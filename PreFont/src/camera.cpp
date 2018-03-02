@@ -4,7 +4,7 @@
 
 #include "myslam/camera.h"
 
-namespace myslam
+namespace myFrontEnd
 {
     Camera::Camera()
     {

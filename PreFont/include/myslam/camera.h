@@ -5,7 +5,7 @@
 #ifndef SLAMPREFONT_CAMERA_H
 #define SLAMPREFONT_CAMERA_H
 
-namespace myslam
+namespace myFrontEnd
 {
     class Camera
     {
