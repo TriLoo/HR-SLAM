@@ -1,4 +1,5 @@
 /home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/smher/HR-SLAMs/PreFont
+-- /home/smher/HR-SLAMs/PreFont
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/smher/HR-SLAMs/PreFont/cmake-build-debug

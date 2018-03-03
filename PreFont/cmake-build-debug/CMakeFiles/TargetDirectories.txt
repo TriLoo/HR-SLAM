@@ -1,3 +1,4 @@
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/mySLAM.dir
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/SLAMPreFont.dir

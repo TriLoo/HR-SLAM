@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/smher/HR-SLAMs/PreFont/main.cpp
-iostream
--
+/home/smher/HR-SLAMs/PreFont/src/camera.cpp
+myslam/camera.h
+/home/smher/HR-SLAMs/PreFont/src/myslam/camera.h
 

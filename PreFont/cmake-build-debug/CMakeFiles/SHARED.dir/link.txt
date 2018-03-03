@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSHARED.a  CMakeFiles/SHARED.dir/src/camera.cpp.o
+/usr/bin/ranlib libSHARED.a

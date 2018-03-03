@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/smher/HR-SLAMs/PreFont/src/camera.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o"
+  "/home/smher/HR-SLAMs/PreFont/src/camera.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/SHARED.dir/src/camera.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

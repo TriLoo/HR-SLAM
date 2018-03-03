@@ -532,3 +532,91 @@ make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMake
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2bf91/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2bf91.dir/build.make CMakeFiles/cmTC_2bf91.dir/build
+make[1]: Entering directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2bf91.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -fPIC    -o CMakeFiles/cmTC_2bf91.dir/CheckIncludeFile.c.o   -c /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_2bf91
+/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2bf91.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC     CMakeFiles/cmTC_2bf91.dir/CheckIncludeFile.c.o  -o cmTC_2bf91 
+make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d0ea9/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d0ea9.dir/build.make CMakeFiles/cmTC_d0ea9.dir/build
+make[1]: Entering directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d0ea9.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d0ea9.dir/CheckFunctionExists.c.o   -c /home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d0ea9
+/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d0ea9.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d0ea9.dir/CheckFunctionExists.c.o  -o cmTC_d0ea9 -lpthread 
+make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+Performing C++ SOURCE FILE Test COMPILER_SUPPRT succeeded with the following output:
+Change Dir: /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d4d8c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d4d8c.dir/build.make CMakeFiles/cmTC_d4d8c.dir/build
+make[1]: Entering directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_d4d8c.dir/src.cxx.o
+/usr/bin/c++     -DCOMPILER_SUPPRT   -std=c++11 -o CMakeFiles/cmTC_d4d8c.dir/src.cxx.o -c /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_d4d8c
+/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d4d8c.dir/link.txt --verbose=1
+/usr/bin/c++    -DCOMPILER_SUPPRT    CMakeFiles/cmTC_d4d8c.dir/src.cxx.o  -o cmTC_d4d8c 
+make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS succeeded with the following output:
+Change Dir: /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_57d97/fast"
+/usr/bin/make -f CMakeFiles/cmTC_57d97.dir/build.make CMakeFiles/cmTC_57d97.dir/build
+make[1]: Entering directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_57d97.dir/src.cxx.o
+/usr/bin/c++     -DCOMPILER_SUPPORTS   -std=c++11 -o CMakeFiles/cmTC_57d97.dir/src.cxx.o -c /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_57d97
+/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_57d97.dir/link.txt --verbose=1
+/usr/bin/c++    -DCOMPILER_SUPPORTS    CMakeFiles/cmTC_57d97.dir/src.cxx.o  -o cmTC_57d97 
+make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_CXX succeeded with the following output:
+Change Dir: /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d2d3a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d2d3a.dir/build.make CMakeFiles/cmTC_d2d3a.dir/build
+make[1]: Entering directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_d2d3a.dir/src.cxx.o
+/usr/bin/c++     -DCOMPILER_SUPPORTS_CXX   -std=c++11 -o CMakeFiles/cmTC_d2d3a.dir/src.cxx.o -c /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_d2d3a
+/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d2d3a.dir/link.txt --verbose=1
+/usr/bin/c++    -DCOMPILER_SUPPORTS_CXX    CMakeFiles/cmTC_d2d3a.dir/src.cxx.o  -o cmTC_d2d3a 
+make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORTS_CXX11 succeeded with the following output:
+Change Dir: /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_3d071/fast"
+/usr/bin/make -f CMakeFiles/cmTC_3d071.dir/build.make CMakeFiles/cmTC_3d071.dir/build
+make[1]: Entering directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_3d071.dir/src.cxx.o
+/usr/bin/c++     -DCOMPILER_SUPPORTS_CXX11   -std=c++11 -o CMakeFiles/cmTC_3d071.dir/src.cxx.o -c /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_3d071
+/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3d071.dir/link.txt --verbose=1
+/usr/bin/c++    -DCOMPILER_SUPPORTS_CXX11    CMakeFiles/cmTC_3d071.dir/src.cxx.o  -o cmTC_3d071 
+make[1]: Leaving directory `/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }

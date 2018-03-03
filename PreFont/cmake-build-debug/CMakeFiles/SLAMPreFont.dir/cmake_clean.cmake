@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/SLAMPreFont.dir/main.cpp.o"
-  "SLAMPreFont.pdb"
-  "SLAMPreFont"
+  "CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o"
+  "libSLAMPreFont.pdb"
+  "libSLAMPreFont.so"
 )
 
 # Per-language clean rules from dependency scanning.

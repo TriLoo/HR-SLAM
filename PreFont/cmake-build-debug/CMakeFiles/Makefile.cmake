@@ -9,16 +9,28 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeCInformation.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeCXXInformation.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeCommonLanguageInclude.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeExtraGeneratorDetermineCompilerMacrosAndIncludeDirs.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeFindCodeBlocks.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeGenericSystem.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeLanguageInformation.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeParseArguments.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeSystemSpecificInformation.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CheckCXXCompilerFlag.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CheckCXXSourceCompiles.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CheckIncludeFile.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CheckLibraryExists.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/CheckSymbolExists.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/Compiler/GNU-C.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/Compiler/GNU-CXX.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/Compiler/GNU.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/FindCUDA.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/FindCUDA/select_compute_arch.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/FindPackageHandleStandardArgs.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/FindPackageMessage.cmake"
+  "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/FindThreads.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/Platform/Linux-GNU-C.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/Platform/Linux-GNU-CXX.cmake"
   "/home/smher/Documents/Linux_setup_files/clion-2017.1.3/bin/cmake/share/cmake-3.7/Modules/Platform/Linux-GNU.cmake"
@@ -29,6 +41,16 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.7.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.7.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.7.2/CMakeSystem.cmake"
+  "../cmake_modules/FindEigen3.cmake"
+  "../cmake_modules/FindG2O.cmake"
+  "/usr/local/lib/cmake/Pangolin/PangolinConfig.cmake"
+  "/usr/local/lib/cmake/Pangolin/PangolinConfigVersion.cmake"
+  "/usr/local/lib/cmake/Pangolin/PangolinTargets-release.cmake"
+  "/usr/local/lib/cmake/Pangolin/PangolinTargets.cmake"
+  "/usr/local/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/local/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/local/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/local/share/OpenCV/OpenCVModules.cmake"
   )
 
 # The corresponding makefile is:
@@ -44,5 +66,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/mySLAM.dir/DependInfo.cmake"
   "CMakeFiles/SLAMPreFont.dir/DependInfo.cmake"
   )

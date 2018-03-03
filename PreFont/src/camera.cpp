@@ -14,5 +14,10 @@ namespace myFrontEnd
     {
         return T_c_w * p_w;
     }
+    Vector3d Camera::camera2world(const Vector3d &p_c, const SE3 &T_c_w)
+    {
+        Vector3d p_t = T_c_w.transpose();
+        //return
+    }
 }
 

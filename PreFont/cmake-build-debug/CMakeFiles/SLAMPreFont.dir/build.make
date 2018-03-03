@@ -57,49 +57,101 @@ include CMakeFiles/SLAMPreFont.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/SLAMPreFont.dir/flags.make
 
-CMakeFiles/SLAMPreFont.dir/main.cpp.o: CMakeFiles/SLAMPreFont.dir/flags.make
-CMakeFiles/SLAMPreFont.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SLAMPreFont.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SLAMPreFont.dir/main.cpp.o -c /home/smher/HR-SLAMs/PreFont/main.cpp
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o: CMakeFiles/SLAMPreFont.dir/flags.make
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o: ../src/camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o -c /home/smher/HR-SLAMs/PreFont/src/camera.cpp
 
-CMakeFiles/SLAMPreFont.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SLAMPreFont.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smher/HR-SLAMs/PreFont/main.cpp > CMakeFiles/SLAMPreFont.dir/main.cpp.i
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SLAMPreFont.dir/src/camera.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smher/HR-SLAMs/PreFont/src/camera.cpp > CMakeFiles/SLAMPreFont.dir/src/camera.cpp.i
 
-CMakeFiles/SLAMPreFont.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SLAMPreFont.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smher/HR-SLAMs/PreFont/main.cpp -o CMakeFiles/SLAMPreFont.dir/main.cpp.s
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SLAMPreFont.dir/src/camera.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smher/HR-SLAMs/PreFont/src/camera.cpp -o CMakeFiles/SLAMPreFont.dir/src/camera.cpp.s
 
-CMakeFiles/SLAMPreFont.dir/main.cpp.o.requires:
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.requires:
 
-.PHONY : CMakeFiles/SLAMPreFont.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.requires
 
-CMakeFiles/SLAMPreFont.dir/main.cpp.o.provides: CMakeFiles/SLAMPreFont.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/SLAMPreFont.dir/main.cpp.o.provides
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.provides: CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.requires
+	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.provides.build
+.PHONY : CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.provides
 
-CMakeFiles/SLAMPreFont.dir/main.cpp.o.provides.build: CMakeFiles/SLAMPreFont.dir/main.cpp.o
+CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.provides.build: CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o
 
 
 # Object files for target SLAMPreFont
 SLAMPreFont_OBJECTS = \
-"CMakeFiles/SLAMPreFont.dir/main.cpp.o"
+"CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o"
 
 # External object files for target SLAMPreFont
 SLAMPreFont_EXTERNAL_OBJECTS =
 
-SLAMPreFont: CMakeFiles/SLAMPreFont.dir/main.cpp.o
-SLAMPreFont: CMakeFiles/SLAMPreFont.dir/build.make
-SLAMPreFont: CMakeFiles/SLAMPreFont.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable SLAMPreFont"
+libSLAMPreFont.so: CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o
+libSLAMPreFont.so: CMakeFiles/SLAMPreFont.dir/build.make
+libSLAMPreFont.so: /usr/local/lib/libopencv_xphoto.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_xobjdetect.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_tracking.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_surface_matching.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_structured_light.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_stereo.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_saliency.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_rgbd.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_reg.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_plot.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_optflow.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_line_descriptor.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_fuzzy.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_dpm.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_dnn.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_datasets.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_ccalib.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_bioinspired.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_bgsegm.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_aruco.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_videostab.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_superres.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_stitching.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_photo.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudastereo.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudaoptflow.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudaobjdetect.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudalegacy.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudaimgproc.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudafeatures2d.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudacodec.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudabgsegm.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_text.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_face.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_ximgproc.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_xfeatures2d.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_shape.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudawarping.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_objdetect.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudafilters.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudaarithm.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_calib3d.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_features2d.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_ml.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_highgui.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_videoio.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_imgcodecs.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_flann.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_video.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_imgproc.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_core.so.3.1.0
+libSLAMPreFont.so: /usr/local/lib/libopencv_cudev.so.3.1.0
+libSLAMPreFont.so: CMakeFiles/SLAMPreFont.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libSLAMPreFont.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SLAMPreFont.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/SLAMPreFont.dir/build: SLAMPreFont
+CMakeFiles/SLAMPreFont.dir/build: libSLAMPreFont.so
 
 .PHONY : CMakeFiles/SLAMPreFont.dir/build
 
-CMakeFiles/SLAMPreFont.dir/requires: CMakeFiles/SLAMPreFont.dir/main.cpp.o.requires
+CMakeFiles/SLAMPreFont.dir/requires: CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o.requires
 
 .PHONY : CMakeFiles/SLAMPreFont.dir/requires
 

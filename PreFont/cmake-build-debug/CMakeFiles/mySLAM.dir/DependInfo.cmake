@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/smher/HR-SLAMs/PreFont/src/camera.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o"
+  "/home/smher/HR-SLAMs/PreFont/main.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/mySLAM.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -18,6 +18,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles/SLAMPreFont.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
