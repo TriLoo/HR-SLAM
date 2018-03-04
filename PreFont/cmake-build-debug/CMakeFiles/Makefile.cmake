@@ -43,10 +43,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.7.2/CMakeSystem.cmake"
   "../cmake_modules/FindEigen3.cmake"
   "../cmake_modules/FindG2O.cmake"
-  "/usr/local/lib/cmake/Pangolin/PangolinConfig.cmake"
-  "/usr/local/lib/cmake/Pangolin/PangolinConfigVersion.cmake"
-  "/usr/local/lib/cmake/Pangolin/PangolinTargets-release.cmake"
-  "/usr/local/lib/cmake/Pangolin/PangolinTargets.cmake"
+  "../src/CMakeLists.txt"
+  "../test/CMakeLists.txt"
+  "/home/smher/myCode/SLAMs/Sophus/build/SophusConfig.cmake"
   "/usr/local/share/OpenCV/OpenCVConfig-version.cmake"
   "/usr/local/share/OpenCV/OpenCVConfig.cmake"
   "/usr/local/share/OpenCV/OpenCVModules-release.cmake"
@@ -62,10 +61,12 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "test/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/mySLAM.dir/DependInfo.cmake"
-  "CMakeFiles/SLAMPreFont.dir/DependInfo.cmake"
+  "src/CMakeFiles/SLAMPreFont.dir/DependInfo.cmake"
+  "test/CMakeFiles/mySLAM.dir/DependInfo.cmake"
   )

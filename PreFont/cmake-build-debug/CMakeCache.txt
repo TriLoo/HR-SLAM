@@ -436,10 +436,13 @@ SHARED_LIB_DEPENDS:STATIC=
 SLAMPreFont_BINARY_DIR:STATIC=/home/smher/HR-SLAMs/PreFont/cmake-build-debug
 
 //Dependencies for the target
-SLAMPreFont_LIB_DEPENDS:STATIC=general;opencv_xphoto;general;opencv_xobjdetect;general;opencv_ximgproc;general;opencv_xfeatures2d;general;opencv_tracking;general;opencv_text;general;opencv_surface_matching;general;opencv_structured_light;general;opencv_stereo;general;opencv_saliency;general;opencv_rgbd;general;opencv_reg;general;opencv_plot;general;opencv_optflow;general;opencv_line_descriptor;general;opencv_fuzzy;general;opencv_face;general;opencv_dpm;general;opencv_dnn;general;opencv_datasets;general;opencv_ccalib;general;opencv_bioinspired;general;opencv_bgsegm;general;opencv_aruco;general;opencv_videostab;general;opencv_videoio;general;opencv_video;general;opencv_superres;general;opencv_stitching;general;opencv_shape;general;opencv_photo;general;opencv_objdetect;general;opencv_ml;general;opencv_imgproc;general;opencv_imgcodecs;general;opencv_highgui;general;opencv_flann;general;opencv_features2d;general;opencv_cudev;general;opencv_cudawarping;general;opencv_cudastereo;general;opencv_cudaoptflow;general;opencv_cudaobjdetect;general;opencv_cudalegacy;general;opencv_cudaimgproc;general;opencv_cudafilters;general;opencv_cudafeatures2d;general;opencv_cudacodec;general;opencv_cudabgsegm;general;opencv_cudaarithm;general;opencv_core;general;opencv_calib3d;general;g2o_cli;general;g2o_ext_freeglut_minimal;general;g2o_simulator;general;g2o_solver_slam2d_linear;general;g2o_types_icp;general;g2o_types_slam2d;general;g2o_types_sba;general;g2o_types_slam3d;general;g2o_core;general;g2o_interface;general;g2o_solver_csparse;general;g2o_solver_structure_only;general;g2o_csparse_extension;general;g2o_opengl_helper;general;g2o_solver_dense;general;g2o_stuff;general;g2o_types_sclam2d;general;g2o_parser;general;g2o_solver_pcg;general;g2o_types_data;general;g2o_types_sim3;general;cxsparse;
+SLAMPreFont_LIB_DEPENDS:STATIC=general;opencv_xphoto;general;opencv_xobjdetect;general;opencv_ximgproc;general;opencv_xfeatures2d;general;opencv_tracking;general;opencv_text;general;opencv_surface_matching;general;opencv_structured_light;general;opencv_stereo;general;opencv_saliency;general;opencv_rgbd;general;opencv_reg;general;opencv_plot;general;opencv_optflow;general;opencv_line_descriptor;general;opencv_fuzzy;general;opencv_face;general;opencv_dpm;general;opencv_dnn;general;opencv_datasets;general;opencv_ccalib;general;opencv_bioinspired;general;opencv_bgsegm;general;opencv_aruco;general;opencv_videostab;general;opencv_videoio;general;opencv_video;general;opencv_superres;general;opencv_stitching;general;opencv_shape;general;opencv_photo;general;opencv_objdetect;general;opencv_ml;general;opencv_imgproc;general;opencv_imgcodecs;general;opencv_highgui;general;opencv_flann;general;opencv_features2d;general;opencv_cudev;general;opencv_cudawarping;general;opencv_cudastereo;general;opencv_cudaoptflow;general;opencv_cudaobjdetect;general;opencv_cudalegacy;general;opencv_cudaimgproc;general;opencv_cudafilters;general;opencv_cudafeatures2d;general;opencv_cudacodec;general;opencv_cudabgsegm;general;opencv_cudaarithm;general;opencv_core;general;opencv_calib3d;general;g2o_cli;general;g2o_ext_freeglut_minimal;general;g2o_simulator;general;g2o_solver_slam2d_linear;general;g2o_types_icp;general;g2o_types_slam2d;general;g2o_types_sba;general;g2o_types_slam3d;general;g2o_core;general;g2o_interface;general;g2o_solver_csparse;general;g2o_solver_structure_only;general;g2o_csparse_extension;general;g2o_opengl_helper;general;g2o_solver_dense;general;g2o_stuff;general;g2o_types_sclam2d;general;g2o_parser;general;g2o_solver_pcg;general;g2o_types_data;general;g2o_types_sim3;general;cxsparse;general;/home/smher/myCode/SLAMs/Sophus/build/libSophus.so;
 
 //Value Computed by CMake
 SLAMPreFont_SOURCE_DIR:STATIC=/home/smher/HR-SLAMs/PreFont
+
+//The directory containing a CMake configuration file for Sophus.
+Sophus_DIR:PATH=/home/smher/myCode/SLAMs/Sophus/build
 
 //Dependencies for target
 src_LIB_DEPENDS:STATIC=
@@ -551,7 +554,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

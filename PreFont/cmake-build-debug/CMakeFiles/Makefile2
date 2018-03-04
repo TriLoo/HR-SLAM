@@ -60,76 +60,112 @@ CMAKE_SOURCE_DIR = /home/smher/HR-SLAMs/PreFont
 CMAKE_BINARY_DIR = /home/smher/HR-SLAMs/PreFont/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/mySLAM.dir
+# Directory level rules for directory src
 
-# All Build rule for target.
-CMakeFiles/mySLAM.dir/all: CMakeFiles/SLAMPreFont.dir/all
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/depend
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target mySLAM"
-.PHONY : CMakeFiles/mySLAM.dir/all
+# Convenience name for "all" pass in the directory.
+src/all: src/CMakeFiles/SLAMPreFont.dir/all
 
-# Include target in all.
-all: CMakeFiles/mySLAM.dir/all
+.PHONY : src/all
 
-.PHONY : all
+# Convenience name for "clean" pass in the directory.
+src/clean: src/CMakeFiles/SLAMPreFont.dir/clean
 
-# Build rule for subdir invocation for target.
-CMakeFiles/mySLAM.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mySLAM.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/mySLAM.dir/rule
+.PHONY : src/clean
 
-# Convenience name for target.
-mySLAM: CMakeFiles/mySLAM.dir/rule
+# Convenience name for "preinstall" pass in the directory.
+src/preinstall:
 
-.PHONY : mySLAM
-
-# clean rule for target.
-CMakeFiles/mySLAM.dir/clean:
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/clean
-.PHONY : CMakeFiles/mySLAM.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/mySLAM.dir/clean
-
-.PHONY : clean
+.PHONY : src/preinstall
 
 #=============================================================================
-# Target rules for target CMakeFiles/SLAMPreFont.dir
+# Target rules for target src/CMakeFiles/SLAMPreFont.dir
 
 # All Build rule for target.
-CMakeFiles/SLAMPreFont.dir/all:
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/depend
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/build
+src/CMakeFiles/SLAMPreFont.dir/all:
+	$(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/depend
+	$(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target SLAMPreFont"
-.PHONY : CMakeFiles/SLAMPreFont.dir/all
+.PHONY : src/CMakeFiles/SLAMPreFont.dir/all
 
 # Include target in all.
-all: CMakeFiles/SLAMPreFont.dir/all
+all: src/CMakeFiles/SLAMPreFont.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/SLAMPreFont.dir/rule: cmake_check_build_system
+src/CMakeFiles/SLAMPreFont.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/SLAMPreFont.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/SLAMPreFont.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/SLAMPreFont.dir/rule
+.PHONY : src/CMakeFiles/SLAMPreFont.dir/rule
 
 # Convenience name for target.
-SLAMPreFont: CMakeFiles/SLAMPreFont.dir/rule
+SLAMPreFont: src/CMakeFiles/SLAMPreFont.dir/rule
 
 .PHONY : SLAMPreFont
 
 # clean rule for target.
-CMakeFiles/SLAMPreFont.dir/clean:
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/clean
-.PHONY : CMakeFiles/SLAMPreFont.dir/clean
+src/CMakeFiles/SLAMPreFont.dir/clean:
+	$(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/clean
+.PHONY : src/CMakeFiles/SLAMPreFont.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/SLAMPreFont.dir/clean
+clean: src/CMakeFiles/SLAMPreFont.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory test
+
+# Convenience name for "all" pass in the directory.
+test/all: test/CMakeFiles/mySLAM.dir/all
+
+.PHONY : test/all
+
+# Convenience name for "clean" pass in the directory.
+test/clean: test/CMakeFiles/mySLAM.dir/clean
+
+.PHONY : test/clean
+
+# Convenience name for "preinstall" pass in the directory.
+test/preinstall:
+
+.PHONY : test/preinstall
+
+#=============================================================================
+# Target rules for target test/CMakeFiles/mySLAM.dir
+
+# All Build rule for target.
+test/CMakeFiles/mySLAM.dir/all: src/CMakeFiles/SLAMPreFont.dir/all
+	$(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/depend
+	$(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=3,4 "Built target mySLAM"
+.PHONY : test/CMakeFiles/mySLAM.dir/all
+
+# Include target in all.
+all: test/CMakeFiles/mySLAM.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+test/CMakeFiles/mySLAM.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mySLAM.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 0
+.PHONY : test/CMakeFiles/mySLAM.dir/rule
+
+# Convenience name for target.
+mySLAM: test/CMakeFiles/mySLAM.dir/rule
+
+.PHONY : mySLAM
+
+# clean rule for target.
+test/CMakeFiles/mySLAM.dir/clean:
+	$(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/clean
+.PHONY : test/CMakeFiles/mySLAM.dir/clean
+
+# clean rule for target.
+clean: test/CMakeFiles/mySLAM.dir/clean
 
 .PHONY : clean
 

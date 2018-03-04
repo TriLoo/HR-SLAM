@@ -111,19 +111,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named mySLAM
-
-# Build rule for target.
-mySLAM: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 mySLAM
-.PHONY : mySLAM
-
-# fast build rule for target.
-mySLAM/fast:
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/build
-.PHONY : mySLAM/fast
-
-#=============================================================================
 # Target rules for targets named SLAMPreFont
 
 # Build rule for target.
@@ -133,62 +120,21 @@ SLAMPreFont: cmake_check_build_system
 
 # fast build rule for target.
 SLAMPreFont/fast:
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/build
+	$(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/build
 .PHONY : SLAMPreFont/fast
 
-main.o: main.cpp.o
+#=============================================================================
+# Target rules for targets named mySLAM
 
-.PHONY : main.o
+# Build rule for target.
+mySLAM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mySLAM
+.PHONY : mySLAM
 
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/main.cpp.s
-.PHONY : main.cpp.s
-
-src/camera.o: src/camera.cpp.o
-
-.PHONY : src/camera.o
-
-# target to build an object file
-src/camera.cpp.o:
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/src/camera.cpp.o
-.PHONY : src/camera.cpp.o
-
-src/camera.i: src/camera.cpp.i
-
-.PHONY : src/camera.i
-
-# target to preprocess a source file
-src/camera.cpp.i:
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/src/camera.cpp.i
-.PHONY : src/camera.cpp.i
-
-src/camera.s: src/camera.cpp.s
-
-.PHONY : src/camera.s
-
-# target to generate assembly for a file
-src/camera.cpp.s:
-	$(MAKE) -f CMakeFiles/SLAMPreFont.dir/build.make CMakeFiles/SLAMPreFont.dir/src/camera.cpp.s
-.PHONY : src/camera.cpp.s
+# fast build rule for target.
+mySLAM/fast:
+	$(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/build
+.PHONY : mySLAM/fast
 
 # Help Target
 help:
@@ -198,14 +144,8 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... mySLAM"
 	@echo "... SLAMPreFont"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... src/camera.o"
-	@echo "... src/camera.i"
-	@echo "... src/camera.s"
+	@echo "... mySLAM"
 .PHONY : help
 
 

@@ -5,7 +5,7 @@
 		<Option title="SLAMPreFont"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\OpenCV\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\;CMake Files\cmake_modules\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\OpenCV\;CMake Files\..\..\myCode\;CMake Files\..\..\myCode\SLAMs\;CMake Files\..\..\myCode\SLAMs\Sophus\;CMake Files\..\..\myCode\SLAMs\Sophus\build\;CMake Files\cmake_modules\;CMake Files\src\;CMake Files\test\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug"/>
@@ -37,69 +37,20 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="mySLAM">
-				<Option output="/home/smher/HR-SLAMs/PreFont/cmake-build-debug/mySLAM" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/local/include/opencv"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
-					<Add directory="/usr/include/c++/4.8"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
-					<Add directory="/usr/include/c++/4.8/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 mySLAM"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="mySLAM/fast">
-				<Option output="/home/smher/HR-SLAMs/PreFont/cmake-build-debug/mySLAM" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/local/include/opencv"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
-					<Add directory="/usr/include/c++/4.8"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
-					<Add directory="/usr/include/c++/4.8/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 mySLAM/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="SLAMPreFont">
-				<Option output="/home/smher/HR-SLAMs/PreFont/cmake-build-debug/libSLAMPreFont.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug"/>
+				<Option output="/home/smher/HR-SLAMs/PreFont/lib/libSLAMPreFont.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
 					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
+					<Add directory="/home/smher/myCode/SLAMs/Sophus"/>
 					<Add directory="/usr/include/c++/4.8"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
 					<Add directory="/usr/include/c++/4.8/backward"/>
@@ -109,23 +60,26 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 SLAMPreFont"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 SLAMPreFont"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="SLAMPreFont/fast">
-				<Option output="/home/smher/HR-SLAMs/PreFont/cmake-build-debug/libSLAMPreFont.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug"/>
+				<Option output="/home/smher/HR-SLAMs/PreFont/lib/libSLAMPreFont.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
 					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
+					<Add directory="/home/smher/myCode/SLAMs/Sophus"/>
 					<Add directory="/usr/include/c++/4.8"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
 					<Add directory="/usr/include/c++/4.8/backward"/>
@@ -135,18 +89,76 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 SLAMPreFont/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 SLAMPreFont/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mySLAM">
+				<Option output="/home/smher/HR-SLAMs/PreFont/bin/mySLAM" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/smher/HR-SLAMs/PreFont/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/smher/myCode/SLAMs/Sophus"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 mySLAM"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="mySLAM/fast">
+				<Option output="/home/smher/HR-SLAMs/PreFont/bin/mySLAM" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/smher/HR-SLAMs/PreFont/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/smher/myCode/SLAMs/Sophus"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 mySLAM/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/smher/HR-SLAMs/PreFont/main.cpp">
-			<Option target="mySLAM"/>
-		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/camera.cpp">
 			<Option target="SLAMPreFont"/>
+		</Unit>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/test/main.cpp">
+			<Option target="mySLAM"/>
 		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
@@ -163,23 +175,20 @@
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
 		</Unit>
-		<Unit filename="/home/smher/HR-SLAMs/PreFont/../../../../usr/local/lib/cmake/Pangolin/PangolinConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
-		</Unit>
-		<Unit filename="/home/smher/HR-SLAMs/PreFont/../../../../usr/local/lib/cmake/Pangolin/PangolinConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
-		</Unit>
-		<Unit filename="/home/smher/HR-SLAMs/PreFont/../../../../usr/local/lib/cmake/Pangolin/PangolinTargets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
-		</Unit>
-		<Unit filename="/home/smher/HR-SLAMs/PreFont/../../../../usr/local/lib/cmake/Pangolin/PangolinTargets-release.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Pangolin\"/>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/../../myCode/SLAMs/Sophus/build/SophusConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\myCode\SLAMs\Sophus\build\"/>
 		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/cmake_modules/FindEigen3.cmake">
 			<Option virtualFolder="CMake Files\cmake_modules\"/>
 		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/cmake_modules/FindG2O.cmake">
 			<Option virtualFolder="CMake Files\cmake_modules\"/>
+		</Unit>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/mySLAM.dir/main.cpp.o"
-  "mySLAM.pdb"
-  "mySLAM"
+  "CMakeFiles/mySLAM.dir/test/main.cpp.o"
+  "../bin/mySLAM.pdb"
+  "../bin/mySLAM"
 )
 
 # Per-language clean rules from dependency scanning.

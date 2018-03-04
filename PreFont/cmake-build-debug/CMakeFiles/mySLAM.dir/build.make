@@ -57,102 +57,103 @@ include CMakeFiles/mySLAM.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/mySLAM.dir/flags.make
 
-CMakeFiles/mySLAM.dir/main.cpp.o: CMakeFiles/mySLAM.dir/flags.make
-CMakeFiles/mySLAM.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mySLAM.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mySLAM.dir/main.cpp.o -c /home/smher/HR-SLAMs/PreFont/main.cpp
+CMakeFiles/mySLAM.dir/test/main.cpp.o: CMakeFiles/mySLAM.dir/flags.make
+CMakeFiles/mySLAM.dir/test/main.cpp.o: ../test/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mySLAM.dir/test/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/mySLAM.dir/test/main.cpp.o -c /home/smher/HR-SLAMs/PreFont/test/main.cpp
 
-CMakeFiles/mySLAM.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mySLAM.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smher/HR-SLAMs/PreFont/main.cpp > CMakeFiles/mySLAM.dir/main.cpp.i
+CMakeFiles/mySLAM.dir/test/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mySLAM.dir/test/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/smher/HR-SLAMs/PreFont/test/main.cpp > CMakeFiles/mySLAM.dir/test/main.cpp.i
 
-CMakeFiles/mySLAM.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mySLAM.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smher/HR-SLAMs/PreFont/main.cpp -o CMakeFiles/mySLAM.dir/main.cpp.s
+CMakeFiles/mySLAM.dir/test/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mySLAM.dir/test/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/smher/HR-SLAMs/PreFont/test/main.cpp -o CMakeFiles/mySLAM.dir/test/main.cpp.s
 
-CMakeFiles/mySLAM.dir/main.cpp.o.requires:
+CMakeFiles/mySLAM.dir/test/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/mySLAM.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/mySLAM.dir/test/main.cpp.o.requires
 
-CMakeFiles/mySLAM.dir/main.cpp.o.provides: CMakeFiles/mySLAM.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/mySLAM.dir/main.cpp.o.provides
+CMakeFiles/mySLAM.dir/test/main.cpp.o.provides: CMakeFiles/mySLAM.dir/test/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/mySLAM.dir/build.make CMakeFiles/mySLAM.dir/test/main.cpp.o.provides.build
+.PHONY : CMakeFiles/mySLAM.dir/test/main.cpp.o.provides
 
-CMakeFiles/mySLAM.dir/main.cpp.o.provides.build: CMakeFiles/mySLAM.dir/main.cpp.o
+CMakeFiles/mySLAM.dir/test/main.cpp.o.provides.build: CMakeFiles/mySLAM.dir/test/main.cpp.o
 
 
 # Object files for target mySLAM
 mySLAM_OBJECTS = \
-"CMakeFiles/mySLAM.dir/main.cpp.o"
+"CMakeFiles/mySLAM.dir/test/main.cpp.o"
 
 # External object files for target mySLAM
 mySLAM_EXTERNAL_OBJECTS =
 
-mySLAM: CMakeFiles/mySLAM.dir/main.cpp.o
-mySLAM: CMakeFiles/mySLAM.dir/build.make
-mySLAM: libSLAMPreFont.so
-mySLAM: /usr/local/lib/libopencv_xphoto.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_xobjdetect.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_tracking.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_surface_matching.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_structured_light.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_stereo.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_saliency.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_rgbd.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_reg.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_plot.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_optflow.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_ximgproc.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_line_descriptor.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_fuzzy.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_dpm.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_dnn.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_datasets.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_text.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_face.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_ccalib.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_bioinspired.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_bgsegm.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_aruco.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_videostab.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_superres.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_stitching.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_xfeatures2d.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_shape.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_photo.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudastereo.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudaoptflow.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudaobjdetect.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudalegacy.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_objdetect.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudaimgproc.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudafeatures2d.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudawarping.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudafilters.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudacodec.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudabgsegm.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_video.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudaarithm.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_calib3d.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_features2d.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_ml.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_highgui.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_videoio.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_imgcodecs.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_imgproc.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_flann.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_core.so.3.1.0
-mySLAM: /usr/local/lib/libopencv_cudev.so.3.1.0
-mySLAM: CMakeFiles/mySLAM.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mySLAM"
+../bin/mySLAM: CMakeFiles/mySLAM.dir/test/main.cpp.o
+../bin/mySLAM: CMakeFiles/mySLAM.dir/build.make
+../bin/mySLAM: ../lib/libSLAMPreFont.so
+../bin/mySLAM: /usr/local/lib/libopencv_xphoto.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_xobjdetect.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_tracking.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_surface_matching.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_structured_light.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_stereo.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_saliency.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_rgbd.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_reg.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_plot.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_optflow.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_ximgproc.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_line_descriptor.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_fuzzy.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_dpm.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_dnn.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_datasets.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_text.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_face.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_ccalib.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_bioinspired.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_bgsegm.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_aruco.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_videostab.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_superres.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_stitching.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_xfeatures2d.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_shape.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_photo.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudastereo.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudaoptflow.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudaobjdetect.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudalegacy.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_objdetect.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudaimgproc.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudafeatures2d.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudawarping.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudafilters.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudacodec.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudabgsegm.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_video.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudaarithm.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_calib3d.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_features2d.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_ml.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_highgui.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_videoio.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_imgcodecs.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_imgproc.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_flann.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_core.so.3.1.0
+../bin/mySLAM: /usr/local/lib/libopencv_cudev.so.3.1.0
+../bin/mySLAM: /home/smher/myCode/SLAMs/Sophus/build/libSophus.so
+../bin/mySLAM: CMakeFiles/mySLAM.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/mySLAM"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mySLAM.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/mySLAM.dir/build: mySLAM
+CMakeFiles/mySLAM.dir/build: ../bin/mySLAM
 
 .PHONY : CMakeFiles/mySLAM.dir/build
 
-CMakeFiles/mySLAM.dir/requires: CMakeFiles/mySLAM.dir/main.cpp.o.requires
+CMakeFiles/mySLAM.dir/requires: CMakeFiles/mySLAM.dir/test/main.cpp.o.requires
 
 .PHONY : CMakeFiles/mySLAM.dir/requires
 
