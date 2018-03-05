@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/SLAMPreFont.dir/camera.cpp.o"
+  "CMakeFiles/SLAMPreFont.dir/frame.cpp.o"
   "../../lib/libSLAMPreFont.pdb"
   "../../lib/libSLAMPreFont.so"
 )

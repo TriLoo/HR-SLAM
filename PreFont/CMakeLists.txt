@@ -14,9 +14,9 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 # add include directories: my head files
 #message(STATUS ${PROJECT_SOURCE_DIR}/include)
 include_directories(
-        {PROJECT_SOURCE_DIR}
-        {PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/include/myslam
+        ${PROJECT_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/include
+        #${PROJECT_SOURCE_DIR}/include/myslam
 )
 
 # OpenCV

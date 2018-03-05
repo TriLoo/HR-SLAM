@@ -6,5 +6,5 @@ CXX_FLAGS = -std=c++11 -g -fPIC   -std=gnu++11
 
 CXX_DEFINES = -DSLAMPreFont_EXPORTS
 
-CXX_INCLUDES = -I/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR} -I/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include -I/home/smher/HR-SLAMs/PreFont/include/myslam -isystem /usr/local/include/opencv -isystem /usr/local/include -I/usr/include/eigen3 -I/home/smher/myCode/SLAMs/Sophus 
+CXX_INCLUDES = -I/home/smher/HR-SLAMs/PreFont -I/home/smher/HR-SLAMs/PreFont/include -isystem /usr/local/include/opencv -isystem /usr/local/include -I/usr/include/eigen3 -I/home/smher/myCode/SLAMs/Sophus 
 

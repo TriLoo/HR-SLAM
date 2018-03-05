@@ -24,3 +24,10 @@ GPL-v2
 * include the third part packages and corresponding header files
 * other configures to cmake, such as output path *etc*
 * add subdirectories, including *src*, *test*, and *others*
+
+## References
+* <视觉SLAM十四讲>
+* [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2)
+* Multiple View Geometry in Computer Vision
+* Deep Learning
+* [Google C++ Style](https://google.github.io/styleguide/cppguide.html)

@@ -44,9 +44,8 @@
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include"/>
 					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
@@ -73,9 +72,8 @@
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include"/>
 					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
@@ -102,9 +100,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include"/>
 					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
@@ -131,9 +128,8 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/{PROJECT_SOURCE_DIR}/include"/>
-					<Add directory="/home/smher/HR-SLAMs/PreFont/include/myslam"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include"/>
 					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
@@ -155,6 +151,9 @@
 			</Target>
 		</Build>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/camera.cpp">
+			<Option target="SLAMPreFont"/>
+		</Unit>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/frame.cpp">
 			<Option target="SLAMPreFont"/>
 		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/test/main.cpp">

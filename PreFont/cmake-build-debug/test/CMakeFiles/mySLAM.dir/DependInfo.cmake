@@ -10,9 +10,8 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../{PROJECT_SOURCE_DIR}"
-  "../{PROJECT_SOURCE_DIR}/include"
-  "../include/myslam"
+  "../"
+  "../include"
   "/usr/local/include/opencv"
   "/usr/local/include"
   "/usr/include/eigen3"
