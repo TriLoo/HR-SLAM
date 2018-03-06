@@ -270,6 +270,7 @@ src/CMakeFiles/SLAMPreFont.dir/camera.cpp.o: /usr/local/include/opencv2/videoio/
 src/CMakeFiles/SLAMPreFont.dir/camera.cpp.o: /usr/local/include/opencv2/xfeatures2d.hpp
 src/CMakeFiles/SLAMPreFont.dir/camera.cpp.o: /usr/local/include/opencv2/xfeatures2d/nonfree.hpp
 
+src/CMakeFiles/SLAMPreFont.dir/frame.cpp.o: ../include/myslam/camera.h
 src/CMakeFiles/SLAMPreFont.dir/frame.cpp.o: ../include/myslam/frame.h
 src/CMakeFiles/SLAMPreFont.dir/frame.cpp.o: ../include/system.h
 src/CMakeFiles/SLAMPreFont.dir/frame.cpp.o: ../src/frame.cpp

@@ -13,6 +13,8 @@ system.h
 ../include/myslam/frame.h
 system.h
 ../include/myslam/system.h
+camera.h
+../include/myslam/camera.h
 
 ../include/system.h
 iostream
