@@ -54,7 +54,9 @@ namespace myFrontEnd {
 
     Eigen::Vector3d Frame::getCamCenter() const
     {
-        return Tcw_.inverse().translation();           // TODO: why here have a inverse() ?
+        // Tcw_          : the projective transform from world to camera.
+        // Tcw_.inverse(): the projective transform from camera to world.
+        return Tcw_.inverse().translation();           // TODO: why here have a inverse() ?, 逆过程?
     }
 
     bool Frame::isInFrame(const Eigen::Vector3d &pt_world)

@@ -125,6 +125,33 @@ SLAMPreFont/fast:
 	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/build
 .PHONY : SLAMPreFont/fast
 
+MapPoint.o: MapPoint.cpp.o
+
+.PHONY : MapPoint.o
+
+# target to build an object file
+MapPoint.cpp.o:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/MapPoint.cpp.o
+.PHONY : MapPoint.cpp.o
+
+MapPoint.i: MapPoint.cpp.i
+
+.PHONY : MapPoint.i
+
+# target to preprocess a source file
+MapPoint.cpp.i:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/MapPoint.cpp.i
+.PHONY : MapPoint.cpp.i
+
+MapPoint.s: MapPoint.cpp.s
+
+.PHONY : MapPoint.s
+
+# target to generate assembly for a file
+MapPoint.cpp.s:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/MapPoint.cpp.s
+.PHONY : MapPoint.cpp.s
+
 camera.o: camera.cpp.o
 
 .PHONY : camera.o
@@ -188,6 +215,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... SLAMPreFont"
+	@echo "... MapPoint.o"
+	@echo "... MapPoint.i"
+	@echo "... MapPoint.s"
 	@echo "... camera.o"
 	@echo "... camera.i"
 	@echo "... camera.s"
