@@ -18,12 +18,12 @@ namespace myFrontEnd
         ~MapPoint();
 
         unsigned long id_;
-        Eigen::Vector3d pos_, norm_;
+        Eigen::Vector3d pos_, norm_;    // 相机的位姿，观测的方向
 
         //std::vector<cv::KeyPoint> kps_;
-        cv::Mat descriptor_;
-        int observed_times_;
-        int matched_times_;
+        cv::Mat descriptor_;    // 描述子，用于匹配
+        int observed_times_;    // 被观测的次数
+        int matched_times_;     // 被匹配的次数
 
         // factory function
         static Ptr createMapPoint();

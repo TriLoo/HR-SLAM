@@ -150,6 +150,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/Map.cpp">
+			<Option target="SLAMPreFont"/>
+		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/MapPoint.cpp">
 			<Option target="SLAMPreFont"/>
 		</Unit>

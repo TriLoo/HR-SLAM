@@ -20,7 +20,7 @@ namespace myFrontEnd {
     Frame::Ptr Frame::createFrame()
     {
         static long factory_id = 0;
-        return Frame::Ptr(new Frame(factory_id));
+        return Frame::Ptr(new Frame(factory_id++));
     }
 
     double Frame::findDepth(const cv::KeyPoint &kp)

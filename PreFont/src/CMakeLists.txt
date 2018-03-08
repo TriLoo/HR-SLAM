@@ -2,6 +2,7 @@ add_library(${PROJECT_NAME} SHARED
         camera.cpp
         frame.cpp
         MapPoint.cpp
+        Map.cpp
         )
 
 # add other libraries to the SLAMPreFont.so
