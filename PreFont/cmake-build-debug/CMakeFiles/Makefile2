@@ -84,7 +84,7 @@ src/preinstall:
 src/CMakeFiles/SLAMPreFont.dir/all:
 	$(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/depend
 	$(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5 "Built target SLAMPreFont"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target SLAMPreFont"
 .PHONY : src/CMakeFiles/SLAMPreFont.dir/all
 
 # Include target in all.
@@ -94,7 +94,7 @@ all: src/CMakeFiles/SLAMPreFont.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/SLAMPreFont.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/SLAMPreFont.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 0
 .PHONY : src/CMakeFiles/SLAMPreFont.dir/rule
@@ -139,7 +139,7 @@ test/preinstall:
 test/CMakeFiles/mySLAM.dir/all: src/CMakeFiles/SLAMPreFont.dir/all
 	$(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/depend
 	$(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=6,7 "Built target mySLAM"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles --progress-num=7,8 "Built target mySLAM"
 .PHONY : test/CMakeFiles/mySLAM.dir/all
 
 # Include target in all.
@@ -149,7 +149,7 @@ all: test/CMakeFiles/mySLAM.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/mySLAM.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mySLAM.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/smher/HR-SLAMs/PreFont/cmake-build-debug/CMakeFiles 0
 .PHONY : test/CMakeFiles/mySLAM.dir/rule

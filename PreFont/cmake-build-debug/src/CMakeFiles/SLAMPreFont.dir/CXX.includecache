@@ -6,6 +6,8 @@
 
 #IncludeRegexTransform: 
 
+../include/myslam/Config.h
+
 ../include/myslam/Map.h
 system.h
 ../include/myslam/system.h
@@ -61,6 +63,10 @@ sophus/se3.h
 ../include/sophus/se3.h
 sophus/so3.h
 ../include/sophus/so3.h
+
+/home/smher/HR-SLAMs/PreFont/src/Config.cpp
+myslam/Config.h
+/home/smher/HR-SLAMs/PreFont/src/myslam/Config.h
 
 /home/smher/HR-SLAMs/PreFont/src/Map.cpp
 myslam/Map.h

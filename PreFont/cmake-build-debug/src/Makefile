@@ -125,6 +125,33 @@ SLAMPreFont/fast:
 	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/build
 .PHONY : SLAMPreFont/fast
 
+Config.o: Config.cpp.o
+
+.PHONY : Config.o
+
+# target to build an object file
+Config.cpp.o:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/Config.cpp.o
+.PHONY : Config.cpp.o
+
+Config.i: Config.cpp.i
+
+.PHONY : Config.i
+
+# target to preprocess a source file
+Config.cpp.i:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/Config.cpp.i
+.PHONY : Config.cpp.i
+
+Config.s: Config.cpp.s
+
+.PHONY : Config.s
+
+# target to generate assembly for a file
+Config.cpp.s:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/Config.cpp.s
+.PHONY : Config.cpp.s
+
 Map.o: Map.cpp.o
 
 .PHONY : Map.o
@@ -242,6 +269,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... SLAMPreFont"
+	@echo "... Config.o"
+	@echo "... Config.i"
+	@echo "... Config.s"
 	@echo "... Map.o"
 	@echo "... Map.i"
 	@echo "... Map.s"

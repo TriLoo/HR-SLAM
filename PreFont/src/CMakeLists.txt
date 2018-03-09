@@ -3,6 +3,7 @@ add_library(${PROJECT_NAME} SHARED
         frame.cpp
         MapPoint.cpp
         Map.cpp
+        Config.cpp
         )
 
 # add other libraries to the SLAMPreFont.so
