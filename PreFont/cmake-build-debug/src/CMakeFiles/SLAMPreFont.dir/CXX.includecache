@@ -7,6 +7,8 @@
 #IncludeRegexTransform: 
 
 ../include/myslam/Config.h
+system.h
+../include/myslam/system.h
 
 ../include/myslam/Map.h
 system.h

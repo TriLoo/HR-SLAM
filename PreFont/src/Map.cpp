@@ -26,4 +26,3 @@ namespace myFrontEnd
             map_points_[map_point->id_] = map_point;
     }
 }
-

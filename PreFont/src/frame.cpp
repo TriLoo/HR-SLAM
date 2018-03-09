@@ -5,9 +5,13 @@
 #include "myslam/frame.h"
 
 namespace myFrontEnd {
-    Frame::Frame(): id_(-1), timeStamp_(-1), camera_(nullptr) {
+    Frame::Frame(): id_(-1), timeStamp_(-1), camera_(nullptr)
+    {
     }
 
+    Frame::~Frame()
+    {
+    }
     Frame::Frame(long id, double time, Sophus::SE3 Tcw, Camera::Ptr camera, cv::Mat color, cv::Mat depth) : id_(id),
                                                                                                     timeStamp_(time),
                                                                                                     Tcw_(Tcw),
