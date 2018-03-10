@@ -59,6 +59,7 @@ int main(int argc, char **argv)
     cout << "Configure File Name: " << endl;
 
     myFrontEnd::Config::setParameterFile(filename);
+    // 由于getParam的模板参数是在返回类型的位置，因此，需要显示指定模板参数，即<double>
     cout << "fx of camera = " << myFrontEnd::Config::getParam<double>("camera.fx") << endl;
 
     cout << "Done." << endl;

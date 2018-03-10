@@ -21,6 +21,7 @@ namespace myFrontEnd
         ~Frame();
 
         // Factory Mode
+        // Singleton mode
         static Ptr createFrame();     // In the class declaration, no need to use Frame::Ptr
 
         // Find the depth in depth map

@@ -25,6 +25,7 @@ namespace myFrontEnd
         static void setParameterFile(const std::string& filename);
 
         // get the parameter value
+        // 注意：模板参数 _T 出现在了返回值的位置，因此使用时，需要显示指定其类型
         template <typename _T>
                 static _T getParam(const std::string& key)
         {
