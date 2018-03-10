@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/smher/HR-SLAMs/PreFont/src/Config.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/Config.cpp.o"
   "/home/smher/HR-SLAMs/PreFont/src/Map.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/Map.cpp.o"
   "/home/smher/HR-SLAMs/PreFont/src/MapPoint.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/MapPoint.cpp.o"
+  "/home/smher/HR-SLAMs/PreFont/src/VisualOdometry.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.o"
   "/home/smher/HR-SLAMs/PreFont/src/camera.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/camera.cpp.o"
   "/home/smher/HR-SLAMs/PreFont/src/frame.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/frame.cpp.o"
   )

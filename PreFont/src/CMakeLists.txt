@@ -4,6 +4,7 @@ add_library(${PROJECT_NAME} SHARED
         MapPoint.cpp
         Map.cpp
         Config.cpp
+        VisualOdometry.cpp
         )
 
 # add other libraries to the SLAMPreFont.so

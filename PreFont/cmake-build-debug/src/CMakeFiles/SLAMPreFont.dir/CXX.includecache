@@ -24,6 +24,12 @@ unordered_map
 system.h
 ../include/myslam/system.h
 
+../include/myslam/VisualOdometry.h
+system.h
+../include/myslam/system.h
+myslam/Map.h
+../include/myslam/myslam/Map.h
+
 ../include/myslam/camera.h
 system.h
 ../include/myslam/system.h
@@ -77,6 +83,10 @@ myslam/Map.h
 /home/smher/HR-SLAMs/PreFont/src/MapPoint.cpp
 myslam/MapPoint.h
 /home/smher/HR-SLAMs/PreFont/src/myslam/MapPoint.h
+
+/home/smher/HR-SLAMs/PreFont/src/VisualOdometry.cpp
+myslam/VisualOdometry.h
+/home/smher/HR-SLAMs/PreFont/src/myslam/VisualOdometry.h
 
 /home/smher/HR-SLAMs/PreFont/src/camera.cpp
 myslam/camera.h

@@ -206,6 +206,33 @@ MapPoint.cpp.s:
 	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/MapPoint.cpp.s
 .PHONY : MapPoint.cpp.s
 
+VisualOdometry.o: VisualOdometry.cpp.o
+
+.PHONY : VisualOdometry.o
+
+# target to build an object file
+VisualOdometry.cpp.o:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.o
+.PHONY : VisualOdometry.cpp.o
+
+VisualOdometry.i: VisualOdometry.cpp.i
+
+.PHONY : VisualOdometry.i
+
+# target to preprocess a source file
+VisualOdometry.cpp.i:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.i
+.PHONY : VisualOdometry.cpp.i
+
+VisualOdometry.s: VisualOdometry.cpp.s
+
+.PHONY : VisualOdometry.s
+
+# target to generate assembly for a file
+VisualOdometry.cpp.s:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f src/CMakeFiles/SLAMPreFont.dir/build.make src/CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.s
+.PHONY : VisualOdometry.cpp.s
+
 camera.o: camera.cpp.o
 
 .PHONY : camera.o
@@ -278,6 +305,9 @@ help:
 	@echo "... MapPoint.o"
 	@echo "... MapPoint.i"
 	@echo "... MapPoint.s"
+	@echo "... VisualOdometry.o"
+	@echo "... VisualOdometry.i"
+	@echo "... VisualOdometry.s"
 	@echo "... camera.o"
 	@echo "... camera.i"
 	@echo "... camera.s"
