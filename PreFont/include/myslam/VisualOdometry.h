@@ -31,9 +31,9 @@ namespace myFrontEnd
 
         cv::Ptr<cv::ORB> orb_;
 
-
         VisualOdometry();
         ~VisualOdometry();
+
 
     private:
 
