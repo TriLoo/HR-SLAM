@@ -124,6 +124,19 @@ SLAMPreFont/fast:
 .PHONY : SLAMPreFont/fast
 
 #=============================================================================
+# Target rules for targets named VO
+
+# Build rule for target.
+VO: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 VO
+.PHONY : VO
+
+# fast build rule for target.
+VO/fast:
+	$(MAKE) -f test/CMakeFiles/VO.dir/build.make test/CMakeFiles/VO.dir/build
+.PHONY : VO/fast
+
+#=============================================================================
 # Target rules for targets named mySLAM
 
 # Build rule for target.
@@ -145,6 +158,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... SLAMPreFont"
+	@echo "... VO"
 	@echo "... mySLAM"
 .PHONY : help
 

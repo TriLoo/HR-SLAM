@@ -24,5 +24,11 @@
 #include "sophus/se3.h"
 #include "sophus/so3.h"
 
+/*
+#include "g2o/core/"
+#include "g2o/core/solver.h"
+#include "g2o/core/optimization_algorithm_levenberg.h"
+*/
+
 
 #endif //SLAMPREFONT_SYSTEM_H

@@ -93,6 +93,62 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="VO">
+				<Option output="/home/smher/HR-SLAMs/PreFont/bin/VO" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/smher/HR-SLAMs/PreFont/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/smher/HR-SLAMs/PreFont"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/smher/myCode/SLAMs/Sophus"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 VO"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="VO/fast">
+				<Option output="/home/smher/HR-SLAMs/PreFont/bin/VO" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/smher/HR-SLAMs/PreFont/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/smher/HR-SLAMs/PreFont"/>
+					<Add directory="/home/smher/HR-SLAMs/PreFont/include"/>
+					<Add directory="/usr/local/include/opencv"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/smher/myCode/SLAMs/Sophus"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 VO/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="mySLAM">
 				<Option output="/home/smher/HR-SLAMs/PreFont/bin/mySLAM" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/smher/HR-SLAMs/PreFont/bin"/>
@@ -167,6 +223,12 @@
 		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/frame.cpp">
 			<Option target="SLAMPreFont"/>
+		</Unit>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/g2o_types.cpp">
+			<Option target="SLAMPreFont"/>
+		</Unit>
+		<Unit filename="/home/smher/HR-SLAMs/PreFont/test/VO.cpp">
+			<Option target="VO"/>
 		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/test/main.cpp">
 			<Option target="mySLAM"/>

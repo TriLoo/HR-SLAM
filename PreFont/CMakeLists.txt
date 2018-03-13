@@ -20,7 +20,7 @@ include_directories(
 )
 
 # OpenCV
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 3.1 REQUIRED)
 #message(STATUS "OpenCV Include Path: ${OpenCV_INCLUDE_DIRS}")
 include_directories(${OpenCV_INCLUDE_DIRS})
 

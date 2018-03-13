@@ -111,6 +111,21 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+test/CMakeFiles/VO.dir/rule:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/VO.dir/rule
+.PHONY : test/CMakeFiles/VO.dir/rule
+
+# Convenience name for target.
+VO: test/CMakeFiles/VO.dir/rule
+
+.PHONY : VO
+
+# fast build rule for target.
+VO/fast:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f test/CMakeFiles/VO.dir/build.make test/CMakeFiles/VO.dir/build
+.PHONY : VO/fast
+
+# Convenience name for target.
 test/CMakeFiles/mySLAM.dir/rule:
 	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mySLAM.dir/rule
 .PHONY : test/CMakeFiles/mySLAM.dir/rule
@@ -124,6 +139,33 @@ mySLAM: test/CMakeFiles/mySLAM.dir/rule
 mySLAM/fast:
 	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f test/CMakeFiles/mySLAM.dir/build.make test/CMakeFiles/mySLAM.dir/build
 .PHONY : mySLAM/fast
+
+VO.o: VO.cpp.o
+
+.PHONY : VO.o
+
+# target to build an object file
+VO.cpp.o:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f test/CMakeFiles/VO.dir/build.make test/CMakeFiles/VO.dir/VO.cpp.o
+.PHONY : VO.cpp.o
+
+VO.i: VO.cpp.i
+
+.PHONY : VO.i
+
+# target to preprocess a source file
+VO.cpp.i:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f test/CMakeFiles/VO.dir/build.make test/CMakeFiles/VO.dir/VO.cpp.i
+.PHONY : VO.cpp.i
+
+VO.s: VO.cpp.s
+
+.PHONY : VO.s
+
+# target to generate assembly for a file
+VO.cpp.s:
+	cd /home/smher/HR-SLAMs/PreFont/cmake-build-debug && $(MAKE) -f test/CMakeFiles/VO.dir/build.make test/CMakeFiles/VO.dir/VO.cpp.s
+.PHONY : VO.cpp.s
 
 main.o: main.cpp.o
 
@@ -160,7 +202,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... VO"
 	@echo "... mySLAM"
+	@echo "... VO.o"
+	@echo "... VO.i"
+	@echo "... VO.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

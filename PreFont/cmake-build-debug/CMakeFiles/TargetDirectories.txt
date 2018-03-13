@@ -5,4 +5,5 @@
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/CMakeFiles/edit_cache.dir
+/home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/CMakeFiles/VO.dir
 /home/smher/HR-SLAMs/PreFont/cmake-build-debug/test/CMakeFiles/mySLAM.dir

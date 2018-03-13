@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/smher/HR-SLAMs/PreFont/src/VisualOdometry.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.o"
   "/home/smher/HR-SLAMs/PreFont/src/camera.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/camera.cpp.o"
   "/home/smher/HR-SLAMs/PreFont/src/frame.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/frame.cpp.o"
+  "/home/smher/HR-SLAMs/PreFont/src/g2o_types.cpp" "/home/smher/HR-SLAMs/PreFont/cmake-build-debug/src/CMakeFiles/SLAMPreFont.dir/g2o_types.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

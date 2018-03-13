@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/SLAMPreFont.dir/Map.cpp.o"
   "CMakeFiles/SLAMPreFont.dir/Config.cpp.o"
   "CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.o"
+  "CMakeFiles/SLAMPreFont.dir/g2o_types.cpp.o"
   "../../lib/libSLAMPreFont.pdb"
   "../../lib/libSLAMPreFont.so"
 )
