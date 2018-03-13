@@ -35,6 +35,8 @@ opencv2/features2d.hpp
 ../include/opencv2/features2d.hpp
 opencv2/tracking.hpp
 ../include/opencv2/tracking.hpp
+opencv2/calib3d.hpp
+../include/opencv2/calib3d.hpp
 Eigen/Core
 ../include/Eigen/Core
 sophus/se3.h

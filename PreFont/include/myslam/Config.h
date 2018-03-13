@@ -14,7 +14,7 @@ namespace myFrontEnd
     private:
         //typedef std::shared_ptr<Config> Ptr;
         // 饿汉式
-        static std::shared_ptr<Config> config_;
+        static std::shared_ptr<Config> config_;             // Static: 单例模式
         Config(){}                    // private constructor, making this class singleton
 
         cv::FileStorage file_;        // wirte or read XML / YAML format files

@@ -812,6 +812,7 @@ src/CMakeFiles/SLAMPreFont.dir/MapPoint.cpp.o
  /usr/local/include/opencv2/xfeatures2d.hpp
  /usr/local/include/opencv2/xfeatures2d/nonfree.hpp
 src/CMakeFiles/SLAMPreFont.dir/VisualOdometry.cpp.o
+ ../include/myslam/Config.h
  ../include/myslam/Map.h
  ../include/myslam/MapPoint.h
  ../include/myslam/VisualOdometry.h

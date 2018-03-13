@@ -29,6 +29,8 @@ system.h
 ../include/myslam/system.h
 myslam/Map.h
 ../include/myslam/myslam/Map.h
+myslam/frame.h
+../include/myslam/myslam/frame.h
 
 ../include/myslam/camera.h
 system.h
@@ -65,6 +67,8 @@ opencv2/features2d.hpp
 ../include/opencv2/features2d.hpp
 opencv2/tracking.hpp
 ../include/opencv2/tracking.hpp
+opencv2/calib3d.hpp
+../include/opencv2/calib3d.hpp
 Eigen/Core
 ../include/Eigen/Core
 sophus/se3.h
@@ -87,6 +91,8 @@ myslam/MapPoint.h
 /home/smher/HR-SLAMs/PreFont/src/VisualOdometry.cpp
 myslam/VisualOdometry.h
 /home/smher/HR-SLAMs/PreFont/src/myslam/VisualOdometry.h
+myslam/Config.h
+/home/smher/HR-SLAMs/PreFont/src/myslam/Config.h
 
 /home/smher/HR-SLAMs/PreFont/src/camera.cpp
 myslam/camera.h
