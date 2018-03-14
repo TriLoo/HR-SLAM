@@ -40,6 +40,7 @@ namespace myFrontEnd
         Sophus::SE3 T_c_r_estimated_;   // the estimated pose of current frame
         int num_inliers_;
         int num_lost_;
+        double map_point_erase_ratio_;
 
         // parameters
         int num_of_features_;   // number of features
@@ -69,6 +70,8 @@ namespace myFrontEnd
         void addKeyFrame();
         bool checkEstimatedPose();
         bool checkKeyFrame();
+
+        void optimizeMap();
     };
 }
 

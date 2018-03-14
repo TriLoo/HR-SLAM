@@ -19,6 +19,7 @@ GLP-v2
 * CUDA C Programming
 * C++ Primer
 * Effective C++
+* 并行程序设计导论
 * Algorithm
 * [Mxnet](http://zh.gluon.ai/)
 * [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2)

@@ -211,6 +211,24 @@ test/CMakeFiles/mySLAM.dir/main.cpp.o
  /usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h
  /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
  /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+ /usr/local/include/g2o/config.h
+ /usr/local/include/g2o/core/batch_stats.h
+ /usr/local/include/g2o/core/eigen_types.h
+ /usr/local/include/g2o/core/g2o_core_api.h
+ /usr/local/include/g2o/core/hyper_graph.h
+ /usr/local/include/g2o/core/matrix_operations.h
+ /usr/local/include/g2o/core/matrix_structure.h
+ /usr/local/include/g2o/core/optimization_algorithm.h
+ /usr/local/include/g2o/core/optimization_algorithm_levenberg.h
+ /usr/local/include/g2o/core/optimization_algorithm_with_hessian.h
+ /usr/local/include/g2o/core/solver.h
+ /usr/local/include/g2o/core/sparse_block_matrix.h
+ /usr/local/include/g2o/core/sparse_block_matrix.hpp
+ /usr/local/include/g2o/core/sparse_block_matrix_ccs.h
+ /usr/local/include/g2o/stuff/g2o_stuff_api.h
+ /usr/local/include/g2o/stuff/macros.h
+ /usr/local/include/g2o/stuff/property.h
+ /usr/local/include/g2o/stuff/string_tools.h
  /usr/local/include/opencv/cxcore.h
  /usr/local/include/opencv2/calib3d.hpp
  /usr/local/include/opencv2/calib3d/calib3d_c.h

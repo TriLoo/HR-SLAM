@@ -45,5 +45,4 @@ namespace myFrontEnd
     };
 }
 
-
 #endif //SLAMPREFONT_FRAME_H

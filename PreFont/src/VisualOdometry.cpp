@@ -4,7 +4,7 @@
 
 #include "myslam/VisualOdometry.h"
 #include "myslam/Config.h"
-#include "myslam/g2o_types.h"
+//#include "myslam/g2o_types.h"
 
 using namespace std;
 using namespace cv;
@@ -115,6 +115,7 @@ namespace myFrontEnd
         T_c_r_estimated_ = Sophus::SE3(Sophus::SO3(rvec.at<double>(0, 0), rvec.at<double>(1, 0), rvec.at<double>(2, 0)),
                                         Sophus::Vector3d(tvec.at<double>(0, 0), tvec.at<double>(1, 0), tvec.at<double>(2, 0) ));
 
+        /*
         // using BA to optimize the pose
         typedef g2o::BlockSolver<g2o::BlockSolverTraits<6, 2>> Block;
         Block::LinearSolverType* linearSolver = new g2o::LinearSolverDense<Block::PoseMatrixType>();
@@ -147,6 +148,7 @@ namespace myFrontEnd
 
         T_c_r_estimated_ = Sophus::SE3(pose->estimate().rotation(),
                                         pose->estimate().translation());
+        */
     }
 
     bool VisualOdometry::checkEstimatedPose()
@@ -182,7 +184,50 @@ namespace myFrontEnd
     void VisualOdometry::addKeyFrame()
     {
         cout << "Adding a key-frame" << endl;
+
+        for (size_t i = 0; i < keypoints_curr_.size(); ++i)
+        {
+            double d = curr_->findDepth(keypoints_curr_[i]);
+            if (d <= 0)
+                continue;
+            Eigen::Vector3d worldPts = curr_->camera_->pixel2world(Eigen::Vector2d(keypoints_curr_[i].pt.x, keypoints_curr_[i].pt.y),
+                                                                    curr_->Tcw_, d);
+            Eigen::Vector3d n = curr_->getCamCenter();
+            n.normalize();
+            auto mp = MapPoint::createMapPoint(worldPts, n, descriptors_curr_.row(i).clone(), curr_.get());      // descriptors 以行的形式存储
+            map_->insertMapPoint(mp);
+        }
+
         map_->insertKeyFrame(curr_);
+
+        ref_ = curr_;
+    }
+
+    void VisualOdometry::optimizeMap()
+    {
+        // remove some map lands
+        for (auto iter = map_->map_points_.begin(); iter != map_->map_points_.end();)
+        {
+            if (!curr_->isInFrame(iter->second->pos_))
+            {
+                iter = map_->map_points_.erase(iter);
+                continue;
+            }
+
+            float match_ratio = float(iter->second->matched_times_) / iter->second->observed_times_;
+            if (match_ratio < map_point_erase_ratio_)
+            {
+                iter = map_->map_points_.erase(iter);
+                continue;
+            }
+
+            if (iter->second->good_ == false)
+            {
+                // TODO: triangulate this map point
+            }
+            iter++;
+        }
+        // TODO: other many things
     }
 
     bool VisualOdometry::addFrame(Frame::Ptr frame)

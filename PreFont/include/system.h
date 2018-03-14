@@ -12,6 +12,7 @@
 #include "memory"
 #include "cassert"
 #include "chrono"
+#include "list"
 
 #include "opencv2/core.hpp"
 #include "opencv2/highgui.hpp"

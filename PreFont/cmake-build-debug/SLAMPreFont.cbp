@@ -224,9 +224,6 @@
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/frame.cpp">
 			<Option target="SLAMPreFont"/>
 		</Unit>
-		<Unit filename="/home/smher/HR-SLAMs/PreFont/src/g2o_types.cpp">
-			<Option target="SLAMPreFont"/>
-		</Unit>
 		<Unit filename="/home/smher/HR-SLAMs/PreFont/test/VO.cpp">
 			<Option target="VO"/>
 		</Unit>
