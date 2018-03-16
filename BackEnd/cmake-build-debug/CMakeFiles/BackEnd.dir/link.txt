@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/BackEnd.dir/main.cpp.o  -o BackEnd 
