@@ -3,6 +3,7 @@ from mxnet import gluon
 from mxnet import nd
 import numpy as np
 from mxnet import autograd
+import os
 
 '''
     This file includes the model of ResNet-50
@@ -96,3 +97,9 @@ def train(net, train_data, test_data, batchsize, epochs):
     totalloss = [np.mean(net(train_data).asnumpy())]
 
     #for epoch in range(1, epochs):
+
+# Define the prediction function for new input
+def prediction(net, img):
+    if os.path.exists('resnet50.param'):
+        net.load_parameters('resnet50.param')
+    return net(img)
