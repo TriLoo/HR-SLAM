@@ -19,6 +19,11 @@
 
 
 #include "Eigen/Core"
+#include "g2o/core/base_vertex.h"
+#include "g2o/core/linear_solver.h"
+#include "g2o/core/optimization_algorithm_levenberg.h"
+#include "g2o/core/solver.h"
+#include "g2o/core/sparse_optimizer.h"
 #include "sophus/se3.h"
 #include "sophus/so3.h"
 
