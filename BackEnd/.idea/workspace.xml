@@ -44,32 +44,54 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PoseGraph.h" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PoseGraph.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/myslam/PoseGraph.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="36" column="14" lean-forward="false" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+            <state relative-caret-position="80">
+              <caret line="25" column="46" lean-forward="false" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="system.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/system.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PoseGraph.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PoseGraph.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PoseGraph.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+            <state relative-caret-position="500">
+              <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="se3.h" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/myCode/SLAMs/Sophus/sophus/se3.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="45" column="40" lean-forward="false" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Matrix.h" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/include/eigen3/Eigen/src/Core/Matrix.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="369" column="8" lean-forward="false" selection-start-line="369" selection-start-column="8" selection-end-line="369" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base_vertex.h" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/include/g2o/core/base_vertex.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-897">
+              <caret line="48" column="2" lean-forward="true" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
+              <folding>
+                <element signature="e#1928#1947#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,11 +114,11 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/test/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/PoseGraph.cpp" />
         <option value="$PROJECT_DIR$/test/main.cpp" />
         <option value="$PROJECT_DIR$/src/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/include/system.h" />
         <option value="$PROJECT_DIR$/include/myslam/PoseGraph.h" />
+        <option value="$PROJECT_DIR$/src/PoseGraph.cpp" />
       </list>
     </option>
   </component>
@@ -464,15 +486,15 @@
       <workItem from="1521353882123" duration="2270000" />
       <workItem from="1521464233714" duration="4000" />
       <workItem from="1521515674261" duration="3262000" />
-      <workItem from="1521559317453" duration="4825000" />
+      <workItem from="1521559317453" duration="8261000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14160000" />
+    <option name="totallyTimeSpent" value="17596000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-4" width="1920" height="1084" extended-state="7" />
+    <frame x="0" y="-4" width="1920" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26040554" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -732,22 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/system.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="25" column="36" lean-forward="false" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PoseGraph.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/include/g2o/core/optimizable_graph.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -756,10 +762,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/include/system.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="22" column="36" lean-forward="false" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/include/g2o/core/base_binary_edge.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="102" column="23" lean-forward="false" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
+          <folding>
+            <element signature="e#1642#1699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/include/g2o/core/base_vertex.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-897">
+          <caret line="48" column="2" lean-forward="true" selection-start-line="48" selection-start-column="2" selection-end-line="48" selection-end-column="2" />
+          <folding>
+            <element signature="e#1928#1947#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/eigen3/Eigen/src/Core/Matrix.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="369" column="8" lean-forward="false" selection-start-line="369" selection-start-column="8" selection-end-line="369" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/myCode/SLAMs/Sophus/sophus/se3.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="45" column="40" lean-forward="false" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/myslam/PoseGraph.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="36" column="14" lean-forward="false" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="14" />
+        <state relative-caret-position="80">
+          <caret line="25" column="46" lean-forward="false" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PoseGraph.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
           <folding />
         </state>
       </provider>
