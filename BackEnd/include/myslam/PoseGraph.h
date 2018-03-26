@@ -28,9 +28,10 @@ namespace myBackEnd
     };
 
     // 定义节点类型，基于李代数
-    // 定义位姿图，基于G2O, 位姿的李代数表示的维度为：3， 类型为李代数: SE3
+    // 定义位姿图，基于G2O, 位姿的李代数表示的维度为：6， 类型为李代数: SE3
+    // se3 in R^6 ! ! !
     // 主要定义： setToOriginImpl()以及oplusImpl()
-    class PoseGraphVertex : public g2o::BaseVertex<3, Sophus::SE3>
+    class PoseGraphVertex : public g2o::BaseVertex<6, Sophus::SE3>
     {
         EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 

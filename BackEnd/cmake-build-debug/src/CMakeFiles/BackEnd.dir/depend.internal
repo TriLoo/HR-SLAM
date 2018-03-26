@@ -9,6 +9,7 @@ src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o
  /home/smher/myCode/SLAMs/Sophus/sophus/so3.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
+ /usr/include/eigen3/Eigen/Dense
  /usr/include/eigen3/Eigen/Eigen2Support
  /usr/include/eigen3/Eigen/Eigenvalues
  /usr/include/eigen3/Eigen/Geometry
@@ -211,6 +212,38 @@ src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o
  /usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h
  /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
  /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
+ /usr/local/include/g2o/config.h
+ /usr/local/include/g2o/core/base_binary_edge.h
+ /usr/local/include/g2o/core/base_binary_edge.hpp
+ /usr/local/include/g2o/core/base_edge.h
+ /usr/local/include/g2o/core/base_vertex.h
+ /usr/local/include/g2o/core/base_vertex.hpp
+ /usr/local/include/g2o/core/batch_stats.h
+ /usr/local/include/g2o/core/creators.h
+ /usr/local/include/g2o/core/eigen_types.h
+ /usr/local/include/g2o/core/g2o_core_api.h
+ /usr/local/include/g2o/core/hyper_graph.h
+ /usr/local/include/g2o/core/jacobian_workspace.h
+ /usr/local/include/g2o/core/linear_solver.h
+ /usr/local/include/g2o/core/matrix_operations.h
+ /usr/local/include/g2o/core/matrix_structure.h
+ /usr/local/include/g2o/core/openmp_mutex.h
+ /usr/local/include/g2o/core/optimizable_graph.h
+ /usr/local/include/g2o/core/optimization_algorithm.h
+ /usr/local/include/g2o/core/optimization_algorithm_levenberg.h
+ /usr/local/include/g2o/core/optimization_algorithm_with_hessian.h
+ /usr/local/include/g2o/core/parameter.h
+ /usr/local/include/g2o/core/parameter_container.h
+ /usr/local/include/g2o/core/robust_kernel.h
+ /usr/local/include/g2o/core/solver.h
+ /usr/local/include/g2o/core/sparse_block_matrix.h
+ /usr/local/include/g2o/core/sparse_block_matrix.hpp
+ /usr/local/include/g2o/core/sparse_block_matrix_ccs.h
+ /usr/local/include/g2o/core/sparse_optimizer.h
+ /usr/local/include/g2o/stuff/g2o_stuff_api.h
+ /usr/local/include/g2o/stuff/macros.h
+ /usr/local/include/g2o/stuff/property.h
+ /usr/local/include/g2o/stuff/string_tools.h
  /usr/local/include/opencv/cxcore.h
  /usr/local/include/opencv2/calib3d.hpp
  /usr/local/include/opencv2/calib3d/calib3d_c.h
