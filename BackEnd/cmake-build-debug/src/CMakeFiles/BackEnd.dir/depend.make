@@ -218,6 +218,8 @@ src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/base_edg
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/base_vertex.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/base_vertex.hpp
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/batch_stats.h
+src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/block_solver.h
+src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/block_solver.hpp
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/creators.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/eigen_types.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/g2o_core_api.h
@@ -238,11 +240,15 @@ src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/solver.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix.hpp
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix_ccs.h
+src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix_diagonal.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/core/sparse_optimizer.h
+src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/solvers/dense/linear_solver_dense.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/stuff/g2o_stuff_api.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/stuff/macros.h
+src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/stuff/misc.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/stuff/property.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/stuff/string_tools.h
+src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/g2o/stuff/timeutil.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/opencv/cxcore.h
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/opencv2/calib3d.hpp
 src/CMakeFiles/BackEnd.dir/PoseGraph.cpp.o: /usr/local/include/opencv2/calib3d/calib3d_c.h

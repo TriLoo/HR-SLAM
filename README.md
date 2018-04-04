@@ -7,6 +7,12 @@ This folder includes the implementation HR-SLAM (**H**eterogeneous Computing bas
 ## License:
 GLP-v2
 
+## Folders
+* PreFont: 简易前端
+* BackEnd: 仅包含位姿图
+* LearningApproaches: 包含一些深度学习相关的方法
+* Tools: 包含一些零碎的、自己实现的代码
+
 ## Refereneces:
 * 视觉SLAM十四讲
 * Deep Learning

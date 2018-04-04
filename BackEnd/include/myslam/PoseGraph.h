@@ -7,10 +7,11 @@
 
 #include "system.h"
 
-class PoseGraphEdge;
 
 namespace myBackEnd
 {
+    //class PoseGraphEdge;
+
     class PoseGraph
     {
     public:
@@ -23,7 +24,7 @@ namespace myBackEnd
 
     private:
         PoseGraph();   // 单例模式
-        std::shared_ptr<PoseGraphEdge> edgePtr_;        // Has a Pose Graphic Edge
+        //std::shared_ptr<PoseGraphEdge> edgePtr_;        // Has a Pose Graphic Edge
 
     };
 
@@ -33,6 +34,7 @@ namespace myBackEnd
     // 主要定义： setToOriginImpl()以及oplusImpl()
     class PoseGraphVertex : public g2o::BaseVertex<6, Sophus::SE3>
     {
+    public:
         EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 
         PoseGraphVertex();
@@ -45,11 +47,14 @@ namespace myBackEnd
     };
 
     // 定义边类型
-    // 双节点边. error vector dimension: 3, measurement type: Sophus::SE3 or Eigen::Vector3d, VertexXi Type: PoseGraphVertex, VertexXj Type: PoseGraphVertex
+    // 双节点边. error vector dimension: 6, measurement type: Sophus::SE3 or Eigen::Vector6d, VertexXi Type: PoseGraphVertex, VertexXj Type: PoseGraphVertex
     // 主要定义误差函数与Jacobin函数
     //class PoseGraphEdge : public g2o::BaseBinaryEdge<3, Sophus::SE3, PoseGraphVertex, PoseGraphVertex>
-    class PoseGraphEdge : public g2o::BaseBinaryEdge<3, Eigen::Vector3d, PoseGraphVertex, PoseGraphVertex>
+    class PoseGraphEdge : public g2o::BaseBinaryEdge<6, Sophus::SE3, PoseGraphVertex, PoseGraphVertex>
     {
+    public:
+        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
         PoseGraphEdge();
 
         bool read(std::istream& is){}

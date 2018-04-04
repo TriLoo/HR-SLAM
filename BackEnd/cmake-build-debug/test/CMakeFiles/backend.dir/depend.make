@@ -218,6 +218,8 @@ test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/base_edge.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/base_vertex.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/base_vertex.hpp
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/batch_stats.h
+test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/block_solver.h
+test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/block_solver.hpp
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/creators.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/eigen_types.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/g2o_core_api.h
@@ -238,11 +240,15 @@ test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/solver.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix.hpp
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix_ccs.h
+test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/sparse_block_matrix_diagonal.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/core/sparse_optimizer.h
+test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/solvers/dense/linear_solver_dense.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/stuff/g2o_stuff_api.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/stuff/macros.h
+test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/stuff/misc.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/stuff/property.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/stuff/string_tools.h
+test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/g2o/stuff/timeutil.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/opencv/cxcore.h
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/opencv2/calib3d.hpp
 test/CMakeFiles/backend.dir/main.cpp.o: /usr/local/include/opencv2/calib3d/calib3d_c.h
