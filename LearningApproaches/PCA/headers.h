@@ -6,6 +6,7 @@
 #define PCA_HEADERS_H
 
 #include "iostream"
+#include "fstream"
 #include "vector"
 #include "memory"
 #include "cassert"
