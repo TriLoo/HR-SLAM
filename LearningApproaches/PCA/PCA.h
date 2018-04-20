@@ -9,13 +9,13 @@
 
 namespace LA         // Learning Approaches namespace
 {
-    class PCA
+    class myPCA
     {
     public:
-        PCA(int k = 1);
-        PCA(const PCA& a) = delete;
-        PCA& operator=(const PCA& a) = delete;
-        ~PCA();
+        myPCA(int k = 1);
+        myPCA(const myPCA& a) = delete;
+        myPCA& operator=(const myPCA& a) = delete;
+        ~myPCA();
 
         void setNumK(int k);
         int getNumK();

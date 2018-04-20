@@ -17,6 +17,8 @@ headers.h
 /home/smher/HR-SLAMs/LearningApproaches/PCA/headers.h
 iostream
 /home/smher/HR-SLAMs/LearningApproaches/PCA/iostream
+fstream
+/home/smher/HR-SLAMs/LearningApproaches/PCA/fstream
 vector
 /home/smher/HR-SLAMs/LearningApproaches/PCA/vector
 memory
