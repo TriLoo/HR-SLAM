@@ -16,7 +16,7 @@ int main() {
     cout << "Image info: " << imgIn.rows << " * " << imgIn.cols << endl;
 
     Mat imgOut = Mat::zeros(imgIn.size(), CV_32FC1);
-    LA::myPCA pca;
+    LA::myPCA pca(5);                  // the first 5 components
     pca.calcPCA(imgOut, imgIn);
 
     //imgOut.convertTo(imgOut, CV_32FC1, 1.0/255);

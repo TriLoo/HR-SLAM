@@ -82,6 +82,12 @@ namespace LA
 
         assert(K_ >= 1);
         imgOut = eigenVectors.rowRange(0, K_) * inImg.t();          // 在第二种情形下的修改, 此时，输出是一个K_ * imgIn.rows的矩阵 ! ! !
+
+        // Step 4: Restore the input image based on the above results.
+        Mat tempOut = eigenVectors.rowRange(0, K_).t();
+        cout << "Temp Size = " << tempOut.rows << " * " << tempOut.cols << endl;
+        //imgOut = eigenValues.rowRange(0, K_).t() * imgOut;
+        imgOut = tempOut * imgOut;
     }
 }
 
