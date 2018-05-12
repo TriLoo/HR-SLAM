@@ -36,7 +36,7 @@ namespace Feature
         cv::Mat kpDescrips_;
 
         // Some Operations to Complete 'calcSIFT(...)'
-        void initSIFT();
+        void initSIFT(const cv::Mat& img);
     };
 }
 
