@@ -16,7 +16,9 @@ GLP-v2
 ## Refereneces:
 * 视觉SLAM十四讲
 * Deep Learning
+* 统计学习方法
 * Multiple View Geometry in Computer Vision (Reading)
+* 计算机视觉 模型、学习和推理
 * 计算机视觉----一种现代方法
 * 数字图像处理与机器视觉
 * CUDA by Example
@@ -25,15 +27,18 @@ GLP-v2
 * CUDA C Programming
 * C++ Primer
 * Effective C++
+* C++编程规范
 * 并行程序设计导论
 * Algorithm
 * [Mxnet](http://zh.gluon.ai/)
 * [ORB-SLAM2](https://github.com/raulmur/ORB_SLAM2)
 * [Papers](https://arxiv.org/list/cs.CV/recent)
+* DOing
+	* TensorFlow实战
 * TODO
-	* 统计学习方法
-	* 计算机视觉 模型、学习和推理
 	* 深度探索C++对象模型
+	* 深入理解计算机系统
+	* State Estimation for Robotics
 
 ## Contact Me:
 Any tutorials or suggestions can  be sent to me by e-mail: [HR-SLAM](smhhaoo@126.com) 
