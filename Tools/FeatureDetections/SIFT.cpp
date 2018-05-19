@@ -8,6 +8,8 @@ using namespace std;
 using namespace cv;
 
 #define ATF at<float>
+#define CURV_RATIO  10    // 去除较大曲率的点
+#define CONTRAST_TH 0.03  // 去除低对比度的点
 
 namespace Feature
 {
@@ -146,6 +148,30 @@ namespace Feature
                         // clear the vector
                         NeighborPixels.clear();
                     }
+                }
+            }
+        }
+    }
+
+    // 去掉低对比度特征点 & 不稳定的边缘点
+    // 极值处的二阶梯度为零
+    // Input is DoG images
+    void FeatureSIFT::filterExtremum()
+    {
+        //
+        Mat extreMat;  // storing the locations of  extremums
+        for (int i = 0; i < octaves_; ++i)
+        {
+            for (int j = 0; j < scales_; ++j)
+            {
+                int indexA = i * scales + j;
+                // In a row * 1 data array
+                // TODO: convert iextremums_[indexA] to CV_8UC1
+                findNonZero(extremums_[indexA], extreMat);  // returns the list of locations of non-zero pixels
+                for (int k = 0; k < extreMat.rows; ++k)
+                {
+                    Point loc = extreMat.at<Point>(k);  // see the opencv documents' example
+                    // remove low contrast
                 }
             }
         }

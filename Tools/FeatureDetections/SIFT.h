@@ -39,6 +39,7 @@ namespace Feature
         // Some Operations to Complete 'calcSIFT(...)'
         void initSIFT(const cv::Mat& img);
         void extractExtremum();
+        void filterExtremum();
     };
 }
 
