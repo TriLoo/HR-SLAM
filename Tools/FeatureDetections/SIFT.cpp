@@ -10,6 +10,7 @@ using namespace cv;
 #define ATF at<float>
 #define CURV_RATIO  10    // 去除较大曲率的点
 #define CONTRAST_TH 0.03  // 去除低对比度的点
+#define PI 3.1314
 
 namespace Feature
 {
@@ -64,14 +65,6 @@ namespace Feature
             }
             index = octaves_ * (scales_ + 2);
         }
-
-        // Extract local extremum points
-        extractExtremum();
-
-        // Filter out bad points
-
-        // Assign Orientations
-
     }
 
     void FeatureSIFT::extractExtremum()
@@ -160,26 +153,86 @@ namespace Feature
     {
         //
         Mat extreMat;  // storing the locations of  extremums
+        Mat_<float> currDoG;
         for (int i = 0; i < octaves_; ++i)
         {
             for (int j = 0; j < scales_; ++j)
             {
-                int indexA = i * scales + j;
+                int indexA = i * scales + j;   // 用于索引保存极值的Mat
+                int indexB = indexA + 1;       // 用于索引DoG图
                 // In a row * 1 data array
                 // TODO: convert iextremums_[indexA] to CV_8UC1
                 findNonZero(extremums_[indexA], extreMat);  // returns the list of locations of non-zero pixels
+                currDoG = PyrDoGs_[indexB];
                 for (int k = 0; k < extreMat.rows; ++k)
                 {
                     Point loc = extreMat.at<Point>(k);  // see the opencv documents' example
                     // remove low contrast
+                    if (currDoG(loc.x, loc.y) < CONTRAST_TH)
+                    {
+                        extremums_[indexA].at<uchar>(loc) = 0;
+                        // OR
+                        //extremums_[indexA].at<uchar>(loc.x, loc.y) = 0;
+                        continue;
+                    }
+
+                    // remove big curvature points
+                    float Dxx = currMat(x + 1, y) + currMat(x - 1, y) - 2 * currMat(x, y);
+                    float Dyy = currMat(x, y + 1) + currMat(x, y - 1) - 2 * currMat(x, y);
+                    float Dxy = currMat(x + 1, y+1) + currMat(x-1, y-1) - currMat(x+1, y-1) - currMat(x-1, y+1);
+                    float traceD = Dxx + Dyy;
+                    float detD = (Dxx * Dyy) - (Dxy * Dxy);
+                    float curvature = traceD * traceD / detD;
+                    // 曲率过大
+                    if (curvature < 0 || curvature >= CURV_RATIO)
+                    {
+                        extremums_[indexA].at<uchar>(loc) = 0;
+                    }
                 }
             }
         }
     }
 
+    // Generate Descriptors
+    // 结果保存在kpDescrips_
+    void FeatureSIFT::generateDescrip()
+    {
+        Mat currLoc;
+        for (int i = 0; i < octaves_; ++i)
+        {
+            for (int j = 0; j < scales_; ++j)
+            {
+                int index = i * (scales_ + 3) + j + 1;
+                int indexA = i * scales + j;
+                Mat_<float> currMat = PyrGauss_[index];
+                Mat_<float> currExtremum = extremums_[indexA];
+                findNonZero(currExtremum, currLoc);
+
+                for (int k = 0; k < currLoc.rows; ++k)
+                {
+                    Point loc = currLoc.at<Point>(k);
+                    float dx = currMat(loc.x+1, loc.y) -  currMat(loc.x, loc.y);
+                    float dy = currMat(loc.x, loc.y+1) -  currMat(loc.x, loc.y);
+
+                    float Orient = atan(dy, dx);
+                    float Mag = sqrt(dx * dx + dy * dy);
+
+                    kpGradOrients_.push_back(Orient);
+                    kpGradMags_.push_back(Mag);
+                }
+            }
+        }
+        // TODO generate descriptors
+    }
+
     void FeatureSIFT::calcSIFT(cv::Mat &imgOut, const cv::Mat &imgIn)
     {
-        //
+        initSIFT(imgIn);
+        extractExtremum();
+        filterExtremum();
+        generateDescrip();
+
+        // Draw all keypoints
     }
 }
 

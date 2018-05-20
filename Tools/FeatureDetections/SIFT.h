@@ -7,6 +7,10 @@
 
 #include "headers.h"
 
+// 参考，
+//https://github.com/phoenix16/SIFT/blob/master/OpenCV/sift.h
+//https://github.com/kassol/SIFT/blob/master/include/sift.h
+
 namespace Feature
 {
     class FeatureSIFT
@@ -35,11 +39,13 @@ namespace Feature
 
         // 保存描述子: 每一个特征点对应一个128维的向量
         cv::Mat kpDescrips_;
+        int kpNums_;                    // 保存总的特征点的数量
 
         // Some Operations to Complete 'calcSIFT(...)'
         void initSIFT(const cv::Mat& img);
         void extractExtremum();
         void filterExtremum();
+        void generateDescrip();
     };
 }
 
