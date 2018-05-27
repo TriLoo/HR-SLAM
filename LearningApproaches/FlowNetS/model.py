@@ -36,7 +36,7 @@ class UpConv(gluon.nn.Block):
         super(UpConv, self).__init__(**kwargs)
 
         #
-        self.Deconv = gluon.nn.Conv2DTranspose(channels=output_channels, kernel_size=(), strides=())
+        self.Deconv = gluon.nn.Conv2DTranspose(channels=output_channels, kernel_size=5, strides=(2, 2))
 
     def forward(self, x):
         return self.Deconv(x)
@@ -78,7 +78,7 @@ class FlowNetS(gluon.nn.Block):
         conv_6 = self.conv6(conv_5)
 
         # Expanding Part, Important
-        upconv5 =
+        upconv5 = self.deconv5(conv_6)
 
 
 
