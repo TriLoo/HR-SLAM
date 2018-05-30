@@ -78,6 +78,7 @@ def test_accuracy(test_data, net, ctx=mx.gpu()):
 
 
 def train(net, train_data, test_data, loss, trainer, ctx = mx.gpu(), num_epochs = 1000, verbose=True):
+    net.collect_params().reset_ctx(ctx)
     for epoch in range(1, num_epochs+1):
         train_l_sum, train_acc_sum, n, m = .0, .0, .0, .0
         start = time()
