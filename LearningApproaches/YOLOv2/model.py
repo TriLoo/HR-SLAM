@@ -19,10 +19,13 @@ def conv3_4block(output_channel):
     blk = gluon.nn.HybridSequential()
     blk.add(
         gluon.nn.Conv2D(output_channel, 3, padding=1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.Conv2D(mid_channel, 1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.Conv2D(output_channel, 3, padding=1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.MaxPool2D(strides=2)
     )
@@ -35,20 +38,23 @@ def conv5_6block(output_channel):
     blk = gluon.nn.HybridSequential()
     blk.add(
         gluon.nn.Conv2D(output_channel, 3, padding=1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.Conv2D(mid_channel, 1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.Conv2D(output_channel, 3, padding=1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.Conv2D(mid_channel, 1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
         gluon.nn.Conv2D(output_channel, 3, padding=1),
+        gluon.nn.BatchNorm(),
         gluon.nn.LeakyReLU(0.1),
     )
 
     return blk
-
-
 
 
 class DarkNet19(gluon.nn.HybridBlock):
@@ -58,9 +64,11 @@ class DarkNet19(gluon.nn.HybridBlock):
         with self.net.name_scope():
             self.net.add(
                 gluon.nn.Conv2D(32, 3, padding=1),
+                gluon.nn.BatchNorm(),
                 gluon.nn.LeakyReLU(0.1),                # conv1, Set the alpha to 0.1
                 gluon.nn.MaxPool2D(strides=2),          # pool1
                 gluon.nn.Conv2D(64, 3, padding=1),
+                gluon.nn.BatchNorm(),
                 gluon.nn.LeakyReLU(0.1),                # conv2 end
                 gluon.nn.MaxPool2D(strides=2),          # pool2
                 conv3_4block(128),                      # conv3 + pool3
@@ -70,14 +78,32 @@ class DarkNet19(gluon.nn.HybridBlock):
                 conv5_6block(1024)
             )
 
-        self.conv7 = gluon.nn.Conv2D(1000, kernel_size=1)
+        self.conv7 = gluon.nn.Conv2D(num_class, kernel_size=1)
         self.avgpool = gluon.nn.GlobalAvgPool2D()
 
+        self.passthrough = self.net[-1]
 
-    def hybrid_forward(self, F, x, *args, **kwargs):
+        # used for detection
+        self.conv8_1 = gluon.nn.Conv2D(1024, kernel_size=3, padding=1)
+        self.conv8_2 = gluon.nn.Conv2D(1024, kernel_size=3, padding=1)
+        self.conv8_3 = gluon.nn.Conv2D(1024, kernel_size=3, padding=1)
+
+
+
+
+    def hybrid_forward(self, F, x, detection,  *args, **kwargs):
         mid_x = self.net(x)
-        mid_x = self.conv7(mid_x)
-        y = self.avgpool(mid_x)
+        if detection:
+            mid_x = self.conv8_1(mid_x)
+            mid_x = self.conv8_2(mid_x)
+            mid_x = self.conv8_3(mid_x)
+            y = self.conv7(mid_x)
+
+            #y = mx.symbol.softmax(mid_x)
+
+        else:
+            mid_x = self.conv7(mid_x)
+            y = self.avgpool(mid_x)
 
         # OR
         #return mx.symbol.softmax(y)
