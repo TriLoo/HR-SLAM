@@ -8,20 +8,29 @@ import readData
 from time import time
 
 
-net = model.DarkNet19(125, model.scales)
-
-#net.initialize(init=mx.init.Xavier(), ctx=mx.gpu())
-net.initialize(init=mx.init.Xavier())
-#net.hybridize()
-
-
-ctx = mx.gpu()
-net.collect_params().reset_ctx(ctx)
-trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate':1, 'wd':5e-4})
-
 data_shape = 256
 batch_size = 2
 train_data, test_data, class_names, num_class = readData.get_iterators(data_shape, batch_size)
+
+#batch = train_data.next()
+# label: class_id, left, top, right, bottom, normlized to 0 - 1
+#print('batch=', batch)    # = data (2, 3, 256, 256), label (2, 1, 5)
+#print('batch.data = ', batch.data, len(batch.data))     # = 2 * 3 * 256 * 256 Ndarray, 1
+#print('batch.data[0] = ', batch.data[0])                 # = 2 * 3 * 256 * 256
+
+net = model.DarkNet19(2, model.scales)   # the class = 2, including the background as dummy!
+
+ctx = mx.gpu()
+net.initialize(init=mx.init.Xavier(), ctx=mx.gpu())
+#net.initialize(init=mx.init.Xavier())
+net.hybridize()
+
+
+#ctx = mx.gpu()
+#ctx = mx.cpu()
+#net.collect_params().reset_ctx(ctx)
+trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate':1, 'wd':5e-4})
+
 
 # define loss function
 sec_loss = gluon.loss.SoftmaxCrossEntropyLoss(from_logits=False)
@@ -38,7 +47,7 @@ box_weight=5.0
 
 batch = train_data.next()
 print(batch)
-for epoch in range(20):
+for epoch in range(2):
     train_data.reset()
     cls_loss.reset()
     obj_loss.reset()
@@ -50,9 +59,14 @@ for epoch in range(20):
         y = batch.label[0].as_in_context(ctx)
         with autograd.record():
             x = net(x)
-            output, cls_pred, score, xywh = model.yolo2_forward(x, 2, scales)
-            with autograd.pause():
-                tid, tscore, tbox, sample_weight = model.yolo2_target(score, xywh, y, model.scales, thresh=.5)
+            #print('x.shape = ', x.shape)   # 2 * 14 * 8 * 8
+            # xywh: center, width, height
+            output, cls_pred, score, xywh = model.yolo2_forward(x, 2, model.scales)
+            #print('score.shape = ', score.shape)
+            #print('After Forward.')
+            with autograd.pause():     # return a scope context to be used in 'with' statement for codes that do not need gradients to be calculated
+                tid, tscore, tbox, sample_weight = model.yolo2_target(score, xywh, y, model.scales, thresh=.5)   # score:1 * batch_size
+                #print('After Forward.')
 
             loss1 = sec_loss(cls_pred, tid, sample_weight * class_weight)
             score_weight = nd.where(sample_weight>0, nd.ones_like(sample_weight) * positive_weight, nd.ones_like(sample_weight) * negative_weight)
@@ -68,9 +82,14 @@ for epoch in range(20):
         obj_loss.update(loss2)
         box_loss.update(loss3)
 
-    print('epoch %2d, train %s %.5f, %s %.5f time %.1f sec'%(epoch, *cls_loss.get(), *obj_loss.get(), *box_loss.get(), time.time() - tic))
+    print('epoch %2d, train %s %.5f, %s %.5f, %s %.5f, time %.1f sec'%(epoch, *cls_loss.get(), *obj_loss.get(), *box_loss.get(), time() - tic))
 
-
+try:
+    net.save_params('SSD.params')
+except:
+    print('First try failed. Try second time...')
+    net.collect_params().save('SSD.params')
+    print('Parameters have been saved to SSD.params')
 
 '''
 def test_stack_neightbor(in_data, factor=2):                    # in_data: 1, 3, 416, 416

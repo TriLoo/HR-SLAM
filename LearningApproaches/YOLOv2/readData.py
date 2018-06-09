@@ -1,13 +1,13 @@
 import mxnet as mx
 from mxnet import nd
-from mxnet.ndarray.contrib import MultiBoxPrior
-#from mxnet import image
 
 
 rgb_mean = nd.array([123, 117, 104])
 rgb_std = nd.array([58.395, 57.12, 57.375])
 
 data_dir = '/home/slz/.mxnet/datasets/'
+
+
 def get_iterators(data_shape, batch_size):
     class_name = ['pikachu', 'dummy']
     num_class = len(class_name)

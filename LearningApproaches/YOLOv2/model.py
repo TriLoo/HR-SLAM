@@ -10,11 +10,11 @@ import readData
 def transform_center(xy):
     b, h, w, n, s = xy.shape
     # tile: repeat thw whole array multiple times
-    offset_y = nd.tile(nd.arange(0, h, repeat=(w*n*1), ctx=xy.context()).reshape((1, h, w, n, 1)), (b, 1, 1, 1, 1))   # repeat b times along the batch axis
-    offset_x = nd.tile(nd.arange(0, w, repeat=(n*1), ctx=xy.context()).reshape((1, 1, w, n, 1)), (b, h, 1, 1, 1)) # repeat b times  along the batch channel, and n times along axis=1
+    offset_y = nd.tile(nd.arange(0, h, repeat=(w*n*1), ctx=xy.context).reshape((1, h, w, n, 1)), (b, 1, 1, 1, 1))   # repeat b times along the batch axis
+    offset_x = nd.tile(nd.arange(0, w, repeat=(n*1), ctx=xy.context).reshape((1, 1, w, n, 1)), (b, h, 1, 1, 1)) # repeat b times  along the batch channel, and n times along axis=1
 
     # split: num_outputs is the number of splits
-    x, y = xy.split(num_outputs=2, axis=1)
+    x, y = xy.split(num_outputs=2, axis=-1)
     x = (x + offset_x) / w
     y = (y + offset_y) / h
     return x, y
@@ -22,7 +22,7 @@ def transform_center(xy):
 
 def transform_size(wh, anchors):
     b, h, w, n, s = wh.shape
-    aw, ah = nd.tile(nd.array(anchors, ctx=wh.context()).reshape((1, 1, 1, -1, 2)), (b, h, w, 1, 1)).split(num_outputs=2, axis=-1)
+    aw, ah = nd.tile(nd.array(anchors, ctx=wh.context).reshape((1, 1, 1, -1, 2)), (b, h, w, 1, 1)).split(num_outputs=2, axis=-1)
 
     w_pred, h_pred = nd.exp(wh).split(num_outputs=2, axis=-1)
     w_out = w_pred * aw / w
@@ -32,12 +32,12 @@ def transform_size(wh, anchors):
 
 
 def yolo2_forward(x, num_class, anchor_scales):
-    stride = num_class + 5   # predict total 'num_class + 5' numbers for each anchor
+    stride = num_class + 5   # predict total 'num_class + 5' numbers for each anchor, = 7 here
     # the 4th dimension is the number of anchors
-    x = x.tranpose((0, 2, 3, 1))
+    x = x.transpose((0, 2, 3, 1))       # 2 * 8 * 8 * 14(2 * 7)
     # split the last dimension to (num_class + 5) for each anchor
-    # Result: (batch, m, n, stride), total m * n pixels
-    x = x.reshape((0, 0, 0, -1, stride))
+    # Result: (batch, m, 2 * n, stride), total m * n pixels
+    x = x.reshape((0, 0, 0, -1, stride))   # 2 * 8 * 8 * 2 * 7, here the second 2 is the scales
     # get the Pr(class | object) return [0, num_class-1]
     cls_preds = x.slice_axis(begin=0, end=num_class, axis=-1)
     # get the Pr(object)
@@ -46,10 +46,11 @@ def yolo2_forward(x, num_class, anchor_scales):
     # get the bounding box offsets:
     xy_pred = x.slice_axis(begin=num_class+1, end=num_class+3, axis=-1)
     xy = nd.sigmoid(xy_pred)
-    x, y = transform_center(xy)
     # get the bounding box scales
     wh_pred = x.slice_axis(begin=num_class+3, end=num_class+5, axis=-1)
-    w, h = transform_size(wh_pred, anchor_scales)
+
+    x, y = transform_center(xy)
+    w, h = transform_size(wh_pred, anchor_scales)   # return the width, height relative to anchors' width and height
 
     # cid is the argmax channel
     cid = nd.argmax(cls_preds, axis=-1, keepdims=True)
@@ -96,13 +97,13 @@ def center2corner(boxes, concat=True):
     return left, top, right, bottom
 
 
-# define the training target given predictions and labels
+# define the training target given predictions and labels, the groundtruth of boundingbox (relative width & height & position to anchors(scales + assumed identical center))
 def yolo2_target(scores, boxes, labels, anchors, ignore_label=-1, thresh=0.5):
-    b, h, w, n, _ = scores.shape    # n: the number of anchors
-    anchors = np.reshape(np.array(anchors), (-1, 2)) # numpy doesn't support autograde
+    b, h, w, n, _ = scores.shape    # n: the number of scales of anchors
+    anchors = np.reshape(np.array(anchors), (-1, 2)) # numpy doesn't support autograde, anchors = (still 2 * 2)?
     # define ground truth, labels = (score, top, left, right, bottom...)
-    gt_boxes = nd.slice_axis(labels, begin=1, end=5, axis=-1)
-    target_score = nd.zeros((b, h, w, n, 1), ctx=scores.context)
+    #gt_boxes = nd.slice_axis(labels, begin=1, end=5, axis=-1)
+    target_score = nd.zeros((b, h, w, n, 1), ctx=scores.context)      # here, n = 2, the number of scales
     target_id = nd.ones_like(target_score, ctx=scores.context) * ignore_label
     target_box = nd.zeros((b, h, w, n, 4), ctx=scores.context)
     sample_weight = nd.zeros((b, h, w, n, 1), ctx=scores.context)
@@ -110,10 +111,11 @@ def yolo2_target(scores, boxes, labels, anchors, ignore_label=-1, thresh=0.5):
     #for i in range(output.shape[0]):
     for i in range(b):
         # find the bestmatch for each gt
-        label = labels[i].anumpy()    # labels -> (b, (n, 6))
+        label = labels[i].asnumpy()    # labels -> (b, 1, 5), b: batch size
         valid_label = label[np.where(label[:, 0] > -0.5)[0], :]
         # shuffle because multi gt could possibily match to one anchor, we keep the last match randomly
         np.random.shuffle(valid_label)
+
         for l in valid_label:
             gx, gy, gw, gh = (l[1] + l[3])/2, (l[4]+l[2])/2, l[3] - l[1], l[4] - l[2]
             ind_x = int(gx * w)
@@ -124,17 +126,22 @@ def yolo2_target(scores, boxes, labels, anchors, ignore_label=-1, thresh=0.5):
             gh = gh * h
             # find the best match using width and height only, assuming centers are identical
             # *: element-wise multiplication
+            #print('anchors = ', anchors)   # 2 * 2
+            #print('anchors[:, 0] = ', anchors[:, 0])    # 2 * 1
+            # here, assuming centers are identical, the anchors only represent the width and height of two scales, so its shape is 2 * 2
             intersect = np.minimum(anchors[:, 0], gw) * np.minimum(anchors[:, 1], gh)
+            #print('intersec = ', intersect)   # shape = 2 * 2
             ovps = intersect / (gw * gh + anchors[:, 0] * anchors[:, 1] - intersect)
-            best_match = int(np.argmax(ovps))
-            target_id[b, ind_y, ind_x, best_match, :] = l[0]
-            target_score[b, ind_y, ind_x, best_match, :] = 1.0
-            tw = np.log(gw / anchors[best_match, 0])
+            #print('ovps = ', ovps)
+            best_match = int(np.argmax(ovps))   # the best match of scale
+            target_id[i, ind_y, ind_x, best_match, :] = l[0]
+            target_score[i, ind_y, ind_x, best_match, :] = 1.0
+            tw = np.log(gw / anchors[best_match, 0])   # return the relative width and height to the anchor, then compute the log
             th = np.log(gh / anchors[best_match, 1])
+            #print('best match = ', best_match)
 
-            target_box[b, ind_y, ind_x, best_match, :] = mx.nd.array([tx, ty, tw, th])
-            sample_weight[b, ind_y, ind_x, best_match, :] = 1.0
-
+            target_box[i, ind_y, ind_x, best_match, :] = mx.nd.array([tx, ty, tw, th])
+            sample_weight[i, ind_y, ind_x, best_match, :] = 1.0
     return target_id, target_score, target_box, sample_weight
 
 
@@ -270,7 +277,7 @@ class DarkNet19(gluon.nn.HybridBlock):
         self.pool5 = gluon.nn.MaxPool2D(strides=2)          # pool5
         self.conv6 = conv5_6block(1024)
 
-        #self.output_nums = num_anchor_scales * (num_class + 1 + 4)
+        self.output_nums = len(anchor_scales) * (num_class + 1 + 4)
         #self.outputlayer = gluon.nn.Conv2D(self.output_nums, kernel_size=1)
         self.outputlayer = YOLO2Output(num_class, anchor_scales)
 
