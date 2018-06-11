@@ -12,6 +12,7 @@ data_shape = 256
 batch_size = 2
 train_data, test_data, class_names, num_class = readData.get_iterators(data_shape, batch_size)
 
+# A very good blog: https://zhuanlan.zhihu.com/p/36902889
 #batch = train_data.next()
 # label: class_id, left, top, right, bottom, normlized to 0 - 1
 #print('batch=', batch)    # = data (2, 3, 256, 256), label (2, 1, 5)
