@@ -35,7 +35,6 @@ class UpConv(gluon.nn.Block):
     def __init__(self, output_channels, **kwargs):
         super(UpConv, self).__init__(**kwargs)
 
-        #
         self.Deconv = gluon.nn.Conv2DTranspose(channels=output_channels, kernel_size=5, strides=(2, 2))
 
     def forward(self, x):
@@ -67,7 +66,8 @@ class FlowNetS(gluon.nn.Block):
         self.conv5_1 = gluon.nn.Conv2D(channels=512, kernel_size=(3, 3), padding=1, activation='relu')
         self.conv6 = gluon.nn.Conv2D(channels=1024, kernel_size=(3, 3), strides=1, padding=1, activation='relu')
 
-        self.deconv5 = UpConv(output_channels=2)
+        # For convenience, here we use Upsample('bilinear') + Convolution to replace the original 'Unpooling'
+
 
     def forward(self, x):
         # Contracting Part

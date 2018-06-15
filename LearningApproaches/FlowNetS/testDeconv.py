@@ -9,7 +9,8 @@ print(data_in)
 kernel = nd.array([[0, 1], [2, 3]])
 
 net = gluon.nn.Sequential()
-net.add(gluon.nn.Conv2D(channels=1, kernel_size=(3, 3), strides=(1, 1)))
+net.add(gluon.nn.Conv2D(channels=1, kernel_size=(3, 3), strides=(1, 1)),
+        gluon.nn.MaxPool2D())
 
 net.initialize()
 
@@ -25,8 +26,10 @@ print('x = ', x)
 print('y = ', y)
 
 Decov = gluon.nn.Sequential()
-Decov.add(gluon.nn.Conv2DTranspose(channels=1, kernel_size=(5, 5), strides=(3, 3)))
+Decov.add(gluon.nn.Conv2DTranspose(channels=1, kernel_size=(4, 4), strides=(2, 2)))
 
 Decov.initialize()
 y_ = Decov(y)
 print('y_ = ', y_)
+
+

@@ -20,11 +20,11 @@ class_name = ['pikachu']
 
 # predict the probability of each anchor
 def class_predict(num_anchors, num_classes):
-    return gluon.nn.Conv2D(num_anchors * (num_classes + 1), kernel_size=3, padding=1)
+    return gluon.nn.Conv2D(num_anchors * (num_classes + 1), kernel_size=3, padding=1)    # output: (num_classes+1) per anchor, total 'num_anchors' anchors
 
 # predict the position of each anchor
 def box_predict(num_anchors):
-    return gluon.nn.Conv2D(num_anchors * 4, kernel_size=3, padding=1)
+    return gluon.nn.Conv2D(num_anchors * 4, kernel_size=3, padding=1)    # each anchor has 4 output channel for each axis of one anchor
 
 # define downsample block: downsample the dimension by half
 def down_sample(num_filters):
@@ -40,9 +40,9 @@ def down_sample(num_filters):
 # Very Important
 # define Merge layer: merget two array of different dimension
 # flatten layer: flatten input (Batch, a, b, c,...) to a 2D array (Batch, a * b * c * ...)
-# during flatten, channel prior, because we want the positions of a anchor (4 numbers) to be continuous
+# during flatten, channel prior, because we want the positions of a anchor (4 numbers) to be continuous, the channel represent the class prediction of ONE anchor
 # now flatten order: height -> width -> channel
-# After transpose & flatten: (pos{1}{1}_0, pos{1}{1}_..., pos{1}{1}_3, pos{1}{2}_0, ..., pos{1}{2}_3 ...
+# After transpose & flatten: (pos{1}{1}_0, pos{1}{1}_1, ..., pos{1}{1}_3, pos{1}{2}_0, ..., pos{1}{2}_3 ...
 def flatten_predict(pred):
     return pred.transpose((0, 2, 3, 1)).flatten()
 
@@ -87,7 +87,7 @@ def toy_ssd_forward(x, model, sizes, ratios, verbose=True):
     # Caution: how the data flow
     x = body(x)
     for i in range(5):
-        anchors.append(MultiBoxPrior(x, sizes=sizes[i], ratios=ratios[i]))
+        anchors.append(MultiBoxPrior(x, sizes=sizes[i], ratios=ratios[i]))     # generate 4 box per pixel of x, total 5 scales
         class_preds.append(flatten_predict(classpredictors[i](x)))
         box_preds.append(flatten_predict(boxpredictors[i](x)))
         if verbose:
@@ -98,7 +98,7 @@ def toy_ssd_forward(x, model, sizes, ratios, verbose=True):
         elif i == 3:
             x = nd.Pooling(x, global_pool=True, pool_type='max', kernel=(x.shape[2], x.shape[3]))   # Global kernel
 
-    return (concat_predict(anchors),
+    return (concat_predict(anchors),      # the channel dim is the 
             concat_predict(class_preds),
             concat_predict(box_preds))
 
