@@ -110,6 +110,19 @@ class FlowNetS(gluon.nn.Block):
         return flow2, flow3, flow4, flow5
 
 
+class EPError(gluon.loss.Loss):
+    def __init__(self, **kwargs):
+        super(EPError, self).__init__(**kwargs)
+
+    def forward(self, pred, target, *args):
+        pred = nd.flatten(pred)
+        target = nd.flatten(target)
+
+        loss = nd.norm(pred-target, 2, axis=-1, keepdims=True)
+
+        return nd.mean(loss, axis=-1, keepdims=True)
+
+
 
 
 
