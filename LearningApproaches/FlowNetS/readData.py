@@ -8,28 +8,30 @@ from mxnet import nd
 rgb_mean = nd.array([123, 117, 104])
 rgb_std = nd.array([58.395, 57.12, 57.375])
 
-data_dir = '~/Documents/DL_datasets/data_scene_flow'
+data_dir = '/home/smher/Documents/DL_Datasets/data_scene_flow'
+
+HEIGHT = 375
+WIDTH = 1242
 
 '''
     Read all datas by the own dataset implementation + memory
 '''
-
 def readKITTIImages(root = data_dir, train=True):
     img_name = root + ('/training/train.txt' if train else '/testing/val.txt')
+    print(img_name)
     with open(img_name, 'r') as f:
         image_list = f.read().split()
 
-    n = len(image_list)
-    data = [None] * n
-    label = [None] * n
+    n = len(image_list)   #400
+    #tempdata = [None] * n
+    data = [None] * (n >> 1)
+    label = [None] * (n >> 1)
 
-    for i, img_file in enumerate(image_list):
-        if i % 2 == 0:
-            imgA = image.imread(os.path.join(os.path.split(img_name)[0], 'image_2/', 'img_file'))    #
-            data[i] = imgA
-            label[i] = image.imread(os.path.join(os.path.split(img_name)[0], 'flow_noc/', 'img_file'))
-        else:
-            continue
+    for i in range(0, n-1, 2):
+        label[i >> 1] = image.imread(os.path.join(os.path.split(img_name)[0], 'flow_noc', image_list[i])).transpose((2, 0, 1))
+        imgA = image.imread(os.path.join(os.path.split(img_name)[0], 'image_2', image_list[i])).transpose((2, 0, 1))
+        imgB = image.imread(os.path.join(os.path.split(img_name)[0], 'image_2', image_list[i+1])).transpose((2, 0, 1))
+        data[i >> 1] = nd.concat(imgA, imgB, dim=0)
 
     return data, label
 

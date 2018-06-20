@@ -120,7 +120,7 @@ class EPError(gluon.loss.Loss):
 
         loss = nd.norm(pred-target, 2, axis=-1, keepdims=True)
 
-        return nd.mean(loss, axis=-1, keepdims=True)
+        return nd.mean(loss)
 
 
 
