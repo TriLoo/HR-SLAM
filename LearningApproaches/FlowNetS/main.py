@@ -25,6 +25,7 @@ y = nd.norm(x, 1)
 print(y)
 '''
 
+'''
 data, label = readData.readKITTIImages()
 print('len(data) = ', len(data))
 print('len(label) = ', len(label))
@@ -37,6 +38,30 @@ a, b = nd.split(d, num_outputs=2, axis=-1)
 
 plt.imshow(a.asnumpy())
 plt.show()
+'''
 
+batch_size = 1
+
+kittidataset = readData.KITTIDataset(True, (360, 1240))
+train_data = gluon.data.DataLoader(kittidataset, batch_size, True, last_batch='discard')
+
+'''
+print(type(train_data))
+for data, label in train_data:
+    print('type of data = ', type(data))
+    print(data.shape)
+    print(label.shape)
+
+    imgA, imgB = nd.split(data, num_outputs=2, axis=1)
+    print(imgA.shape)
+    imgA = (imgA[0, :, :, :]).transpose((1, 2, 0))
+    print(imgA.shape)
+    imgA = ((imgA * readData.rgb_std[0:3]) + readData.rgb_mean[0:3]) * 255
+    imgA = imgA.astype('uint8').asnumpy()
+    plt.imshow(imgA)
+    break
+
+plt.show()
+'''
 
 

@@ -29,8 +29,8 @@ def deconv(num_outputs, up=True):
 def predict_flow():
     net = gluon.nn.Sequential()
     net.add(
-        # why, here the output channel is 2 !?: horizontal and vertical ?
-        gluon.nn.Conv2D(channels=2, kernel_size=3, strides=1, padding=1, use_bias=False) # if using BatchNormal, can not to use bias
+        # why, here the output channel is 3 !?: horizontal and vertical ?
+        gluon.nn.Conv2D(channels=3, kernel_size=3, strides=1, padding=1, use_bias=False) # if using BatchNormal, can not to use bias
     )
 
     return net
@@ -67,11 +67,11 @@ class FlowNetS(gluon.nn.Block):
         self.predictflow3 = predict_flow()
         self.predictflow2 = predict_flow()
 
-        self.upsampled_flow_5_to_4 = gluon.nn.Conv2DTranspose(2, 4, 2, 1, use_bias=False, weight_initializer=mx.init.Bilinear())
-        self.upsampled_flow_4_to_3 = gluon.nn.Conv2DTranspose(2, 4, 2, 1, use_bias=False, weight_initializer=mx.init.Bilinear())
-        self.upsampled_flow_3_to_2 = gluon.nn.Conv2DTranspose(2, 4, 2, 1, use_bias=False, weight_initializer=mx.init.Bilinear())
+        self.upsampled_flow_5_to_4 = gluon.nn.Conv2DTranspose(3, 4, 2, 1, use_bias=False, weight_initializer=mx.init.Bilinear())
+        self.upsampled_flow_4_to_3 = gluon.nn.Conv2DTranspose(3, 4, 2, 1, use_bias=False, weight_initializer=mx.init.Bilinear())
+        self.upsampled_flow_3_to_2 = gluon.nn.Conv2DTranspose(3, 4, 2, 1, use_bias=False, weight_initializer=mx.init.Bilinear())
 
-        self.finalpredict = gluon.nn.Conv2DTranspose(2, kernel_size=8, strides=4, padding=2, weight_initializer=mx.init.Bilinear())
+        self.finalpredict = gluon.nn.Conv2DTranspose(3, kernel_size=8, strides=4, padding=2, weight_initializer=mx.init.Bilinear())
         self.finalpredict.weight.lr_mult = 0.0
 
     def forward(self, x):
@@ -123,6 +123,6 @@ class EPError(gluon.loss.Loss):
         return nd.mean(loss)
 
 
-
-
+def train_target(label):
+    pass
 
