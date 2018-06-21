@@ -1,6 +1,7 @@
 import mxnet as mx
 from mxnet import nd
 from mxnet import gluon
+from mxnet.ndarray.contrib import BilinearResize2D
 
 
 def conv(num_outputs, ks, stride, padding, bias=False):
@@ -16,7 +17,7 @@ def conv(num_outputs, ks, stride, padding, bias=False):
 def deconv(num_outputs, up=True):
     net = gluon.nn.Sequential()
     net.add(
-        gluon.nn.Conv2DTranspose(num_outputs, kernel_size=4, strides=2, padding=1, weight_initializer=mx.init.Bilinear()),
+        gluon.nn.Conv2DTranspose(num_outputs, kernel_size=4, strides=2, padding=1, use_bias=False, weight_initializer=mx.init.Bilinear()),
         gluon.nn.LeakyReLU(0.1)
     )
 
@@ -111,18 +112,29 @@ class FlowNetS(gluon.nn.Block):
 
 
 class EPError(gluon.loss.Loss):
-    def __init__(self, **kwargs):
-        super(EPError, self).__init__(**kwargs)
+    def __init__(self, batch_axis = 0, **kwargs):
+        super(EPError, self).__init__(None, batch_axis, **kwargs)
 
-    def forward(self, pred, target, *args):
-        pred = nd.flatten(pred)
-        target = nd.flatten(target)
+    def hybrid_forward(self, F, pred, target):
+        #pred = nd.flatten(pred)
+        #target = nd.flatten(target)
+        print('pred.shape = ', pred.shape)
+        print('target.shape = ', target.shape)
 
-        loss = nd.norm(pred-target, 2, axis=-1, keepdims=True)
+        loss = F.norm(pred-target, axis=1, keepdims=True)
 
-        return nd.mean(loss)
+        return loss.mean()
 
 
-def train_target(label):
-    pass
+def train_target(label, target_size):
+    flow2_size = target_size
+    flow3_size = (target_size[0] >> 1, target_size[1]>>1)
+    flow4_size = (target_size[0] >> 2, target_size[1]>>2)
+    flow5_size = (target_size[0] >> 3, target_size[1]>>3)
+    flow_target2 = BilinearResize2D(label, *flow2_size)
+    flow_target3 = BilinearResize2D(label, *flow3_size)
+    flow_target4 = BilinearResize2D(label, *flow4_size)
+    flow_target5 = BilinearResize2D(label, *flow5_size)
+
+    return flow_target2, flow_target3, flow_target4, flow_target5
 
