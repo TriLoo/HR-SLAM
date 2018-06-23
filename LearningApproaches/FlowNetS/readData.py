@@ -65,7 +65,7 @@ class KITTIDataset(gluon.data.Dataset):
     def __getitem__(self, item):
         data, label = rand_crop(self.data[item], self.label[item], *self.crop_size)
         data = data.transpose((2, 0, 1))
-        label = label.transpose((2, 0, 1)).astype('float32')
+        label = label.transpose((2, 0, 1)).astype('float32') / 255.0
         return data, label
 
     def __len__(self):
