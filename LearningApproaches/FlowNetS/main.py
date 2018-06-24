@@ -77,8 +77,8 @@ for epoch in range(2):
         with autograd.record():
             flow2_pred, flow3_pred, flow4_pred, flow5_pred = net(x)
 
-            #with autograd.pause():
-            flow2_targ, flow3_targ, flow4_targ, flow5_targ = model.train_target(y, (80, 256))
+            with autograd.pause():
+                flow2_targ, flow3_targ, flow4_targ, flow5_targ = model.train_target(y, (80, 256))
 
             loss = loss1(flow2_pred, flow2_targ) + loss2(flow3_pred, flow3_targ) + loss3(flow4_pred, flow4_targ) + loss4(flow5_pred, flow5_targ)
 
