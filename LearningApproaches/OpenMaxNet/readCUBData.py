@@ -12,7 +12,7 @@ data_shape = 256
 
 rgb_mean = nd.array([123, 117, 104])
 
-data_dir = '/home/smher/.mxnet/datasets/CUB100'
+data_dir = '/home/slz/.mxnet/datasets/CUB100'
 
 augs = transforms.Compose([
     # Notes: the input size of randomresizedcrop is (W, H)

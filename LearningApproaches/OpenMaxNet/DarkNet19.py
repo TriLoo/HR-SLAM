@@ -4,36 +4,68 @@ from mxnet import nd
 from mxnet import autograd
 from mxnet import gluon
 import readCUBData
+from mxnet import metric
 
 # use resnet to be the model
 # pretrained_resnet18 = model_zoo.vision.resnet18_v2(classes=100)
 # the fully connected input size is
 pretrained_resnet18 = model_zoo.vision.resnet18_v2(pretrained = True, ctx=mx.cpu())
 
-finetune_resnet18 = model_zoo.vision.resnet18_v2(classes=100)
+finetune_resnet18 = model_zoo.vision.resnet18_v2(classes=100, ctx=mx.gpu())
 finetune_resnet18.features = pretrained_resnet18.features
 finetune_resnet18.output.initialize(mx.init.Xavier())
 
 
+#cls_acc = metric.Accuracy()
+def accuracy(output, label):
+    return nd.mean(output.argmax(axis=-1)==label).asscalar()
+
+
+'''
+def evaluate_accuracy(data_iterator, net, batch_size=2, ctx=[mx.gpu()]):
+    if isinstance(ctx, mx.Context):
+        ctx=[ctx]
+
+    acc = nd.array)[0]
+    n = 0.
+
+    if isinstance(data_iterator, mx.io.MXDataIter):
+        data_iterator.reset()
+    for batch in data_iterator:
+        data, label =
+'''
+
+
 # default loss = SoftmaxCrossEntropy()
-def train(net, train_data, test_data, lossfunc, learning_rate, batch_size, ctx=mx.cpu(), epoches=5):
+def train(net, train_data, test_data, lossfunc, learning_rate, batch_size, ctx=mx.gpu(), epoches=30):
     net.collect_params().reset_ctx(ctx)
     net.hybridize()
     trainer = gluon.Trainer(net.collect_params(), 'sgd', {'learning_rate':learning_rate, 'wd':0.001, 'momentum':0.01})
     train_loss = []
+#cls_acc.reset()
     for epoch in range(epoches):
+#train_loss = 0.0
         for i, batch in enumerate(train_data):
             data, label = batch
+            data = data.copyto(mx.gpu())
+            label = label.copyto(mx.gpu())
             with autograd.record():
-                output = net(data)
+                output = net(data)                    # list
                 currloss = lossfunc(output, label)    # hybrid_forward(F, pred, label, ...)
+#print('shape of output = ', len(output))           # output: 2
             currloss.backward()
             trainer.step(batch_size)
+#train_loss += sum([l.sum().asscalar() for l in currloss])
             #print('type of currloss: {}, shape of currloss: {}'.format(type(currloss), currloss.shape), currloss)
-            if (i+1) % 100 == 0:
-                print('current loss = ', currloss)
-                train_loss.append(currloss)
-        print('Epoch: %d, training loss: ' % (epoch), train_loss[-1][0], train_loss[-1][1])
+            if (i) % 100 == 0:
+                train_loss.append(currloss)    
+                print('current loss = ', nd.sum(currloss).asscalar())
+
+        print('Epoch: %d, training loss: ' % (epoch), nd.sum(train_loss[-1]).asscalar())
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -44,14 +76,19 @@ if __name__ == '__main__':
     y = finetune_resnet18(x) # Input: (1, 100)
     print(y.shape)   # (2, 100)
     '''
-    data_dir = '/home/smher/.mxnet/datasets/CUB100'
+    data_dir = '/home/slz/.mxnet/datasets/CUB100'
     net = pretrained_resnet18
-    lr = 0.1
+    lr = 0.15
     lossfunc = gluon.loss.SoftmaxCrossEntropyLoss()
-    batch_size = 2
+    batch_size = 8
     train_set = gluon.data.vision.ImageFolderDataset(data_dir, transform=lambda X, y : readCUBData.transform(X, y, readCUBData.augs))
     train_data = gluon.data.DataLoader(train_set, batch_size=batch_size, shuffle=True)
     train(net, train_data, None, lossfunc, lr, batch_size)
+
+    try:
+        net.collect_params().save('resnet.params')
+    except:
+        print('save failed')
 
 
 
