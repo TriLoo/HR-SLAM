@@ -1,20 +1,28 @@
+# -*- coding: utf-8 -*-
+
+__author__ = 'smh'
+__date__ = '2018.07.05'
+
 import mxnet as mx
 from mxnet import gluon
 
 # 参考文献：RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation, 2018.06.04 arxiv
 # Cautions:  backbone network: ResNet-50 (RedNet)
 
+# 文档结构： (1). RedNet Model, (2). Loss class, (3). Training function, etc.
+
 def stnlayer(data):
     #net = gluon.nn.HybridSequential()
     return mx.sym.SpatialTransformer(data, transform_type='affine')
 
 
-def get_convlayer(output_num, ks, s, p=None, act=False):
+def get_convlayer(output_num, ks, s, p=None, bn=True, act=False):
     net = gluon.nn.HybridSequential()
     net.add(
-        gluon.nn.Conv2D(output_num, kernel_size=ks, strides=s, padding=p),
-        gluon.nn.BatchNorm()
+        gluon.nn.Conv2D(output_num, kernel_size=ks, strides=s, padding=p, use_bias=False),
     )
+    if bn:
+        net.add(gluon.nn.BatchNorm())
 
     if act:
         net.add(gluon.nn.Activation('relu'))
@@ -25,7 +33,7 @@ def get_convlayer(output_num, ks, s, p=None, act=False):
 def get_reslayer_upsample(output_num, ks=4, s=2, p=1, act=False):
     net = gluon.nn.HybridSequential()
     net.add(
-        gluon.nn.Conv2DTranspose(output_num, kernel_size=ks, strides=s, padding=p),
+        gluon.nn.Conv2DTranspose(output_num, kernel_size=ks, strides=s, padding=p, use_bias=False, weight_initializer=mx.init.Bilinear()),
         gluon.nn.BatchNorm()
     )
 
@@ -108,13 +116,20 @@ def get_resblock_encoder(output_nums, unit_nums, down=True):
 # 文章说了，在decoder部分的trans1-5里面，每层trans只有一层是具有升维功能的res layer with upsample， 其它层是具有普通两层3*3卷积同等输出channel的res block.
 # 在decoder的最后一层是一层Conv2DTranspose实现，而不是包含res layer with upsample的trans层实现的
 # 注意，与encoder部分不同的是，在每一个trans结构里面，是先存在几个不降维的res block (unit)，在最后才会跟一层 res layer with upsample
-def get_resblock_decoder(output_nums, unit_nums):
+def get_resblock_decoder(output_nums, unit_nums, up=True):
     blk = gluon.nn.HybridSequential()
-    for i in range(unit_nums-1):
-        blk.add(
-            resblock_same(output_nums)     # 这里与原文不同，原文这里并没有采用bottleneck结构，而是普通的两层3*3同等输出channel数量的卷积层，见ResNet论文,为了方便，这里采用bottleneck 结构
-        )
-    blk.add(resblock_upsample(output_nums))
+    if up:
+        for i in range(unit_nums-1):
+            blk.add(
+                resblock_same(output_nums)     # 这里与原文不同，原文这里并没有采用bottleneck结构，而是普通的两层3*3同等输出channel数量的卷积层，见ResNet论文,为了方便，这里采用bottleneck 结构
+            )
+        blk.add(resblock_upsample(output_nums))
+    else:                                       # else分支作为实现Trans5的基础，因为Trans5并没有升维，而是配合后续的一个Transpose Conv layer来实现升维！
+        for i in range(unit_nums):
+            blk.add(
+                resblock_same(output_nums)     # 这里与原文不同，原文这里并没有采用bottleneck结构，而是普通的两层3*3同等输出channel数量的卷积层，见ResNet论文,为了方便，这里采用bottleneck 结构
+            )
+
 
     return blk
 
@@ -126,8 +141,9 @@ def get_resblock_decoder(output_nums, unit_nums):
 # 在encoder里面的layer1是没有降维的！这一块是配合前一层模型中唯一的max pooling with stride=2来实现的降维，文章中这一层layer是绿色的，说明不降维，橘黄色的encoder layer是自带降维
 # 所有的fusion操作是 Element-wise Addition
 class ASENet(gluon.nn.HybridBlock):
-    def __init__(self, **kwargs):
+    def __init__(self, class_nums, **kwargs):
         super(ASENet, self).__init__(**kwargs)
+        self.class_nums = class_nums
 
         # Encoder Part
         # covolution layer 1 with stride = 2
@@ -155,13 +171,67 @@ class ASENet(gluon.nn.HybridBlock):
         self.trans2 = get_resblock_decoder(128, 4)
         self.trans3 = get_resblock_decoder(64, 3)
         self.trans4 = get_resblock_decoder(64, 3)
-        self.trans5 = get_resblock_decoder(64, 3)
+        self.trans5 = get_resblock_decoder(64, 3, up=False)
+
+        self.finalconv = gluon.nn.Conv2DTranspose(channels=class_nums, kernel_size=4, strides=2, padding=1, use_bias=False, weight_initializer=mx.init.Bilinear())
+
+        # Agents Part
+        self.agent4 = get_convlayer(512, ks=1, s=1, act=True)
+        self.agent3 = get_convlayer(256, ks=1, s=1, act=True)
+        self.agent2 = get_convlayer(128, ks=1, s=1, act=True)
+        self.agent1 = get_convlayer(64, ks=1, s=1, act=True)
+        self.agent0 = get_convlayer(64, ks=1, s=1, act=True)
+
+        # Side Outputs Part
+        self.conv_side_output1 = get_convlayer(class_nums, ks=1, s=1, bn=False, act=False)
+        self.conv_side_output2 = get_convlayer(class_nums, ks=1, s=1, bn=False, act=False)
+        self.conv_side_output3 = get_convlayer(class_nums, ks=1, s=1, bn=False, act=False)
+        self.conv_side_output4 = get_convlayer(class_nums, ks=1, s=1, bn=False, act=False)
 
     def hybrid_forward(self, F, rgb, depth, *args, **kwargs):
         # TODO: construct the whole network basing on above calss variables
-        pass
+        # Encoder Part
+        conv1 = self.conv1(rgb)
+        conv1_d = self.conv1_d(depth)
+
+        layer1 = self.encoder_layer1(self.maxpool1(rgb))
+        layer1_d = self.encoder_layer1_d(self.maxpool1_d(depth))
+
+        layer2 = self.encoder_layer2(rgb)
+        layer2_d = self.encoder_layer2_d(depth)
+
+        layer3 = self.encoder_layer3(rgb)
+        layer3_d = self.encoder_layer3_d(depth)
+
+        layer4 = self.encoder_layer4(rgb)
+        layer4_d = self.encoder_layer4_d(depth)
+
+        # Agent Part
+        agent4 = self.agent4(layer4 + layer4_d)
+        agent3 = self.agent3(layer3 + layer3_d)
+        agent2 = self.agent2(layer2 + layer2_d)
+        agent1 = self.agent1(layer1 + layer1_d)
+        agent0 = self.agent0(conv1 + conv1_d)
+
+        # Decoder Part
+        trans1 = self.trans1(agent4)
+        trans2 = self.trans2(agent3 + trans1)
+        trans3 = self.trans3(agent2 + trans2)
+        trans4 = self.trans4(agent1 + trans3)
+
+        finaloutput = self.finalconv(self.trans5(agent0 + trans4))
+
+        # Side Output Part
+        side_output1 = self.conv_side_output1(trans1 + agent3)
+        side_output2 = self.conv_side_output2(trans2 + agent2)
+        side_output3 = self.conv_side_output3(trans3 + agent1)
+        side_output4 = self.conv_side_output4(trans4 + agent0)
+
+        # Return all outputs
+        return finaloutput, side_output4, side_output3, side_output2, side_output1
 
 
+# 当对side output进行计算loss时，需要将输入的label利用nearset-neighbor算法进行降维
 class target_loss(gluon.loss.Loss):
     def __init__(self, **kwargs):
         super(target_loss, self).__init__(**kwargs)
