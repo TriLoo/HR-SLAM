@@ -12,12 +12,13 @@ data_shape = 256
 
 rgb_mean = nd.array([123, 117, 104])
 
-data_dir = '/home/slz/.mxnet/datasets/CUB100'
+data_dir = '/home/smher/.mxnet/datasets/CUB100'
 
 augs = transforms.Compose([
     # Notes: the input size of randomresizedcrop is (W, H)
     transforms.RandomResizedCrop((420, 312), scale=(0.8, 1.0)),      # input data shape: H, W, C
     transforms.RandomFlipLeftRight()])
+
 
 def transform(data, label, augs):
     data = data.astype('float32')
