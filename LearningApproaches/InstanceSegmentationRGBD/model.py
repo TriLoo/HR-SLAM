@@ -5,6 +5,7 @@ __date__ = '2018.07.05'
 
 import mxnet as mx
 from mxnet import gluon
+from mxnet.ndarray.contrib import BilinearResize2D
 
 # 参考文献：RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation, 2018.06.04 arxiv
 # Cautions:  backbone network: ResNet-50 (RedNet)
@@ -265,6 +266,21 @@ class target_loss(gluon.loss.Loss):
 
     def hybrid_forward(self, F, x, *args, **kwargs):
         pass
+
+
+def generate_target(label):
+    label_size = label.shape
+    output4_size = (label_size[0] >> 1, label_size[1] >> 1)
+    output3_size = (label_size[0] >> 2, label_size[1] >> 2)
+    output2_size = (label_size[0] >> 3, label_size[1] >> 3)
+    output1_size = (label_size[0] >> 4, label_size[1] >> 4)
+
+    label_output4 = BilinearResize2D(label, *output4_size)
+    label_output3 = BilinearResize2D(label, *output3_size)
+    label_output2 = BilinearResize2D(label, *output2_size)
+    label_output1 = BilinearResize2D(label, *output1_size)
+
+    return label, label_output4, label_output3, label_output2, label_output1
 
 
 # 训练的时候，可以通过增加RGB图像的增广来实现模型对Depth的依赖，间接学习RGB与Depth之间的对应关系，如
