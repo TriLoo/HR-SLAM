@@ -10,6 +10,7 @@ import numpy as np
 import scipy.spatial.distance as spd
 
 
+# 计算被正确分类的样本的scores与该类的mavs的距离
 # mavs: shape = (1, class_num); features: shape = (N_c, 1, class_num)
 def compute_channel_distance(mavs, features, eu_weight):
     eucos_dists, eu_dists, cos_dists = [], [], []
