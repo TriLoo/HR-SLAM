@@ -6,6 +6,7 @@ __date__ = '2018.07.05'
 import mxnet as mx
 from mxnet import gluon
 from mxnet.ndarray.contrib import BilinearResize2D
+from mxnet import nd
 
 # 参考文献：RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation, 2018.06.04 arxiv
 # Cautions:  backbone network: ResNet-50 (RedNet)
@@ -263,9 +264,10 @@ class ASENet(gluon.nn.HybridBlock):
 class target_loss(gluon.loss.Loss):
     def __init__(self, **kwargs):
         super(target_loss, self).__init__(**kwargs)
+        self.loss = gluon.loss.SoftmaxCrossEntropyLoss(axis=1)   # along the channel axis
 
-    def hybrid_forward(self, F, x, *args, **kwargs):
-        pass
+    def hybrid_forward(self, F, pred, label, *args, **kwargs):
+        return self.loss(pred, label)
 
 
 def generate_target(label):
@@ -283,9 +285,30 @@ def generate_target(label):
     return label, label_output4, label_output3, label_output2, label_output1
 
 
+loss_inst = target_loss()
+
+
+# TODO: fix bugs
+class mIoU(mx.metric.EvalMetric):
+    def __init__(self, name, **kwargs):
+        super(mIoU, self).__init__(name, **kwargs)
+        self.sum_metric = 0.0
+
+    def update(self, labels, preds):
+        shape = labels.shape
+        area = 1.0
+        for i in shape:
+            area *= i
+        IoU = labels == nd.argmax(preds, axis=1)
+        acc = nd.sum(IoU) / area
+
+        self.sum_metric += acc
+        self.num_inst += 1
+
+
 # 训练的时候，可以通过增加RGB图像的增广来实现模型对Depth的依赖，间接学习RGB与Depth之间的对应关系，如
 #  RGB的随机裁剪以及变形等
 #  RGB的亮度变化，此时可以认为学习到了Depth对应RGB亮度之间的鲁棒性!
-def train_target():
+def train(net, train_data, test_data, epoches, evalues, loss=loss_inst, batch_size=2, lr=0.1, period=10, ctx=mx.gpu()):
     pass
 
