@@ -7,11 +7,13 @@ import mxnet as mx
 from mxnet import gluon
 from mxnet.ndarray.contrib import BilinearResize2D
 from mxnet import nd
+import numpy as np
 
 # 参考文献：RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation, 2018.06.04 arxiv
 # Cautions:  backbone network: ResNet-50 (RedNet)
+# Evaluation References: [1]. FuseNet ...,  [2]. FCN, [3]. Github: py_img_seg_evl
 
-# 文档结构： (1). RedNet Model, (2). Loss class, (3). Training function, etc.
+# 文档结构： (1). RedNet Model, (2). Loss class, (3). Evaluation Metrics, (4). Training function, etc.
 
 
 def stnlayer(data):
@@ -288,23 +290,125 @@ def generate_target(label):
 loss_inst = target_loss()
 
 
-# TODO: fix bugs
+class ShapeError(Exception):
+    def __init__(self, value):
+        self.value = value
+    def __str__(self):
+        return repr(self.value)
+
+
+def check_shapes(labels, preds, shape=True):
+    if shape:
+        labels_shape, preds_shape = labels.shape, preds.shape
+    else:
+        labels_shape, preds_shape = len(labels), len(preds)
+
+    if labels_shape != preds_shape:
+        raise  ShapeError('shape of labels {} does not match shape of predictions {}.'.format(labels_shape, preds_shape))
+
+    return labels, preds
+
+
+#! \param n_cl the number of classes
+def extract_mask(seg, n_cl):
+    h, w = seg.shape
+    masks = np.zeros(n_cl, h, w)
+
+    for i, c in enumerate(range(n_cl)):
+        masks[i, :, :] = (seg == c)
+
+    return masks
+
+
+# Three evaluation metrices usually used in image segmentation
+# IoU: TP / (TP + FP + FN)
+# mIoU: average over all classes
 class mIoU(mx.metric.EvalMetric):
-    def __init__(self, name, **kwargs):
+    def __init__(self, num_classes, name = 'miou', axis=1, **kwargs):
         super(mIoU, self).__init__(name, **kwargs)
+        self.sum_metric = 0.0
+        self.num_classes = num_classes
+        self.axis = axis
+
+    def update(self, labels, preds):   # only consider the origin size labels and predicts
+        for label, pred in zip(labels, preds):
+            pred = nd.argmax(pred, axis=self.axis)
+            check_shapes(label, pred)
+            if isinstance(label, nd.NDArray):
+                label = label.asnumpy().astype('int32')
+            if isinstance(pred, nd.NDArray):
+                pred = pred.asnumpy().astype('int32')
+            pred_mask = extract_mask(pred, self.num_classes)
+            label_mask = extract_mask(label, self.num_classes)
+            miou = list([0]) * self.num_classes
+            for i, c in enumerate(range(self.num_classes)):
+                curr_pred_mask = pred_mask[i, :, :]
+                curr_label_mask = label_mask[i, :, :]
+                if (np.sum(curr_pred_mask) == 0) or (np.sum(curr_label_mask) == 0):
+                    continue    # 图像中不含有这一类目标 ! !
+                n_ii = np.sum(curr_label_mask == curr_pred_mask)
+                t_i = np.sum(curr_label_mask)    # ground truth
+                n_ij = np.sum(curr_pred_mask)
+                miou[i] = n_ii / (t_i + n_ij - n_ii)
+            self.sum_metric += np.sum(miou[i]) / self.num_classes
+            self.num_inst += 1   # the number of samples
+
+
+# pixel accuracy = (\sum_c^{K}TP_c) / N_{pixel}
+# equals to normal accuracy, i.e. the background is took as class '0'
+class PixelAccuracy(mx.metric.EvalMetric):
+    def __init__(self, num_classes, name='pa', axis=1, **kwargs):
+        super(PixelAccuracy, self).__init__(name, **kwargs)
+        self.num_classes = num_classes
+        self.axis = axis
         self.sum_metric = 0.0
 
     def update(self, labels, preds):
-        shape = labels.shape
-        area = 1.0
-        for i in shape:
-            area *= i
-        IoU = labels == nd.argmax(preds, axis=1)
-        acc = nd.sum(IoU) / area
+        for label, pred in zip(labels, preds):
+            pred = nd.argmax(pred, axis=self.axis)
+            check_shapes(label, pred)
+            pred = pred.asnumpy().astype('int32')
+            label = label.asnumpy().astype('int32')
+            label = label.flat
+            pred = pred.flat
 
-        self.sum_metric += acc
-        self.num_inst += 1
+            self.sum_metric += (pred == label).sum()
+            self.num_inst += 1
 
+
+# mean Pixel Accuracy = (\sum_c^K TP_c / (P = TP_c + FN_c))，这里与FuseNet里面不同，但我感觉应该是这样的
+class meanPixelAccuracy(mx.metric.EvalMetric):
+    def __init__(self, num_classes, name = 'mpa', axis=1, **kwargs):
+        super(meanPixelAccuracy, self).__init__(name, **kwargs)
+        self.axis = axis
+        self.num_classes = num_classes
+        self.sum_metric = 0.0
+
+    def update(self, labels, preds):
+        for label, pred in zip(labels, preds):
+            pred = nd.argmax(pred, axis=self.axis)
+            check_shapes(label, pred)
+            if isinstance(label, nd.NDArray):
+                label = label.asnumpy().astype('int32')
+            if isinstance(pred, nd.NDArray):
+                pred = pred.asnumpy().astype('int32')
+            pred_mask = extract_mask(pred, self.num_classes)
+            label_mask = extract_mask(label, self.num_classes)
+            acc = list([0]) * self.num_classes
+            for i, c in enumerate(range(self.num_classes)):
+                curr_pred_mask = pred_mask[i, :, :]
+                curr_label_mask = label_mask[i, :, :]
+                n_ii = np.sum(curr_label_mask == curr_pred_mask)
+                t_i = np.sum(curr_label_mask)
+                if (t_i != 0):
+                    acc[i] = n_ii / t_i
+                else:
+                    acc[i] = 0
+            self.sum_metric += np.mean(acc)
+            self.num_inst += 1
+
+
+# TODO: add frequency weighted (f.w.) IoU
 
 # 训练的时候，可以通过增加RGB图像的增广来实现模型对Depth的依赖，间接学习RGB与Depth之间的对应关系，如
 #  RGB的随机裁剪以及变形等
