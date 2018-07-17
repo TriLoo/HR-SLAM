@@ -8,6 +8,7 @@ from mxnet import gluon
 from mxnet.ndarray.contrib import BilinearResize2D
 from mxnet import nd
 import numpy as np
+from mxnet import autograd
 
 # 参考文献：RedNet: Residual Encoder-Decoder Network for indoor RGB-D Semantic Segmentation, 2018.06.04 arxiv
 # Cautions:  backbone network: ResNet-50 (RedNet)
@@ -414,5 +415,24 @@ class meanPixelAccuracy(mx.metric.EvalMetric):
 #  RGB的随机裁剪以及变形等
 #  RGB的亮度变化，此时可以认为学习到了Depth对应RGB亮度之间的鲁棒性!
 def train(net, train_data, test_data, epoches, evalues, loss=loss_inst, batch_size=2, lr=0.1, period=10, ctx=mx.gpu()):
-    pass
+    print('Start training on ', ctx)
+    if isinstance(ctx, mx.Context):
+        ctx = [ctx]
+
+    for epoch in range(epoches):
+        train_loss, train_acc, n = 0.0, 0.0, 0.0
+    if isinstance(train_data, mx.io.DataIter):
+        train_data.reset()
+    for i, batch in enumerate(train_data):
+        data, label = batch
+        data = data.copyto(ctx)
+        label = label.copyto(ctx)
+        loss = []
+        with autograd.record():
+            pred_1, pred_2, pred_3, pred_4, pred_5 = net(data)
+            with autograd.pause():
+                label_1, label_2, label_3, label_4, label_5 = generate_target(label)
+
+
+
 
