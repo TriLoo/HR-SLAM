@@ -49,5 +49,6 @@ def normalize_img(rgb, depth):
 
 if __name__ == '__main__':
     f = h5py.File(mat_dir)
-    print(list(f))
+    print(list(f))   # refs, subsymtem, accelData, depths, iamges, instances, labels, names, namesToIds, rawDepthFilenames, rawDeths ...
+    print(f['depths'].shape)     # (1449, 640, 480)
     print(f['images'].shape)    # (1449, 3, 640, 480)

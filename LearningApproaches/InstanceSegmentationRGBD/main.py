@@ -89,6 +89,7 @@ y = net(x)
 print(y.shape)
 '''
 
+
 def main():
     parse = argparse.ArgumentParser()
     parse.add_argument('--epoches', type=int, default=10)

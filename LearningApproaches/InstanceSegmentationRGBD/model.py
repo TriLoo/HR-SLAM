@@ -325,7 +325,7 @@ def extract_mask(seg, n_cl):
 # IoU: TP / (TP + FP + FN)
 # mIoU: average over all classes
 class mIoU(mx.metric.EvalMetric):
-    def __init__(self, num_classes, name = 'miou', axis=1, **kwargs):
+    def __init__(self, num_classes, name = 'miou', axis=0, **kwargs):
         super(mIoU, self).__init__(name, **kwargs)
         self.sum_metric = 0.0
         self.num_classes = num_classes
@@ -333,7 +333,7 @@ class mIoU(mx.metric.EvalMetric):
 
     def update(self, labels, preds):   # only consider the origin size labels and predicts
         for label, pred in zip(labels, preds):
-            pred = nd.argmax(pred, axis=self.axis)
+            pred = nd.argmax(pred, axis=self.axis)   # note that the default axis is 0
             check_shapes(label, pred)
             if isinstance(label, nd.NDArray):
                 label = label.asnumpy().astype('int32')
@@ -358,7 +358,7 @@ class mIoU(mx.metric.EvalMetric):
 # pixel accuracy = (\sum_c^{K}TP_c) / N_{pixel}
 # equals to normal accuracy, i.e. the background is took as class '0'
 class PixelAccuracy(mx.metric.EvalMetric):
-    def __init__(self, num_classes, name='pa', axis=1, **kwargs):
+    def __init__(self, num_classes, name='pa', axis=0, **kwargs):
         super(PixelAccuracy, self).__init__(name, **kwargs)
         self.num_classes = num_classes
         self.axis = axis
@@ -379,7 +379,7 @@ class PixelAccuracy(mx.metric.EvalMetric):
 
 # mean Pixel Accuracy = (\sum_c^K TP_c / (P = TP_c + FN_c))，这里与FuseNet里面不同，但我感觉应该是这样的
 class meanPixelAccuracy(mx.metric.EvalMetric):
-    def __init__(self, num_classes, name = 'mpa', axis=1, **kwargs):
+    def __init__(self, num_classes, name = 'mpa', axis=0, **kwargs):
         super(meanPixelAccuracy, self).__init__(name, **kwargs)
         self.axis = axis
         self.num_classes = num_classes
@@ -411,28 +411,55 @@ class meanPixelAccuracy(mx.metric.EvalMetric):
 
 # TODO: add frequency weighted (f.w.) IoU
 
+
+def evaluate_net(num_classes, test_data, net, ctx=mx.cpu()):
+    test_miou = mIoU(num_classes)
+    test_pa = PixelAccuracy(num_classes)
+    test_mpa = meanPixelAccuracy(num_classes)
+    test_miou.reset()
+    test_pa.reset()
+    test_mpa.reset()
+    for data, label in test_data:
+        data = data.copyto(ctx)
+        pred = net(data)
+        pred = pred.copyto(mx.cpu())
+        pred = nd.argmax(pred[0], axis=1)   # Only the original size data is updated
+        test_miou.update([label], [pred])
+        test_pa.update([label], [pred])
+        test_mpa.update([label], [pred])
+    return test_miou, test_pa, test_mpa
+
+
 # 训练的时候，可以通过增加RGB图像的增广来实现模型对Depth的依赖，间接学习RGB与Depth之间的对应关系，如
 #  RGB的随机裁剪以及变形等
 #  RGB的亮度变化，此时可以认为学习到了Depth对应RGB亮度之间的鲁棒性!
-def train(net, train_data, test_data, epoches, evalues, loss=loss_inst, batch_size=2, lr=0.1, period=10, ctx=mx.gpu()):
+def train(net, trainer, train_data, test_data, epoches, loss=loss_inst, num_classes=10, batch_size=2, periods=10, ctx=mx.gpu()):
     print('Start training on ', ctx)
     if isinstance(ctx, mx.Context):
         ctx = [ctx]
 
     for epoch in range(epoches):
-        train_loss, train_acc, n = 0.0, 0.0, 0.0
-    if isinstance(train_data, mx.io.DataIter):
-        train_data.reset()
-    for i, batch in enumerate(train_data):
-        data, label = batch
-        data = data.copyto(ctx)
-        label = label.copyto(ctx)
-        loss = []
-        with autograd.record():
-            pred_1, pred_2, pred_3, pred_4, pred_5 = net(data)
-            with autograd.pause():
-                label_1, label_2, label_3, label_4, label_5 = generate_target(label)
+        #train_loss, train_acc, n = 0.0, 0.0, 0.0
+        if isinstance(train_data, mx.io.DataIter):
+            train_data.reset()
+        for i, batch in enumerate(train_data):
+            data, label = batch
+            data = data.copyto(ctx)
+            label = label.copyto(ctx)
+            with autograd.record():
+                pred, pred_4, pred_3, pred_2, pred_1 = net(data)
+                with autograd.pause():
+                    label, label_4, label_3, label_2, label_1 = generate_target(label)
+                loss1 = loss(pred, label)
+                loss2 = loss(pred_4, label_4)
+                loss3 = loss(pred_3, label_3)
+                loss4 = loss(pred_2, label_2)
+                loss5 = loss(pred_1, label_1)
+                loss_total = loss1 + loss2 + loss3 + loss4 + loss5
+            loss_total.backward()
+            trainer.step(batch_size)
+            if i % periods == 0:
+                print('Batch %d, Current loss: %.4f'%(i, loss_total))
 
-
-
-
+        miou, pa, mpa = evaluate_net(num_classes, test_data, net, ctx[0])
+        print('Epoch %3d. test %s %.4f, %s %.4f, %s %.4f'%(epoch, *miou.get(), *pa.get(), *mpa.get())) # get() return two list, name + values
