@@ -25,7 +25,7 @@ def main():
     parse.add_argument('--save', default='.', help='Directory to save the results.')
     args = parse.parse_args()
 
-    categories = [i for i in range(100)]
+    categories = [i for i in range(9)]
 
     mavs = joblib.load(args.mavs)
     dists = joblib.load(args.dists)
@@ -38,23 +38,24 @@ def main():
     pred_y, pred_y_o = [], []
 
     #for score in scores[0]:
-    for score in scores[2]:    # for temp test
+    for i, score in enumerate(scores[2]):    # for temp test
         #so, ss = openmax(weibull_model, categories, score, args.euc_scale, args.alpha, args.distances_type)
         so, ss = openmax(weibull_model, categories, score, args.euc_scale, 3, args.distances_type)
-        pred_y.append(np.argmax(ss) if np.max(ss) >= args.threshold else 100)
-        pred_y_o.append(np.argmax(so) if np.max(so) >= args.threshold else 100)
+        pred_y.append(np.argmax(ss) if np.max(ss) >= args.threshold else 10)
+        pred_y_o.append(np.argmax(so) if np.max(so) >= args.threshold else 10)
         print('value of softmax[0]: ', ss[0])
         print('value of softmax[2]: ', ss[2])
         print('value of openmax[0]: ', so[0])
         print('value of openmax[2]: ', so[2])
-        print('value of openmax[100]: ', so[100])
+        print('value of openmax[100]: ', so[9])
 
         #print('lenght of pred_y: ', len(pred_y))
         #print('lenght of pred_y_o: ', len(pred_y_o))
         print('pred_y[-1]: ', pred_y[-1])
         print('pred_y_o[-1]: ', pred_y_o[-1])
 
-        #break
+        if i == 10:
+            break
 
     print('Calculation Finished.')
 

@@ -1,8 +1,23 @@
-import numpy as np
+import ResNet3D
+import readH5
 
-data = np.ones(shape=(9234, 16200))
+from mxnet import gluon
+import mxnet as mx
+from mxnet import nd
 
-for i in range(92):
-    batch_x = data[i * 100:(i+1) * 100, :]   # return (100, 16200)
-    print('shape of batch_x: ', batch_x.shape)
-    break
+dataset = readH5.IndianDatasets('I9-9.h5')
+train_data = gluon.data.DataLoader(dataset, batch_size = 1, shuffle=True)
+
+net = ResNet3D.ResNet3D(9)
+net.collect_params().load('ResNet3D.params', ctx = mx.cpu())
+#net.collect_params().reset_ctx(mx.cpu())
+
+for i, batch in enumerate(train_data):
+    data, label = batch
+    pred = net(data)
+    print('preds = ', nd.argmax(pred, axis=-1, keepdims=True))
+    print('label = ', nd.argmax(label, axis=-1, keepdims=True))
+    if i == 10:
+        break
+    
+

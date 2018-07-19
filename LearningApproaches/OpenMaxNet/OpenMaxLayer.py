@@ -120,3 +120,4 @@ def openmax(weibull_model, categories, input_scores, eu_weight, alpha=10, distan
     softmax_prob = softmax(np.array(input_scores.ravel()))
 
     return openmax_prob, softmax_prob
+
