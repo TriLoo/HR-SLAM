@@ -59,7 +59,7 @@ def compute_openmax_prob(scores, scores_u):
     prob_scores, prob_unknowns = [], []
     for s, su in zip(scores, scores_u):
         channel_scores = np.exp(s)
-        print('np.sum(su): ', np.sum(su))
+#print('np.sum(su): ', np.sum(su))
         channel_unknown = np.exp(np.sum(su))
 
         #print('channel_scores: ', channel_scores)
