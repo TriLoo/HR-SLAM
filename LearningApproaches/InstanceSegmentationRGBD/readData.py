@@ -14,6 +14,7 @@ matplotlib.rcParams['figure.dpi'] = 120
 import matplotlib.pyplot as plt
 
 import joblib
+import os
 
 '''
 Dataset:  
@@ -27,7 +28,6 @@ Method:
 mat_dir = '/home/smher/Documents/DL_Datasets/NYUv2/nyu_depth_v2_labeled.mat'
 
 
-
 def calculate_means_std(datas, means_file='means.joblib', std_file='std.joblib'):
     means = np.mean(datas, axis=(0, 1, 2))   # channel wise
     stds = np.std(datas, axis=(0, 1, 2))
@@ -35,11 +35,16 @@ def calculate_means_std(datas, means_file='means.joblib', std_file='std.joblib')
     joblib.dump(stds, std_file)
 
 
-# TODO: to be implemented
-rgb_mean = nd.array([112, 112, 112])
-depth_mean = nd.array([112])
-rgb_std = nd.array([1, 1, 1])
-depth_std = nd.array([1])
+def calculate_means(datas, means_file='means.joblib'):
+    means = np.mean(datas, axis=(0, 1, 2))   # channel wise
+    joblib.dump(means, means_file)
+    return means
+
+
+def calculate_std(datas, std_file='std.joblib'):
+    stds = np.std(datas, axis=(0, 1, 2))
+    joblib.dump(stds, std_file)
+    return stds
 
 
 def rand_crop(data, label, shape):
@@ -57,17 +62,15 @@ augs = gluon.data.vision.transforms.Compose(
 )
 
 
-def normalize_img(rgb, depth):
-    data_rgb = (rgb.astype('float32')/255.0 - rgb_mean) / rgb_std
-    data_depth = (depth.astype('float32')/255.0 - depth_mean) / depth_std
-
-    return data_rgb, data_depth
+def normalize_img(img, img_mean, img_std):
+    data = (img.astype('float32')/255.0 - img_mean) / img_std
+    return data
 
 
 class NYUDataset(gluon.data.Dataset):
     def __init__(self, filename, mean_file='means.joblib', std_file='std.joblib', **kwargs):
         super(NYUDataset, self).__init__(**kwargs)
-        mat_file = h5py.File(filename)
+        f = h5py.File(filename)
         #print(list(f))   # refs, subsymtem, accelData, depths, images, instances, labels, names, namesToIds, rawDepthFilenames, rawDeths ...
         #print(f['depths'].shape)     # (1449, 640, 480)
         #print(f['images'].shape)     # (1449, 3, 640, 480)
@@ -75,11 +78,19 @@ class NYUDataset(gluon.data.Dataset):
         images = f['images']        # type h5py._h1.dataset.Dataset, element is np.ndarray, 下同
         depths = f['depths']
         depths = depths[:, :, :, np.newaxis]
-        mean_val = joblib.load(mean_file)
-        std_val = joblib.load(std_file)
         images = np.transpose(images, axes=(0, 2, 3, 1))
-        self.images = [normalize_img(image, depth) for image, depth in zip(images, depths)]
-        self.depths = [normalize_img(image, depth) for image, depth in zip(images, depths)]
+        if os.path.exists(mean_file):
+            mean_val = joblib.load(mean_file)
+        else:
+            mean_val = calculate_means(images)
+        if os.path.exists(std_file):
+            std_val = joblib.load(std_file)
+        else:
+            std_val = calculate_std(images)
+        self.images = [normalize_img(image, mean_val, std_val) for image in images]
+        depth_mean = calculate_means(depths)
+        depth_std = calculate_std(depths)
+        self.depths = [normalize_img(depth, depth_mean, depth_std) for depth in depths]
         self.labels = f['labels']
         f.close()
 
@@ -90,26 +101,15 @@ class NYUDataset(gluon.data.Dataset):
         return len(self.images)
 
 
+# For Test
 if __name__ == '__main__':
-    f = h5py.File(mat_dir)
-    print(list(f))   # refs, subsymtem, accelData, depths, images, instances, labels, names, namesToIds, rawDepthFilenames, rawDeths ...
-    print(f['depths'].shape)     # (1449, 640, 480)
-    print(f['images'].shape)    # (1449, 3, 640, 480)
-    print(f['labels'].shape)    # (1449, 640, 480)
-    images = f['images']        # type h5py._h1.dataset.Dataset, element is np.ndarray, 下同
-    depths = f['depths']
-    labels = f['labels']
-    print('shape of images: ', images.shape)
-    img0 = images[0]
-    img0 = np.transpose(img0, (1, 2, 0))
-    depth0 = depths[0]
-    label0 = labels[0]
-    f.close()
-
-    plt.imshow(img0)
-    plt.figure()
-    plt.imshow(depth0, cmap='gray')
-    plt.figure()
-    plt.imshow(label0, cmap='gray')
-    plt.show()
-
+    trainset = NYUDataset(mat_dir)
+    train_data = gluon.data.DataLoader(trainset, batch_size=1)
+    for img0, depth0, label0 in train_data:
+        plt.imshow(img0)
+        plt.figure()
+        plt.imshow(depth0, cmap='gray')
+        plt.figure()
+        plt.imshow(label0, cmap='gray')
+        plt.show()
+        break
