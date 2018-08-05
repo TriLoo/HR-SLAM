@@ -41,8 +41,10 @@ def calculate_means(datas, means_file='means.joblib'):
     return means
 
 
-def calculate_std(datas, std_file='std.joblib'):
-    stds = np.std(datas, axis=(0, 1, 2))
+def calculate_std(datas, data_mean, std_file='std.joblib'):
+    #stds = np.std(datas, axis=(0, 1, 2))    # Memory Error
+    datas_2 = (datas - data_mean) ** 2
+    stds = np.sqrt(np.mean(datas_2, axis=(0, 1, 2)))
     joblib.dump(stds, std_file)
     return stds
 
@@ -75,19 +77,22 @@ class NYUDataset(gluon.data.Dataset):
         #print(f['depths'].shape)     # (1449, 640, 480)
         #print(f['images'].shape)     # (1449, 3, 640, 480)
         #print(f['labels'].shape)     # (1449, 640, 480)
-        images = f['images']        # type h5py._h1.dataset.Dataset, element is np.ndarray, 下同
-        depths = f['depths']
+        images = f['images'][:]        # type h5py._h1.dataset.Dataset, element is np.ndarray, 下同
+        depths = f['depths'][:]
+        #print('type of depths: ', type(depths))
+        #print('shape of depths: ', depths.shape)
         depths = depths[:, :, :, np.newaxis]
         images = np.transpose(images, axes=(0, 2, 3, 1))
         if os.path.exists(mean_file):
-            mean_val = joblib.load(mean_file)
+            image_mean = joblib.load(mean_file)
         else:
-            mean_val = calculate_means(images)
+            image_mean = calculate_means(images)
         if os.path.exists(std_file):
-            std_val = joblib.load(std_file)
+            image_std = joblib.load(std_file)
         else:
-            std_val = calculate_std(images)
-        self.images = [normalize_img(image, mean_val, std_val) for image in images]
+            #image_std = calculate_std(images, image_mean)
+            image_std = np.array([1, 1, 1])
+        self.images = [normalize_img(image, image_mean, image_std) for image in images]
         depth_mean = calculate_means(depths)
         depth_std = calculate_std(depths)
         self.depths = [normalize_img(depth, depth_mean, depth_std) for depth in depths]
