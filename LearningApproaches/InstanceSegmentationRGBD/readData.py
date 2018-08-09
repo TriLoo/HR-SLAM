@@ -4,17 +4,11 @@ __author__ = 'smh'
 __date__ = '2018.07.14'
 
 import numpy as np
-from mxnet import nd
+import cv2
+import mxnet as mx
 from mxnet import gluon
 from mxnet import image
-#import scipy.io as scio    # please use HDF reader for matlab v7.3 files
-import h5py
-import matplotlib
-matplotlib.rcParams['figure.dpi'] = 120
-import matplotlib.pyplot as plt
-
-import joblib
-import os
+import argparse
 
 '''
 Dataset:  
@@ -25,30 +19,12 @@ Method:
     Tool: scipy.io
 '''
 
+# TODO: Need more aggressive augmentations
+
 mat_dir = '/home/smher/Documents/DL_Datasets/NYUv2/nyu_depth_v2_labeled.mat'
 
 
-def calculate_means_std(datas, means_file='means.joblib', std_file='std.joblib'):
-    means = np.mean(datas, axis=(0, 1, 2))   # channel wise
-    stds = np.std(datas, axis=(0, 1, 2))
-    joblib.dump(means, means_file)
-    joblib.dump(stds, std_file)
-
-
-def calculate_means(datas, means_file='means.joblib'):
-    means = np.mean(datas, axis=(0, 1, 2))   # channel wise
-    joblib.dump(means, means_file)
-    return means
-
-
-def calculate_std(datas, data_mean, std_file='std.joblib'):
-    #stds = np.std(datas, axis=(0, 1, 2))    # Memory Error
-    datas_2 = (datas - data_mean) ** 2
-    stds = np.sqrt(np.mean(datas_2, axis=(0, 1, 2)))
-    joblib.dump(stds, std_file)
-    return stds
-
-
+# data includs both images and depths
 def rand_crop(data, label, shape):
     data, rect = image.random_crop(data, shape)
     label = image.fixed_crop(label, *rect)
@@ -69,52 +45,65 @@ def normalize_img(img, img_mean, img_std):
     return data
 
 
+'''
 class NYUDataset(gluon.data.Dataset):
     def __init__(self, filename, mean_file='means.joblib', std_file='std.joblib', **kwargs):
         super(NYUDataset, self).__init__(**kwargs)
-        f = h5py.File(filename)
-        #print(list(f))   # refs, subsymtem, accelData, depths, images, instances, labels, names, namesToIds, rawDepthFilenames, rawDeths ...
-        #print(f['depths'].shape)     # (1449, 640, 480)
-        #print(f['images'].shape)     # (1449, 3, 640, 480)
-        #print(f['labels'].shape)     # (1449, 640, 480)
-        images = f['images'][:]        # type h5py._h1.dataset.Dataset, element is np.ndarray, 下同
-        depths = f['depths'][:]
-        #print('type of depths: ', type(depths))
-        #print('shape of depths: ', depths.shape)
-        depths = depths[:, :, :, np.newaxis]
-        images = np.transpose(images, axes=(0, 2, 3, 1))
-        if os.path.exists(mean_file):
-            image_mean = joblib.load(mean_file)
-        else:
-            image_mean = calculate_means(images)
-        if os.path.exists(std_file):
-            image_std = joblib.load(std_file)
-        else:
-            #image_std = calculate_std(images, image_mean)
-            image_std = np.array([1, 1, 1])
-        self.images = [normalize_img(image, image_mean, image_std) for image in images]
-        depth_mean = calculate_means(depths)
-        depth_std = calculate_std(depths)
-        self.depths = [normalize_img(depth, depth_mean, depth_std) for depth in depths]
-        self.labels = f['labels']
-        f.close()
 
     def __getitem__(self, item):    # 可以加入一些数据处理的函数
-        return self.images[item], self.depths[item], self.labels[item]
+        pass
 
     def __len__(self):
-        return len(self.images)
+        pass
+'''
 
+
+def get_nyu_iterator():
+    #parse = argparse.ArgumentParser()
+    #parse.add_argument('--data_csv_file', default='train_datas_tmp.csv')
+    #parse.add_argument('--label_csv_file', default='train_labels_tmp.csv')
+    #parse.add_argument('--mean_img_file', default='nyu_image_means.joblib')
+    #parse.add_argument('--std_img_file', default='nyu_image_stds.joblib')
+    #parse.add_argument('--mean_dep_file', default='nyu_depth_means.joblib')
+    #parse.add_argument('--std_dep_file', default='nyu_depth_stds.joblib')
+    #parse.add_argument('--batch_size', type=int, default=2)
+    #args = parse.parse_args()
+
+    train_img_iter = mx.io.CSVIter(data_csv='train_datas_tmp.csv', data_shape=(4, 640, 480),
+                               label_csv='train_labels_tmp.csv', label_shape=(640, 480),
+                               batch_size=2, dtype='float32')
+
+    return train_img_iter
 
 # For Test
 if __name__ == '__main__':
-    trainset = NYUDataset(mat_dir)
-    train_data = gluon.data.DataLoader(trainset, batch_size=1)
-    for img0, depth0, label0 in train_data:
-        plt.imshow(img0)
-        plt.figure()
-        plt.imshow(depth0, cmap='gray')
-        plt.figure()
-        plt.imshow(label0, cmap='gray')
-        plt.show()
+    train_iter = get_nyu_iterator()
+    for batch in train_iter:
+        print(batch.data[0].shape, batch.label[0].shape)
+        img = batch.data[0][:, :3, :, :]    # shape: (2, 3, 640, 480)
+        dep = batch.data[0][:, 3:, :, :]     # shape: (2, 1, 640, 480)
+        print('shape of img: ', img.shape)
+        print('shape of dep: ', dep.shape)
+        img_n = img[0]
+        img_n = np.transpose(img_n, axes=(1, 2, 0))
+        print('shape of img_n: ', img_n.shape)
+        print('data type of img_n: ', img_n.dtype)
+        print('type of img_n: ', type(img_n))    # mx.ndarray.NDArray
+        assert img_n.dtype == np.float32
+        img_n = img_n.asnumpy()
+        img_n /= np.max(img_n)
+        print('type of img_n: ', type(img_n))    # mx.ndarray.NDArray
+        assert isinstance(img_n, np.ndarray)
+        cv2.imshow('image', img_n)
+        dep_n = dep[0][0].asnumpy()
+        dep_n /= np.max(dep_n)
+        cv2.imshow('depth', dep_n)
+        # show label
+        label0 = batch.label[0][0]   # (640, 480)
+        label0 = label0.asnumpy()
+        print('data type of label0: ', label0.dtype)
+        print('max of label0: ', np.max(label0))
+        label0 /= np.max(label0)
+        cv2.imshow('label', label0)
+        cv2.waitKey()
         break
