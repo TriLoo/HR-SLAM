@@ -43,3 +43,49 @@ This folder includes the implementation of my own network to realize instance-le
 
 下一步怎么做？
 
+2018.08.11
+
+整个实验需要完成的工作：
+
+* 数据集：NYUv2, SUN 3D
+
+* RGB-D (2.5D) Feature Fusion
+
+  * Multiscale (Early-Middle-Late) Feature Fusion
+
+  * Use depth data as 1-channel
+
+  * RDFNet
+
+  * FuseNet
+
+  * RedNet
+
+  * ...
+
+* Attention:
+
+  * Attention ResNet
+
+  * Convoluton Attention Block
+
+* Instance-Level Segmentation
+
+  * Mask R-CNN
+
+  * Learning to segment everything
+
+  * PANet
+
+  * FCIS
+
+  * DeepMask
+
+  * SDS
+
+  * ...
+
+* Target function
+
+  * 还不知道怎么做？
+

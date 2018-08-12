@@ -13,11 +13,21 @@ GLP-v2
 * LearningApproaches: 包含一些深度学习相关的方法
 * Tools: 包含一些零碎的、自己实现的代码
 
-## Current Work
+## Current Work :octocat:
 
-* /LearningApproaches/InstanceSegmentation
+* /LearningApproaches/InstanceSegmentationRGBD
 
-  不知道怎么处理Instance Level.
+    * Read Dataset 
+
+	  使用`CSVIter`来产生DataIter.
+
+	* RGBD Data Fusion
+
+	  Multi-layer, Multi-Scale Attention Based **middle + late + early fusions**.
+
+    * 不知道怎么处理Instance Level ?
+
+	* 该使用什么损失函数 ? 还是交叉熵 ?
 
 ## Refereneces:
 * 视觉SLAM十四讲
