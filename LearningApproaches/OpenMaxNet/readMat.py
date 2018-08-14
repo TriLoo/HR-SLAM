@@ -5,9 +5,6 @@ __date__ = '2018.07.19'
 
 import scipy.io as scio
 import numpy as np
-#import matplotlib
-#matplotlib.rcParams['figure.dpi'] = 120
-#import matplotlib.pyplot as plt
 
 
 def readMatFile(filename = 'Indian_pines_corrected.mat'):
@@ -23,19 +20,23 @@ def readMatFile(filename = 'Indian_pines_corrected.mat'):
     return indian_data
 
 
-def generate_child_window(data, height=9, width=9):
+def generate_child_window(data, width=9, height=9):
     data_shape = data.shape
     rows = np.floor(data_shape[0] / height)
     cols = np.floor(data_shape[1] / width)
-    windows = []
+    datas = []
+    boxes = []
     row_idx = np.linspace(0, rows - 1, rows)
     col_idx = np.linspace(0, cols - 1, cols)
     for i in row_idx:           # row second
         for j in col_idx:       # column first
             ele = data[(i * height).astype('int'): ((i + 1) * height).astype('int'), (j * width).astype('int') : ((j + 1) * width).astype('int')]
-            windows.append(ele)
+            datas.append(ele)
+            center_x = i * width + (width >> 1)
+            center_y = j * height + (height >> 1)
+            boxes.append([(center_x, center_y), width, height])
 
-    return {'Rows': rows, 'Cols': cols, 'Windows': windows}
+    return {'Datas': datas, 'Rows': rows, 'Cols': cols, 'Boxes': boxes}
 
 
 # Indian_pines_corrected : indian_pines_corrected

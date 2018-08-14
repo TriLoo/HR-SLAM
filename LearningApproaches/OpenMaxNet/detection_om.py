@@ -5,25 +5,13 @@ __date__ = '2018.07.20'
 
 import argparse
 import joblib
-import detection
+import detection_sm
 
 import numpy as np
 from OpenMaxLayer import fit_weibull, openmax
 
 
-def main():
-    parse = argparse.ArgumentParser()
-    parse.add_argument('--mavs', default='mavs.joblib')
-    parse.add_argument('--dists', default='dists.joblib')
-    parse.add_argument('--scores', default='scores.joblib')
-    parse.add_argument('--alpha', type=int, default=5)
-    parse.add_argument('--tailsize', type=int, default=20)
-    parse.add_argument('--distances_type', default='eucos')
-    parse.add_argument('--euc_scale', type=float, default=5e-3)
-    parse.add_argument('--threshold', type=float, default=0.0)
-    parse.add_argument('--save', default='.', help='Directory to save the results.')
-    args = parse.parse_args()
-
+def main(args):
     categories = [i for i in range(9)]
 
     mavs = joblib.load(args.mavs)
@@ -37,7 +25,7 @@ def main():
     pred_y, pred_y_o = [], []
 
     # 准备测试数据的每一个score
-    pred_lst = detection.detection(is_save=False)
+    pred_lst = detection_sm.detection_softmax(is_save=False)
 
     for i, score in enumerate(pred_lst):    # for temp test
         score = score.asnumpy()
@@ -50,6 +38,18 @@ def main():
 
     print('Calculation Finished.')
 
+
 if __name__ == '__main__':
-    main()
+    parse = argparse.ArgumentParser()
+    parse.add_argument('--mavs', default='mavs.joblib')
+    parse.add_argument('--dists', default='dists.joblib')
+    parse.add_argument('--scores', default='scores.joblib')
+    parse.add_argument('--alpha', type=int, default=5)
+    parse.add_argument('--tailsize', type=int, default=20)
+    parse.add_argument('--distances_type', default='eucos')
+    parse.add_argument('--euc_scale', type=float, default=5e-3)
+    parse.add_argument('--threshold', type=float, default=0.0)
+    parse.add_argument('--save', default='.', help='Directory to save the results.')
+    args = parse.parse_args()
+    main(args)
 
