@@ -89,3 +89,9 @@ This folder includes the implementation of my own network to realize instance-le
 
   * 还不知道怎么做？
 
+
+2018.08.16
+
+今天刚把一直有问题的 CSVIter 解决了一下，现在貌似可以工作了。下一步就是先训练像素级的吧。最近重新看了几篇实例分割的论文，感觉比较复杂，通常的做法
+是分解成: Object Detection + Semantic Segmentation。这样的话，我还得考虑一下加上Object Proposal的分支，工程量陡增了一下。
+
