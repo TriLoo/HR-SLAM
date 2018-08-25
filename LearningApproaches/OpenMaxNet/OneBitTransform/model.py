@@ -14,6 +14,7 @@ __date__ = '2018.08.22'
 import numpy as np
 import itertools
 import cv2
+import joblib
 
 
 eps = 1e-6
@@ -31,7 +32,7 @@ def _generate_multibandpass_filter(shape=(17, 17)):
 
 # img is a single band image
 def _onebit_transform_band(img, filter_kernel):
-    filtered = cv2.filter2D(img, ddepth=3,  kernel=filter_kernel)
+    filtered = cv2.filter2D(src=img, ddepth=cv2.CV_32FC1,  kernel=filter_kernel)
     idx = np.where(img > filtered)
     onebit_piexl = np.zeros(img.shape)
     onebit_piexl[idx] = 1
@@ -46,12 +47,42 @@ def _calculate_band_transition(band):
     # calculate the transition number along the row
     for i in range(H-1):
         for j in range(W-1):
-            count_h += np.bitwise_xor(np.int(band[i][j]), np.int(band[i][j+1]))
+            count_h += np.bitwise_xor(band[i][j], band[i][j+1])
     # calculate the transition number along the column
     for i in range(W):
         for j in range(H-1):
-            count_w += np.bitwise_xor(np.int(band[j][i]), np.int(band[j+1][i]))
+            count_w += np.bitwise_xor(band[j][i], band[j+1][i])
     return count_h + count_w
+
+
+def _one_dimension_boxfilter(img, wid_size):
+    scale = 1.0 / (wid_size)
+    filter_r = (wid_size - 1) >> 1
+    t = 0
+    out = np.zeros(img.shape)
+    # left edge
+    t = img[0] * filter_r
+    for i in range(filter_r+1):
+        t += img[i]
+    out[0] = t * scale
+    for i in range(1, filter_r + 1):
+        t += img[i + filter_r]
+        t -= img[0]
+        out[i] = t * scale
+
+    # middle part
+    for i in range(1 + filter_r, len(img) - filter_r):
+        t += img[i + filter_r]
+        t -= img[i - filter_r - 1]
+        out[i] = t * scale
+
+    # right part
+    for i in range(len(img) - filter_r, len(img)):
+        t += img[len(img) - 1]
+        t -= img[i - filter_r - 1]
+        out[i] = t * scale
+
+    return out
 
 
 # 等价于：计算band1与band2的对应位置的数值进行xor然后加和,因为band1和band2的元素要么为0要么为1
@@ -77,8 +108,10 @@ def _onebittransform(img):
 def _numberoftransitions(img):
     if len(img.shape) != 3:
         raise ValueError('Shape mismatch(transition count). Input img must have more than one band. Data layout: CHW')
+    #print('shape of img step1.2: ', img.shape)
     transition_count_lst = []
     for band in img:
+        band = band.astype(int)
         transition_count_lst.append(_calculate_band_transition(band))
 
     return np.array(transition_count_lst)
@@ -88,11 +121,7 @@ def _numberoftransitions(img):
 def _calculate_local_threshold(trans, wid_size):
     if len(trans.shape) != 1:
         raise ValueError('Shape mismatch(local threshold). Input trans must have only one dimension.')
-    ele_num = len(trans)
-    trans = trans[:, np.newaxis]
-    mean_trans = cv2.blur(trans, ksize=(wid_size, 1), borderType=cv2.BORDER_REFLECT)
-    mean_trans = np.reshape(mean_trans, newshape=(ele_num))
-
+    mean_trans = _one_dimension_boxfilter(trans, wid_size)
     return mean_trans
 
 
@@ -102,6 +131,8 @@ def calculate_well_structured(img, filter_shape=(17, 17), wid_size=7, a=0.95):
     trans_lst = _numberoftransitions(obt_img)
     local_thsh = _calculate_local_threshold(trans_lst, wid_size)
     idx = np.where(local_thsh * a > trans_lst)
+    joblib.dump(trans_lst, 'trans_lst.joblib')
+    joblib.dump(local_thsh, 'local_thsh.joblib')
 
     return idx, obt_img
 
@@ -109,20 +140,32 @@ def calculate_well_structured(img, filter_shape=(17, 17), wid_size=7, a=0.95):
 # Step 2.1 calculate the correlation for each well-structured band
 # calculate the first two bands
 def _calculate_correlation_bands(idx, bands):
+    print('shape of idx: ', len(idx))
+    print(idx)
     n, h, w = bands.shape
+    print('n = ', n)
+    print('h = ', h)
+    print('w = ', w)
     if n < 3:
         raise ValueError('Shape mismatch(select bands). Input bands should be more than three.')
     least_similar_bands = (0, 1)
     currMaxCorr = 0
     for index in itertools.product(idx, idx):
+        print('index = ', index)
         id_1 = index[0]
         id_2 = index[1]
-        if id_1 == id_2:
+        print('type of id_1: ', type(id_1))
+        print('type of id_2: ', type(id_2))
+        print('id_1 = ', id_1)
+        print('id_2 = ', id_2)
+        if id_1 <= id_2:
             continue
         correlations = _calculate_band_correlations(bands[id_1], bands[id_2])
         if correlations > currMaxCorr:
             currMaxCorr = correlations
             least_similar_bands = index
+            print('currMaxCurr = ', currMaxCorr)
+            print('least similar bands = ', least_similar_bands)
 
     return least_similar_bands
 
