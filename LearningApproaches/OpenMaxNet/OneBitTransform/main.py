@@ -17,23 +17,17 @@ def read_raw_data(file_name, samples, lines, bands):
     bin_img = np.fromfile(fd, dtype=np.uint16, count=rows * cols)
     fd.close()
     bin_img = np.reshape(bin_img, newshape=(rows, bands, -1))
-    bin_img = np.transpose(bin_img, axes=(0, 2, 1))
-    r = bin_img[:, :, 55]
-    g = bin_img[:, :, 85]
-    b = bin_img[:, :, 93]
-    rgb = np.array([b, g, r])
-    rgb = rgb / np.max(rgb)
-    rgb = np.transpose(rgb, axes=(2, 1, 0))
-
-    return rgb
+    img = np.transpose(bin_img, axes=(1, 0, 2))
+    return img
 
 
 if __name__ == '__main__':
     rgb = read_raw_data(dir, samples=696, lines=587, bands=128)
-    rgb = np.transpose(rgb, axes=(2, 0, 1))
+    rgb = np.float32(rgb)
     img = model.show_hyper_img_top(rgb)
-    rgb = np.transpose(img, axes=(1, 2, 0))
-    cv2.imshow('Test', rgb)
+    img = img.astype('float32')
+    img = img / np.max(img)
+    cv2.imshow('Test', img)
     cv2.waitKey()
     '''
     fd = open(dir, 'rb')

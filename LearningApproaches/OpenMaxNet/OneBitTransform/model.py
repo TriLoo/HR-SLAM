@@ -140,32 +140,20 @@ def calculate_well_structured(img, filter_shape=(17, 17), wid_size=7, a=0.95):
 # Step 2.1 calculate the correlation for each well-structured band
 # calculate the first two bands
 def _calculate_correlation_bands(idx, bands):
-    print('shape of idx: ', len(idx))
-    print(idx)
     n, h, w = bands.shape
-    print('n = ', n)
-    print('h = ', h)
-    print('w = ', w)
     if n < 3:
         raise ValueError('Shape mismatch(select bands). Input bands should be more than three.')
     least_similar_bands = (0, 1)
     currMaxCorr = 0
-    for index in itertools.product(idx, idx):
-        print('index = ', index)
+    for index in itertools.product(idx[0], idx[0]):
         id_1 = index[0]
         id_2 = index[1]
-        print('type of id_1: ', type(id_1))
-        print('type of id_2: ', type(id_2))
-        print('id_1 = ', id_1)
-        print('id_2 = ', id_2)
         if id_1 <= id_2:
             continue
         correlations = _calculate_band_correlations(bands[id_1], bands[id_2])
         if correlations > currMaxCorr:
             currMaxCorr = correlations
             least_similar_bands = index
-            print('currMaxCurr = ', currMaxCorr)
-            print('least similar bands = ', least_similar_bands)
 
     return least_similar_bands
 
@@ -173,9 +161,9 @@ def _calculate_correlation_bands(idx, bands):
 def _calculate_third_band(lsb, idx, bands):
     currMaxCorr = 0
     currMaxRatio = 0
-    currIdx = idx[0]
+    currIdx = idx[0][0]
     id_1, id_2 = lsb
-    for index in idx:
+    for index in idx[0]:
         if index == id_1 or index == id_2:
             continue
         corr1 = _calculate_band_correlations(bands[index], bands[id_1])
@@ -202,7 +190,8 @@ def _calculate_third_band(lsb, idx, bands):
 
 
 # Step 2: selecting three suitable bands for the color display
-def calculate_rgb(idx, bands):
+def calculate_rgb(idx, bands, img):
+    print('shape of bands: ', bands.shape)
     id0, id1 = _calculate_correlation_bands(idx, bands)
     id2 = _calculate_third_band((id0, id1), idx, bands)
     var0 = np.std(bands[id0])
@@ -212,14 +201,10 @@ def calculate_rgb(idx, bands):
     var_dict[var0] = id0
     var_dict[var1] = id1
     var_dict[var2] = id2
-    print('id0 = ', id0)
-    print('id1 = ', id1)
-    print('id2 = ', id2)
-    sorted_keys = sorted(var_dict.keys())
-    print('lenght of sorted_keys: ', len(sorted_keys))
-    r = bands[var_dict[sorted_keys[0]]]
-    g = bands[var_dict[sorted_keys[1]]]
-    b = bands[var_dict[sorted_keys[2]]]
+    sorted_keys = sorted(var_dict.keys())   # Increment order
+    r = img[var_dict[sorted_keys[2]]]
+    g = img[var_dict[sorted_keys[1]]]
+    b = img[var_dict[sorted_keys[0]]]
 
     return r, g, b
 
@@ -230,8 +215,8 @@ def calculate_rgb(idx, bands):
 def show_hyper_img_top(img, show_img=False):
     # Step 1:
     idx, bands = calculate_well_structured(img)
-    r, b, g = calculate_rgb(idx, bands)
-    pseudo_img = np.array(r, g, b)
+    r, b, g = calculate_rgb(idx, bands, img)
+    pseudo_img = np.array([b, g, r])
     pseudo_img = np.transpose(pseudo_img, axes=(1, 2, 0))
     if show_img:
         cv2.imshow('Pseudo-color', pseudo_img)
