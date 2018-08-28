@@ -265,9 +265,9 @@ class ASENet(gluon.nn.HybridBlock):
 
 # 当对side output进行计算loss时，需要将输入的label利用nearset-neighbor算法进行降维
 class target_loss(gluon.loss.Loss):
-    def __init__(self, **kwargs):
-        super(target_loss, self).__init__(**kwargs)
-        self.loss = gluon.loss.SoftmaxCrossEntropyLoss(axis=1)   # along the channel axis
+    def __init__(self, weight=None, axis=1, **kwargs):
+        super(target_loss, self).__init__(weight, axis, **kwargs)
+        self.loss = gluon.loss.SoftmaxCrossEntropyLoss(axis=axis)   # along the channel axis
 
     def hybrid_forward(self, F, pred, label, *args, **kwargs):
         return self.loss(pred, label)
@@ -294,6 +294,7 @@ loss_inst = target_loss()
 class ShapeError(Exception):
     def __init__(self, value):
         self.value = value
+
     def __str__(self):
         return repr(self.value)
 
@@ -410,6 +411,15 @@ class meanPixelAccuracy(mx.metric.EvalMetric):
 
 
 # TODO: add frequency weighted (f.w.) IoU
+# fwIoU = t_{ii} / (W*H) * {\sum_{i} IoU_i}
+class fwIoU(mx.metric.EvalMetric):
+    def __init__(self, num_classes, name='fwIoU', axis=0, **kwargs):
+        super(fwIoU, self).__init__(name)
+        pass
+
+    def update(self, labels, preds):
+        # To Be Complemented
+        pass
 
 
 def evaluate_net(num_classes, test_data, net, ctx=mx.cpu()):
@@ -433,21 +443,24 @@ def evaluate_net(num_classes, test_data, net, ctx=mx.cpu()):
 # 训练的时候，可以通过增加RGB图像的增广来实现模型对Depth的依赖，间接学习RGB与Depth之间的对应关系，如
 #  RGB的随机裁剪以及变形等
 #  RGB的亮度变化，此时可以认为学习到了Depth对应RGB亮度之间的鲁棒性!
-def train(net, trainer, train_data, test_data, epoches, loss=loss_inst, num_classes=10, batch_size=2, periods=10, ctx=mx.gpu()):
+def train(net, trainer, train_data, test_data, epoches, loss=loss_inst, num_classes=13, batch_size=2, periods=10, ctx=mx.gpu()):
     print('Start training on ', ctx)
+    '''
     if isinstance(ctx, mx.Context):
         ctx = [ctx]
-
+    '''
     for epoch in range(epoches):
-        #train_loss, train_acc, n = 0.0, 0.0, 0.0
         if isinstance(train_data, mx.io.DataIter):
             train_data.reset()
         for i, batch in enumerate(train_data):
-            data, label = batch
+            data = batch.data[0]
+            label = batch.label[0]
             data = data.copyto(ctx)
             label = label.copyto(ctx)
+            img = data[:, :3, :, :]
+            dep = data[:, 3:, :, :]
             with autograd.record():
-                pred, pred_4, pred_3, pred_2, pred_1 = net(data)
+                pred, pred_4, pred_3, pred_2, pred_1 = net(img, dep)
                 with autograd.pause():
                     label, label_4, label_3, label_2, label_1 = generate_target(label)
                 loss1 = loss(pred, label)
@@ -461,5 +474,9 @@ def train(net, trainer, train_data, test_data, epoches, loss=loss_inst, num_clas
             if i % periods == 0:
                 print('Batch %d, Current loss: %.4f'%(i, loss_total))
 
-        miou, pa, mpa = evaluate_net(num_classes, test_data, net, ctx[0])
-        print('Epoch %3d. test %s %.4f, %s %.4f, %s %.4f'%(epoch, *miou.get(), *pa.get(), *mpa.get())) # get() return two list, name + values
+        if test_data is not None:
+            miou, pa, mpa = evaluate_net(num_classes, test_data, net, ctx[0])
+            print('Epoch %3d. test %s %.4f, %s %.4f, %s %.4f'%(epoch, *miou.get(), *pa.get(), *mpa.get())) # get() return two list, name + values
+        else:
+            print('Epoch %3d. '%(epoch))
+
