@@ -275,15 +275,32 @@ class target_loss(gluon.loss.Loss):
 
 def generate_target(label):
     label_size = label.shape
-    output4_size = (label_size[0] >> 1, label_size[1] >> 1)
-    output3_size = (label_size[0] >> 2, label_size[1] >> 2)
-    output2_size = (label_size[0] >> 3, label_size[1] >> 3)
-    output1_size = (label_size[0] >> 4, label_size[1] >> 4)
+    #print('label_size = ', label_size)   # (2, 640, 480)
+    output4_size = (label_size[1] >> 1, label_size[2] >> 1)
+    output3_size = (label_size[1] >> 2, label_size[2] >> 2)
+    output2_size = (label_size[1] >> 3, label_size[2] >> 3)
+    output1_size = (label_size[1] >> 4, label_size[2] >> 4)
 
-    label_output4 = BilinearResize2D(label, *output4_size)
-    label_output3 = BilinearResize2D(label, *output3_size)
-    label_output2 = BilinearResize2D(label, *output2_size)
-    label_output1 = BilinearResize2D(label, *output1_size)
+    label_output4 = []
+    label_output3 = []
+    label_output2 = []
+    label_output1 = []
+
+    for curr_label in label:
+        label_output4.append(BilinearResize2D(curr_label, *output4_size))
+        label_output3.append(BilinearResize2D(curr_label, *output3_size))
+        label_output2.append(BilinearResize2D(curr_label, *output2_size))
+        label_output1.append(BilinearResize2D(curr_label, *output1_size))
+        '''
+        label_output4 = BilinearResize2D(label, *output4_size)
+        label_output3 = BilinearResize2D(label, *output3_size)
+        label_output2 = BilinearResize2D(label, *output2_size)
+        label_output1 = BilinearResize2D(label, *output1_size)
+        '''
+    label_output4 = nd.array(label_output4)
+    label_output3 = nd.array(label_output3)
+    label_output2 = nd.array(label_output2)
+    label_output1 = nd.array(label_output1)
 
     return label, label_output4, label_output3, label_output2, label_output1
 
@@ -429,7 +446,9 @@ def evaluate_net(num_classes, test_data, net, ctx=mx.cpu()):
     test_miou.reset()
     test_pa.reset()
     test_mpa.reset()
-    for data, label in test_data:
+    for databatch in test_data:
+        data = databatch.data[0]
+        label = databatch.label[0]
         data = data.copyto(ctx)
         pred = net(data)
         pred = pred.copyto(mx.cpu())
@@ -475,7 +494,7 @@ def train(net, trainer, train_data, test_data, epoches, loss=loss_inst, num_clas
                 print('Batch %d, Current loss: %.4f'%(i, loss_total))
 
         if test_data is not None:
-            miou, pa, mpa = evaluate_net(num_classes, test_data, net, ctx[0])
+            miou, pa, mpa = evaluate_net(num_classes, test_data, net, ctx)
             print('Epoch %3d. test %s %.4f, %s %.4f, %s %.4f'%(epoch, *miou.get(), *pa.get(), *mpa.get())) # get() return two list, name + values
         else:
             print('Epoch %3d. '%(epoch))

@@ -65,6 +65,7 @@ class NYUDataset(gluon.data.Dataset):
 
 
 # 先用这个吧，先把程序跑起来(2018.08.14)
+# (2018.09.13): do not have train shuffle in 'CSVIter'
 def get_nyu_iterator(data_file='train_datas_tmp.csv',
                      data_shape=(4, 640, 480),
                      label_file='train_labels_tmp.csv',
@@ -92,9 +93,9 @@ def get_nyu_iterator(data_file='train_datas_tmp.csv',
 # add `augs` into the parameter list of this class
 class myCSVIter(mx.io.DataIter):
     def __init__(self,
-                 data_file='train_datas_tmp.csv',
+                 data_file='split_train_datas.csv',
                  data_shape=(4, 640, 480),
-                 label_file='train_labels_tmp.csv',
+                 label_file='split_train_labels.csv',
                  label_shape=(640, 480),
                  batch_size=2,
                  augs=None,
@@ -124,11 +125,14 @@ class myCSVIter(mx.io.DataIter):
             databatch_ = self.csv_iter.next()
             img_data = databatch_.data[0]
             img_label = databatch_.label[0]
-            img_rgb = np.transpose(img_data[:, :3, :, :], axes=(0, 2, 3, 1))
-            img_lst = [self._augs(img).asnumpy() for img in img_rgb]
-            img = nd.array(img_lst)
-            img = nd.transpose(img, axes=(0, 3, 1, 2))
-            img_data[:, :3, :, :] = img
+            if self._augs is not None:
+                # transpose the input img into (batch_size, H, W, C) shape
+                img_rgb = np.transpose(img_data[:, :3, :, :], axes=(0, 2, 3, 1))
+                img_lst = [self._augs(img).asnumpy() for img in img_rgb]
+                img = nd.array(img_lst)
+                # transpose back the input img into (batch_size, C, H, W)
+                img = nd.transpose(img, axes=(0, 3, 1, 2))
+                img_data[:, :3, :, :] = img   # Write back the image
             return mx.io.DataBatch([img_data], [img_label])
         except StopIteration:
             raise StopIteration
