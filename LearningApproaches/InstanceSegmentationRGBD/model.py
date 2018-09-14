@@ -274,33 +274,21 @@ class target_loss(gluon.loss.Loss):
 
 
 def generate_target(label):
+    label = nd.expand_dims(label, axis=1)
     label_size = label.shape
     #print('label_size = ', label_size)   # (2, 640, 480)
-    output4_size = (label_size[1] >> 1, label_size[2] >> 1)
-    output3_size = (label_size[1] >> 2, label_size[2] >> 2)
-    output2_size = (label_size[1] >> 3, label_size[2] >> 3)
-    output1_size = (label_size[1] >> 4, label_size[2] >> 4)
+    output4_size = (label_size[2] >> 1, label_size[3] >> 1)
+    output3_size = (label_size[2] >> 2, label_size[3] >> 2)
+    output2_size = (label_size[2] >> 3, label_size[3] >> 3)
+    output1_size = (label_size[2] >> 4, label_size[3] >> 4)
 
-    label_output4 = []
-    label_output3 = []
-    label_output2 = []
-    label_output1 = []
+    label_output4 = BilinearResize2D(label, *output4_size)
+    label_output3 = BilinearResize2D(label, *output3_size)
+    label_output2 = BilinearResize2D(label, *output2_size)
+    label_output1 = BilinearResize2D(label, *output1_size)
 
-    for curr_label in label:
-        label_output4.append(BilinearResize2D(curr_label, *output4_size))
-        label_output3.append(BilinearResize2D(curr_label, *output3_size))
-        label_output2.append(BilinearResize2D(curr_label, *output2_size))
-        label_output1.append(BilinearResize2D(curr_label, *output1_size))
-        '''
-        label_output4 = BilinearResize2D(label, *output4_size)
-        label_output3 = BilinearResize2D(label, *output3_size)
-        label_output2 = BilinearResize2D(label, *output2_size)
-        label_output1 = BilinearResize2D(label, *output1_size)
-        '''
-    label_output4 = nd.array(label_output4)
-    label_output3 = nd.array(label_output3)
-    label_output2 = nd.array(label_output2)
-    label_output1 = nd.array(label_output1)
+    #print('type of label_output: ', type(label_output4))
+    #print('shape of label_output: ', label_output4.shape)
 
     return label, label_output4, label_output3, label_output2, label_output1
 
@@ -491,7 +479,10 @@ def train(net, trainer, train_data, test_data, epoches, loss=loss_inst, num_clas
             loss_total.backward()
             trainer.step(batch_size)
             if i % periods == 0:
-                print('Batch %d, Current loss: %.4f'%(i, loss_total))
+                #print('type of loss_total: ', type(loss_total[0]))
+                #print('shape of loss_total: ', loss_total.shape)
+                print('Batch %d, Current loss: %.4f'%(i, nd.mean(loss_total)))
+                #print('Batch %d, Current loss: %.4f'%(i, loss_total[0].asscalar()))
 
         if test_data is not None:
             miou, pa, mpa = evaluate_net(num_classes, test_data, net, ctx)
