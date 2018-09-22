@@ -28,6 +28,11 @@ def _generate_segments(im_orig, scale, sigma, min_size):
         skimage.util.img_as_float(im_orig), scale=scale, sigma=sigma,
         min_size=min_size)
 
+    #print('shape of im_mask: ', im_mask.shape)        # (694, 584)
+    #print('data type of im_mask: ', im_mask.dtype)    # int64
+    #print('maximum value of im_mask: ', numpy.max(im_mask))   # 500
+    #print('minimum value of im_mask: ', numpy.min(im_mask))   # 0
+
     # merge mask channel to the image as a 4th channel
     im_orig = numpy.append(
         im_orig, numpy.zeros(im_orig.shape[:2])[:, :, numpy.newaxis], axis=2)
@@ -111,6 +116,7 @@ def _calc_texture_gradient(img):
 
         output will be [height(*)][width(*)]
     """
+    #print('shape of input img: ', img.shape)  # (696, 587, 4)
     ret = numpy.zeros((img.shape[0], img.shape[1], img.shape[2]))
 
     for colour_channel in (0, 1, 2):
@@ -149,14 +155,15 @@ def _calc_texture_hist(img):
 
 
 def _extract_regions(img):
-
     R = {}
 
     # get hsv image
     hsv = skimage.color.rgb2hsv(img[:, :, :3])
 
     # pass 1: count pixel positions
+    print('img shape: ', img.shape)
     for y, i in enumerate(img):
+        #print('shape of i: ', i.shape)
 
         for x, (r, g, b, l) in enumerate(i):
 
@@ -178,12 +185,14 @@ def _extract_regions(img):
 
     # pass 2: calculate texture gradient
     tex_grad = _calc_texture_gradient(img)
+    print('shape of tex_grad: ', tex_grad.shape)    # (696, 587, 4)
 
     # pass 3: calculate colour histogram of each region
     for k, v in R.items():
 
         # colour histogram
         masked_pixels = hsv[:, :, :][img[:, :, 3] == k]
+        #print('shape of masked_pixels: ', masked_pixels.shape)   # (x, 3)
         R[k]["size"] = len(masked_pixels / 4)
         R[k]["hist_c"] = _calc_colour_hist(masked_pixels)
 
@@ -268,6 +277,7 @@ def selective_search(
     # load image and get smallest regions
     # region label is stored in the 4th value of each pixel [r,g,b,(region)]
     img = _generate_segments(im_orig, scale, sigma, min_size)
+    print('After graph segmentation shape: ', img.shape)
 
     if img is None:
         return None, {}

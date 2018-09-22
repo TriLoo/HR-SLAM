@@ -3,6 +3,8 @@
 __author__ = 'smh'
 __date__ = '2018.09.12'
 
+# "Efficient Graph-Based Image Segmentation - Pedro F. Felzenszwalb etc."
+
 
 from filter import *
 from segment_graph import *
@@ -62,29 +64,34 @@ def segment_hs(hs_img, sigma, k, min_size):
         if (a != b) and ((u.size(a) < min_size) or (u.size(b) < min_size)):
             u.join(a, b)
 
-    output = np.zeros(shape=(height, width, 3))
+    #output = np.zeros(shape=(height, width, 3))
+    output = np.zeros(shape=(height, width))
 
     # pick random colors for each component
     colors = np.zeros(shape=(height * width, 3))
+    #colors = np.zeros(shape=(height * width))
     for i in range(height * width):
         colors[i, :] = random_rgb()
+        #colors[i] = i
 
     for y in range(height):
         for x in range(width):
             comp = u.find(y * width + x)
-            output[y, x, :] = colors[comp, :]
+            output[y, x] = np.mean(colors[comp])
+            #output[y, x, :] = colors[comp, :]
 
     elapsed_time = time.time() - start_time
     print("Execution time: " + str(int(elapsed_time / 60)) + " minute(s) and " + str(
              int(elapsed_time % 60)) + " seconds")
 
-    print('shape of result: ', output.shape)
-    print('type of result: ', type(output))
-    print('max value of result: ', np.max(output))
-    print('min value of result: ', np.min(output))
+    #print('shape of result: ', output.shape)
+    #print('type of result: ', type(output))
+    #print('max value of result: ', np.max(output))
+    #print('min value of result: ', np.min(output))
+    output = output.astype(np.uint8)
 
-    cv2.imshow('Test Output', output)
-    cv2.waitKey()
+    #cv2.imshow('Test Output', output)
+    #cv2.waitKey()
 
     return output
 
@@ -94,6 +101,7 @@ if __name__ == '__main__':
     k = 500
     min_size = 50
     hs_img = readRaw.read_raw_data()
+    print('hs_img shape: ', hs_img.shape)   # (128, 696, 587)
     segment_hs(hs_img, sigma, k, min_size)
 
 

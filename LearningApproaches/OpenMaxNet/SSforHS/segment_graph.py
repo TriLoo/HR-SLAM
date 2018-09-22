@@ -1,5 +1,4 @@
 from disjoint_set import *
-import math
 import numpy as np
 import random
 
@@ -50,6 +49,7 @@ def get_threshold(size, c):
 # returns square of a number
 def square(value):
     return np.dot(value, value)
+
 
 
 # randomly creates RGB
