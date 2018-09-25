@@ -38,11 +38,13 @@ def drawResults(img, cls, loc, wid, hei):
     return img
 
 
-def showResults(img, om, sm, boxes, name_om='OpenMax', name_sm='SoftMax', show_both=True, show_om=False, show_sm=False):
+def showResults(img, om, sm, boxes, bg = 5,name_om='OpenMax', name_sm='SoftMax', show_both=True, show_om=False, show_sm=False):
     img_om = img.copy()
     img_sm = img.copy()
     for o, s, b in zip(om, sm, boxes):
         loc, wid, hei = b
+        if s == bg:
+            continue
         if show_both:
             drawResults(img_om, o, loc, wid, hei)
             drawResults(img_sm, s, loc, wid, hei)

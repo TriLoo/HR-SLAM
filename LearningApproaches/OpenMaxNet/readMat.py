@@ -32,8 +32,8 @@ def generate_child_window(data, width=9, height=9):
         for j in col_idx:       # column first
             ele = data[(i * height).astype('int'): ((i + 1) * height).astype('int'), (j * width).astype('int') : ((j + 1) * width).astype('int')]
             datas.append(ele)
-            center_x = i * width + (width >> 1)
-            center_y = j * height + (height >> 1)
+            center_y = i * width + (width >> 1)
+            center_x = j * height + (height >> 1)
             boxes.append([(center_x, center_y), width, height])
 
     return {'Datas': datas, 'Rows': rows, 'Cols': cols, 'Boxes': boxes}
@@ -54,6 +54,6 @@ if __name__ == '__main__':
     #plt.show()
     split_data = generate_child_window(data)
     print(split_data['Rows'], split_data['Cols'])     # 16, 16
-    print('length of split_data: ', len(split_data['Windows']))    # 256
-    print('size of windows: ', split_data['Windows'][0].shape)     # (9, 9, 200)
+    print('length of split_data: ', len(split_data['Datas']))    # 256
+    print('size of windows: ', split_data['Datas'][0].shape)     # (9, 9, 200)
 
