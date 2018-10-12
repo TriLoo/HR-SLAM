@@ -95,3 +95,14 @@ This folder includes the implementation of my own network to realize instance-le
 今天刚把一直有问题的 CSVIter 解决了一下，现在貌似可以工作了。下一步就是先训练像素级的吧。最近重新看了几篇实例分割的论文，感觉比较复杂，通常的做法
 是分解成: Object Detection + Semantic Segmentation。这样的话，我还得考虑一下加上Object Proposal的分支，工程量陡增了一下。
 
+2018.09.14
+
+今天算是吧训练部分的代码跑起来了，但误差增加是什么意思？下一步就是用一个1060试一下结果吧。
+
+2018.09.20
+
+用1060跑的后，总是有问题，cudaMalloc错误，感觉是显存不够用。到今天2018.09.27，还是没解决，GPU真是个问题，CPU跑起来后太慢了。
+
+试了Kaggle kernel, google colab等，都没用起来。天池的notebook听说支持gpu了，但申请需要粮票+每次最多只有6个小时。上传数据集也太麻烦了。
+
+
